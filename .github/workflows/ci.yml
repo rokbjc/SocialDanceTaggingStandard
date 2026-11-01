@@ -13,7 +13,7 @@ jobs:
     name: Data + docs in sync
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: No private references in tracked files
         # A regenerated file must not silently reintroduce the private catalog path or the consumer name.
         # (Legacy on-disk frame names Songs-DB_* / SB-* are interop facts and are intentionally kept.)
@@ -53,7 +53,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-dotnet@v6
         with:
           global-json-file: dotnet/global.json
@@ -68,7 +68,7 @@ jobs:
     name: Docs site (mkdocs --strict)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
