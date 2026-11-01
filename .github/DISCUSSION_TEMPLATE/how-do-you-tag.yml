@@ -1,0 +1,35 @@
+title: "How I tag my tracks: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for sharing. Tell us how you describe a track for social dancing. Real examples help the standard most.
+  - type: input
+    id: dances
+    attributes:
+      label: Which dances do you DJ or teach?
+      placeholder: "Lindy Hop, Balboa, Blues, ..."
+    validations:
+      required: true
+  - type: textarea
+    id: properties
+    attributes:
+      label: Which properties do you tag, and with which values?
+      description: "For example tempo band, feel, mood, energy, intro length, vocals. Include your own words and scales."
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: One example track
+      description: "Title (or a made-up one) and every tag you would put on it."
+  - type: textarea
+    id: missing
+    attributes:
+      label: What does SDTS not let you say yet?
+  - type: input
+    id: tool
+    attributes:
+      label: Which software do you use?
+      placeholder: "MediaMonkey, Mixxx, Traktor, Rekordbox, spreadsheet, ..."

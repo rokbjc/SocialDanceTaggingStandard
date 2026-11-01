@@ -1,1 +1,5 @@
 blank_issues_enabled: true
+contact_links:
+  - name: Share how you tag your tracks
+    url: https://github.com/rokbjc/SocialDanceTaggingStandard/discussions/categories/how-do-you-tag
+    about: Tell us which properties you tag, with which values, and what the standard is missing.

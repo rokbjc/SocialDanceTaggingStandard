@@ -29,7 +29,7 @@
   <PropertyGroup>
     <Product>SocialDanceTaggingStandard</Product>
     <Authors>rokbjc</Authors>
-    <Version>0.1.0</Version>
+    <Version>0.1.0-beta.1</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/rokbjc/SocialDanceTaggingStandard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/rokbjc/SocialDanceTaggingStandard</RepositoryUrl>

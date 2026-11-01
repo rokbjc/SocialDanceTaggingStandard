@@ -18,7 +18,7 @@ jobs:
         # A regenerated file must not silently reintroduce the private catalog path or the consumer name.
         # (Legacy on-disk frame names Songs-DB_* / SB-* are interop facts and are intentionally kept.)
         run: |
-          if git grep -nI -F -e 'M:\media' -e 'Songoulash' -- . ':!.github/workflows/ci.yml' ; then
+          if git grep -nI -F -e 'M:\media' -e 'Songoulash' -- . ':!.github/workflows/ci.yml' ':!.gitlab-ci.yml' ; then
             echo "::error::a private reference is present in a tracked file"
             exit 1
           fi

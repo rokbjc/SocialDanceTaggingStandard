@@ -223,7 +223,7 @@
   title: The library declares a public API and follows SemVer
   status: partial
   evidence: >-
-    PackageId in each dotnet/src/*/*.csproj and `<Version>0.1.0</Version>` in dotnet/Directory.Build.props;
+    PackageId in each dotnet/src/*/*.csproj and `<Version>0.1.0-beta.1</Version>` in dotnet/Directory.Build.props;
     SemVer rules in docs/standard/versioning.md. No public-API baseline or analyzer exists and no public-API
     review record was found.
   source: requirements/library.md

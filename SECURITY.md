@@ -3,7 +3,7 @@
 ## Supported versions
 
 The project is pre-1.0. While the version is `0.x`, **only the latest published release** of each stream
-(the spec version in [`data/fields.yaml`](data/fields.yaml) and the NuGet packages built from `dotnet/`) receives
+(the spec version in [`data/fields.yaml`](data/fields.yaml) and the .NET packages built from `dotnet/`) receives
 security fixes. There is no back-porting to older `0.x` releases — upgrade to the latest.
 
 ## What is in scope

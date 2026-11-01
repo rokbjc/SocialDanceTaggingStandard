@@ -6,6 +6,8 @@ All notable changes are documented here. Format follows
 
 ## [Unreleased]
 
+## [0.1.0-beta.1] - 2026-11-01
+
 ### Added
 - **Dance `parent` and group values.** Every dance may name one `parent` (a single id, a strict tree; absent is
   the same as null). `Swing`, `Ballroom Standard`, `Ballroom Latin`, `Street Latin` and `Argentine Tango Family`

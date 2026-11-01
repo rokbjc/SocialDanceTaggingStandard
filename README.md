@@ -52,6 +52,13 @@ flowchart LR
 > [discussion](https://github.com/rokbjc/SocialDanceTaggingStandard/discussions). The NuGet packages are **not published yet**;
 > they will be if the standard finds an audience. Until then, build from source.
 
+## 💬 Tell us how you tag
+
+The standard improves with real practice. If you DJ or teach social dance, tell us which properties you
+tag, which values you use, and what you cannot say yet: start a thread in
+[**How do you tag?**](https://github.com/rokbjc/SocialDanceTaggingStandard/discussions/categories/how-do-you-tag).
+A missing dance, mood or field can also go in as an [issue](https://github.com/rokbjc/SocialDanceTaggingStandard/issues/new/choose).
+
 ## Two layers (a binding model)
 
 1. **Taxonomy (format-neutral)** — what dances and per-track dimensions exist, and the rules for them.
@@ -154,13 +161,13 @@ then run `python scripts/gen_field_docs.py` and `python scripts/gen_vocab_docs.p
 generated Markdown. On the rhythmic-feel pages the audio examples are inline players only in the built
 site; GitHub's own Markdown view shows them as plain links.
 
-## Naming convention (planned)
+## Frame naming
 
-New SDTS taxonomy fields will use a portable, uppercase `TXXX:SDTS_*` description (e.g.
-`SDTS_DANCES`, `SDTS_THEME`). **Not yet active** — consumers still read/write the existing
-frames. The legacy on-disk frames are **frozen** and are NOT renamed: `SB-*` (private
-audio-analysis caches: beats / chroma / stems / moodbar) stay in the reference implementation's
-private audio-tools library; `COMM:Songs-DB_*` (MediaMonkey columns) remain as-is.
+SDTS fields that no standard tag covers are stored under a portable, uppercase name: ID3 `TXXX:SDTS_*`
+(e.g. `SDTS_DANCES`, `SDTS_THEME`), Vorbis `SDTS_*`, MP4 `----:com.apple.iTunes:SDTS_*`. Fields with a standard
+home keep it (genre → `TCON`, mood → `TMOO`, BPM → `TBPM`, rating → `POPM`). The `COMM:Songs-DB_*` frames
+that MediaMonkey uses are read and synced, not renamed. The per-field mapping is in the
+[field reference](docs/standard/fields/README.md).
 
 ## Status
 
