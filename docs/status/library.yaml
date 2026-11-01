@@ -1,0 +1,268 @@
+# Status ledger - the .NET reference library. One row per requirement id in requirements/library.md,
+# plus the one v1.0 checklist item (§5) that no LIB row covers (LIB-DOD-05) and the one roadmap item of the
+# library that has no requirement id (LIB-ROADMAP-01, `release: post-v1.0`).
+# Statuses: gap | buildable | partial | met | proven | blocked ("accepted" is set by the owner only).
+#   met    = the required behaviour exists; evidence is a file path.
+#   proven = met, and the named automated check passed when run on 2026-10-07 at commit 25b098b
+#            (clean clone, Windows, .NET SDK 10.0.401, Python 3.12).
+# Checks run: `dotnet build dotnet/SocialDanceTaggingStandard.slnx -c Release` (0 warnings, 0 errors);
+# `dotnet test dotnet/SocialDanceTaggingStandard.slnx -c Release --no-build` (496 passed, 0 failed);
+# `dotnet format dotnet/SocialDanceTaggingStandard.slnx --verify-no-changes --no-restore` (exit 0);
+# `dotnet pack dotnet/SocialDanceTaggingStandard.slnx -c Release --no-build` (4 packages); `python scripts/validate_data.py` (exit 0);
+# the generators of the CI in-sync step followed by `git diff --exit-code` (exit 0);
+# `python -m mkdocs build --strict` (exit 0). The consumer solution was not built or tested.
+
+- id: LIB-F-01
+  kind: requirement
+  title: LoadDefault() loads the baseline vocabulary from compiled-in C# with no network or external data
+  status: proven
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard.Taxonomy/SocialDanceVocabulary.cs (LoadDefault) over
+    dotnet/src/SocialDanceTaggingStandard.Taxonomy/Generated/BaselineVocabulary.g.cs;
+    VocabularyTests.LoadDefault_ReadsVersionAndCoreDimensions and VocabularyTests.Packs_AreSwingAndBlues passed.
+  source: requirements/library.md
+
+- id: LIB-F-02
+  kind: requirement
+  title: A dimension resolves aliases and codes, validates membership and normalises multi-value lists
+  status: proven
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard.Taxonomy/Dimension.cs; VocabularyTests.Core_ResolvesCanonicalAndAlias,
+    VocabularyTests.IsValid_ChecksMembership_AliasAware,
+    VocabularyTests.Normalize_CollapsesAliases_AndDropsParentWhenChildPresent and
+    VocabularyTests.Dances_Normalize_StripsGradeMarkersAndDedups passed.
+  source: requirements/library.md
+
+- id: LIB-F-03
+  kind: requirement
+  title: Every kind of identifier is a distinct strong type, defined once and generated from the YAML
+  status: met
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard/Ids.cs, dotnet/src/SocialDanceTaggingStandard.Id3/Ids.cs, dotnet/src/SocialDanceTaggingStandard.Taxonomy/Ids.cs and the Generated/*.g.cs
+    members; the Release build compiles. `git grep` for frame-id and description literals in the hand-written
+    files of SocialDanceTaggingStandard.Id3 and SocialDanceTaggingStandard.MediaMonkey finds no call-site literal. Two descriptions are
+    hand-defined as `const string` (MusicMatchSituation, SyncStateKey) in
+    dotnet/src/SocialDanceTaggingStandard.MediaMonkey/MediaMonkeyFrames.cs because they have no YAML source. The criterion is a code-review gate; no automated test.
+  source: requirements/library.md
+
+- id: LIB-F-04
+  kind: requirement
+  title: The Id3 binding reads and writes genres, moods, the canonical comment and TXXX:SDTS_* via typed accessors
+  status: met
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard.Id3/Id3TaxonomyExtensions.cs, Id3UserTextSource.cs, Generated/SdtsFrames.g.cs.
+    CanonicalCommentTests (5), Id3ContainerFramesTests (5) and
+    Id3TagSourceTests.UserTextSource_OverLiveTag_RoundTrips passed. No test round-trips
+    GetGenres/SetGenres or GetMoods/SetMoods over a real tag, so the row is not "proven".
+  source: requirements/library.md
+
+- id: LIB-F-05
+  kind: requirement
+  title: The MediaMonkey bridge imports, exports and 3-way-syncs SDTS fields against COMM:Songs-DB_* columns
+  status: met
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard.MediaMonkey/MediaMonkeyMirror.cs and Generated/MediaMonkeyMirrorMap.g.cs.
+    MediaMonkeyFramesTests (8) and MirrorMapTests (5) passed; they cover the map, not the MediaMonkeyMirror
+    class, which only the samples use. The consumer's Audio.Tests round-trip was not run.
+  source: requirements/library.md
+
+- id: LIB-F-06
+  kind: requirement
+  title: The Sync engine does a value-agnostic 3-way reconcile with baseline change detection and conflict modes
+  status: proven
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard/Sync/MirrorSyncEngine.cs and TagMirror.cs; TagMirrorTests.BothEdited_ReportOnly_DoesNotClobber,
+    TagMirrorTests.BothEdited_PreferCanonical_OverwritesMirror,
+    TagMirrorTests.BothEdited_PreferMirror_OverwritesCanonical,
+    TagMirrorTests.Baseline_PreventsReExportOfUnchangedFields and
+    ConformanceVectorsTests.Reconcile_MatchesVectors passed.
+  source: requirements/library.md
+
+- id: LIB-F-07
+  kind: requirement
+  title: A consumer can add private fields and a custom value translator; unmapped frames are never disturbed
+  status: met
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard/Sync/MirrorMap.cs (Compose) and IValueTranslator.cs.
+    MirrorMapTests.Compose_MergesStandardAndPrivateFields and the three Compose_Duplicate*_Throws tests passed.
+    The unmapped-frame-untouched test named by the criterion was not found, so the row is not "proven".
+  source: requirements/library.md
+
+- id: LIB-F-08
+  kind: requirement
+  title: Typed id/value members and term catalogs are generated from the YAML; no hand-maintained mirror
+  status: proven
+  evidence: >-
+    scripts/gen_ids.py and scripts/gen_vocab_docs.py regenerated dotnet/src/*/Generated with no diff (the CI
+    in-sync step, reproduced locally); BaselineVocabularyDriftTests.GeneratedBaseline_MatchesYamlOnDisk passed.
+  source: requirements/library.md
+
+- id: LIB-F-09
+  kind: requirement
+  title: The reference library reproduces the standard's conformance vectors
+  status: proven
+  evidence: >-
+    ConformanceVectorsTests.Reconcile_MatchesVectors, ConformanceVectorsTests.StableHash_MatchesVectors,
+    ValidationConformanceTests.Validate_MatchesVectors, ProfileResolutionConformanceTests.Profile_MatchesVectors
+    and PathIngestTests.Conformance_path_ingest_vector_reproduces passed.
+  source: requirements/library.md
+
+- id: LIB-F-10
+  kind: requirement
+  title: The Id3 package has no MediaMonkey-specific identifiers in executable code
+  status: met
+  evidence: >-
+    `git grep -E 'Songs-DB_|MusicMatch_|MM5|MediaMonkey' -- dotnet/src/SocialDanceTaggingStandard.Id3` matches comments only; the
+    columns are in dotnet/src/SocialDanceTaggingStandard.MediaMonkey/Generated/MmColumns.g.cs. Code-review gate; no automated test.
+  source: requirements/library.md
+
+- id: LIB-F-11
+  kind: requirement
+  title: The library projects field values from a path per from_path rules as a read-only pure function
+  status: proven
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard.Taxonomy/Ingest/PathParser.cs and PathIngest.cs; PathParserTests (7),
+    PathIngestTests.Conformance_path_ingest_vector_reproduces and
+    PathTagSourceTests.Set_throws_because_a_path_is_read_only passed.
+  source: requirements/library.md
+
+- id: LIB-F-12
+  kind: requirement
+  title: SdtsFile is a whole-record gateway; a consumer names no TagLib type
+  status: proven
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard.Id3/SdtsFile.cs; SdtsFileTests.Container_Backed_Fields_And_Save_RoundTrip passed;
+    dotnet/samples/SocialDanceTaggingStandard.ConsumerProbe compiled in the Release build and the CI check "Consumer probe names no
+    TagLib type" (`git grep TagLib` over the probe) found no match.
+  source: requirements/library.md
+
+- id: LIB-N-01
+  kind: requirement
+  title: The generated compile-time catalogs agree with the runtime-loaded vocabulary value for value
+  status: proven
+  evidence: >-
+    GeneratedVocabularyCatalogTests (31 tests) and
+    BaselineVocabularyDriftTests.GeneratedBaseline_MatchesYamlOnDisk passed, with the conformance tests of LIB-F-09.
+  source: requirements/library.md
+
+- id: LIB-N-02
+  kind: requirement
+  title: Packages target net8.0, depend only on TagLibSharp and YamlDotNet, and core pulls in neither
+  status: met
+  evidence: >-
+    dotnet/src/*/*.csproj all set net8.0; dotnet/src/SocialDanceTaggingStandard/SocialDanceTaggingStandard.csproj has no PackageReference; the packed
+    SocialDanceTaggingStandard 0.1.0 nuspec lists no dependency, Id3 and MediaMonkey list TagLibSharp 2.3.0, Taxonomy lists
+    YamlDotNet 18.0.0. The Release build succeeded.
+  source: requirements/library.md
+
+- id: LIB-N-03
+  kind: requirement
+  title: The consumer builds against the packages and its tag read/write/sync path passes end to end
+  status: partial
+  evidence: >-
+    A consumer project references dotnet/src/SocialDanceTaggingStandard/SocialDanceTaggingStandard.csproj and SocialDanceTaggingStandard.Taxonomy.csproj and has an Audio.Tests
+    project. The consumer solution was not built and Audio.Tests was not run in this audit, so "green" is
+    unverified.
+  source: requirements/library.md
+
+- id: LIB-N-04
+  kind: requirement
+  title: LoadDefault() returns in well under a second; per-file tag operations are linear in the frame count
+  status: met
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard.Taxonomy/SocialDanceVocabulary.cs builds the baseline from compiled-in C# without file
+    access. The timing test named by the criterion was not found; the 183 SocialDanceTaggingStandard.Taxonomy.Tests ran in under one
+    second in total.
+  source: requirements/library.md
+
+- id: LIB-N-05
+  kind: requirement
+  title: Tag read-write-read round-trips losslessly, a sync never drops a mapped value, behaviour is deterministic
+  status: proven
+  evidence: >-
+    Id3TagSourceTests.UserTextSource_OverLiveTag_RoundTrips, Id3TagSourceTests.CommentSource_OverLiveTag_RoundTrips,
+    Id3ContainerFramesTests.InvolvedPeople_SurviveRenderReparse_UnderV24,
+    TagMirrorTests.BothEdited_ReportOnly_DoesNotClobber and
+    MirrorSyncAbsentAndSecondaryTests.AbsentMirror_Unknown_KeepsCanonicalAndRematerialisesTheMirror passed;
+    re-running the generators produced no diff.
+  source: requirements/library.md
+
+- id: LIB-N-06
+  kind: requirement
+  title: 0 warnings, dotnet format clean, fully tested and CI-gated
+  status: partial
+  evidence: >-
+    Local run: Release build 0 warnings and 0 errors, `dotnet format --verify-no-changes` exit 0, 496 tests
+    passed, validate_data.py and the in-sync gate clean. Open: the CI step "No private references in tracked
+    files" (.github/workflows/ci.yml) fails at this commit - its `git grep` matches CHANGELOG.md,
+    data/vocabulary/packs/blues/dances.yaml and two generated files in dotnet/src/SocialDanceTaggingStandard.Taxonomy/Generated/ -
+    so the data job would not pass. No CI run exists to cite (no git remote is configured).
+  source: requirements/library.md
+
+- id: LIB-N-07
+  kind: requirement
+  title: OS-neutral code, LF line endings, .editorconfig mirrors the ecosystem root
+  status: met
+  evidence: >-
+    .github/workflows/ci.yml builds on ubuntu-latest and windows-latest; .gitattributes sets `* text=auto eol=lf`;
+    .editorconfig is byte-identical to the ecosystem root file (cmp). Build and tests were run on Windows only.
+  source: requirements/library.md
+
+- id: LIB-N-08
+  kind: requirement
+  title: No secrets committed, data parsed and never executed, dependency licenses documented
+  status: partial
+  evidence: >-
+    NOTICE.md records TagLibSharp 2.3.0 (LGPL-2.1-or-later) and YamlDotNet 18.0.0 (MIT), matching the csproj
+    files; `git grep` finds no dynamic-code API in dotnet/src. No secret scanner was run (none is installed
+    or wired into CI); a pattern grep over the tracked files at this commit found nothing.
+  source: requirements/library.md
+
+- id: LIB-N-09
+  kind: requirement
+  title: The library declares a public API and follows SemVer
+  status: partial
+  evidence: >-
+    PackageId in each dotnet/src/*/*.csproj and `<Version>0.1.0</Version>` in dotnet/Directory.Build.props;
+    SemVer rules in docs/standard/versioning.md. No public-API baseline or analyzer exists and no public-API
+    review record was found.
+  source: requirements/library.md
+
+- id: LIB-N-10
+  kind: requirement
+  title: Each package ships as a NuGet package with description and license, restorable from public sources
+  status: met
+  evidence: >-
+    `dotnet pack` produced SocialDanceTaggingStandard, SocialDanceTaggingStandard.Taxonomy, SocialDanceTaggingStandard.Id3 and SocialDanceTaggingStandard.MediaMonkey
+    0.1.0 (.nupkg and .snupkg), each with a description, license Apache-2.0 and README.md; metadata in
+    dotnet/Directory.Build.props; no nuget.config with a private feed is tracked.
+  source: requirements/library.md
+
+- id: LIB-N-11
+  kind: requirement
+  title: The library makes no network or LLM calls; it only validates a profile and reports unmapped tokens
+  status: met
+  evidence: >-
+    `git grep -E 'HttpClient|System\.Net|WebRequest|Socket' -- dotnet/src` finds nothing; the packed
+    dependencies are TagLibSharp and YamlDotNet only; dotnet/src/SocialDanceTaggingStandard.Taxonomy/Profile/ProfileValidator.cs.
+    No automated dependency audit exists.
+  source: requirements/library.md
+
+- id: LIB-DOD-05
+  kind: requirement
+  title: mkdocs build --strict is clean (v1.0 checklist item 5)
+  status: proven
+  evidence: >-
+    CI job "Docs site (mkdocs --strict)" (.github/workflows/ci.yml) reproduced locally with mkdocs 1.6.1 and
+    mkdocs-material 9.7.6: `python -m mkdocs build --strict`, exit 0.
+  source: requirements/library.md
+
+- id: LIB-ROADMAP-01
+  kind: requirement
+  title: Vorbis and MP4 bindings (`.Vorbis` / `.Mp4` packages) via the cross-format triangle
+  status: gap
+  release: post-v1.0
+  evidence: >-
+    README.md §"Non-goals & roadmap" ("`.Vorbis` / `.Mp4` bindings via the cross-format triangle").
+    dotnet/src holds SocialDanceTaggingStandard, SocialDanceTaggingStandard.Id3, SocialDanceTaggingStandard.MediaMonkey and SocialDanceTaggingStandard.Taxonomy only; no Vorbis or MP4 project exists.
+  source: README.md

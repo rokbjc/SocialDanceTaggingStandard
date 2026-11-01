@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SocialDanceTaggingStandard</RootNamespace>
+    <AssemblyName>SocialDanceTaggingStandard</AssemblyName>
+    <PackageId>SocialDanceTaggingStandard</PackageId>
+    <Description>Reference model for the Social-Dance Tagging Standard (SDTS): a format-neutral taxonomy and per-track tag fields for social/partner-dance DJ libraries (swing, blues, and beyond). Serialization lives in binding packages such as SocialDanceTaggingStandard.Id3.</Description>
+  </PropertyGroup>
+
+</Project>

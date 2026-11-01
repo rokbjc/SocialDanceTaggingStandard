@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- Shared test helpers. References ONLY core so it stays dependency-light; the per-library test
+       projects reference it. Not a test project (no xUnit / Test.Sdk) — a plain helper library. -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SocialDanceTaggingStandard\SocialDanceTaggingStandard.csproj" />
+  </ItemGroup>
+
+</Project>

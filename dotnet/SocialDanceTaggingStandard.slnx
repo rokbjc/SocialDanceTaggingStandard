@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SocialDanceTaggingStandard/SocialDanceTaggingStandard.csproj" />
+    <Project Path="src/SocialDanceTaggingStandard.Taxonomy/SocialDanceTaggingStandard.Taxonomy.csproj" />
+    <Project Path="src/SocialDanceTaggingStandard.Id3/SocialDanceTaggingStandard.Id3.csproj" />
+    <Project Path="src/SocialDanceTaggingStandard.MediaMonkey/SocialDanceTaggingStandard.MediaMonkey.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SocialDanceTaggingStandard.TestKit/SocialDanceTaggingStandard.TestKit.csproj" />
+    <Project Path="tests/SocialDanceTaggingStandard.Tests/SocialDanceTaggingStandard.Tests.csproj" />
+    <Project Path="tests/SocialDanceTaggingStandard.Taxonomy.Tests/SocialDanceTaggingStandard.Taxonomy.Tests.csproj" />
+    <Project Path="tests/SocialDanceTaggingStandard.Id3.Tests/SocialDanceTaggingStandard.Id3.Tests.csproj" />
+    <Project Path="tests/SocialDanceTaggingStandard.MediaMonkey.Tests/SocialDanceTaggingStandard.MediaMonkey.Tests.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/SocialDanceTaggingStandard.Samples/SocialDanceTaggingStandard.Samples.csproj" />
+    <Project Path="samples/SocialDanceTaggingStandard.ConsumerProbe/SocialDanceTaggingStandard.ConsumerProbe.csproj" />
+  </Folder>
+</Solution>

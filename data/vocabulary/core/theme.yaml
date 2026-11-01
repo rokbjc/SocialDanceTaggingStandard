@@ -1,0 +1,211 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+dimension: theme
+layer: core
+axes:
+- name: category
+  values:
+  - seasonal
+  - event
+  - context
+  grouping: true
+  labels:
+    seasonal: "Seasonal"
+    event: "Event"
+    context: "Context"
+values:
+- id: christmas
+  canonical: Christmas
+  aliases:
+  - Xmas
+  - Holiday-Christmas
+  category: seasonal
+  description: December holiday season — Christmas songs.
+  display:
+    code: XMS
+    emoji: 🎄
+    icon: tabler:christmas-tree
+    color: '#7CB342'
+- id: summer
+  canonical: Summer
+  aliases: []
+  category: seasonal
+  description: Summer vibes — beach, warm weather, summer events.
+  display:
+    code: SUM
+    emoji: 🏖️
+    icon: tabler:beach
+    color: '#7CB342'
+- id: winter
+  canonical: Winter
+  aliases: []
+  category: seasonal
+  description: Winter mood (excluding Christmas — see the Christmas value).
+  display:
+    code: WIN
+    emoji: ❄️
+    icon: mdi:snowflake
+    color: '#7CB342'
+- id: spring
+  canonical: Spring
+  aliases: []
+  category: seasonal
+  description: Spring vibes.
+  display:
+    code: SPR
+    emoji: 🌸
+    icon: mdi:flower
+    color: '#7CB342'
+- id: autumn
+  canonical: Autumn
+  aliases:
+  - Fall
+  category: seasonal
+  description: Autumn vibes.
+  display:
+    code: AUT
+    emoji: 🍂
+    icon: mdi:leaf
+    color: '#7CB342'
+- id: holiday
+  canonical: Holiday
+  aliases:
+  - Vacation
+  category: seasonal
+  description: Generic holiday season — not Christmas-specific.
+  display:
+    code: HOL
+    emoji: 🏝️
+    icon: mdi:palm-tree
+    color: '#7CB342'
+- id: halloween
+  canonical: Halloween
+  aliases:
+  - Spooky
+  category: seasonal
+  description: Halloween season — spooky/haunting repertoire (October). Analogous to Christmas.
+  display:
+    code: HAL
+    emoji: 🎃
+    icon: mdi:ghost
+    color: '#7CB342'
+- id: wedding
+  canonical: Wedding
+  aliases:
+  - Wedding Party
+  category: event
+  description: Wedding event repertoire.
+  display:
+    code: WED
+    emoji: 💍
+    icon: mdi:ring
+    color: '#7CB342'
+- id: party
+  canonical: Party
+  aliases: []
+  category: event
+  description: Generic party / upbeat event context.
+  display:
+    code: PTY
+    emoji: 🎉
+    icon: mdi:party-popper
+    color: '#7CB342'
+- id: love
+  canonical: Love
+  aliases:
+  - Romance
+  - Romantic Theme
+  - Romantic Songs
+  - Love Song
+  category: context
+  description: 'Love-themed / romantic songs. Distinct from Mood ''Tender'' (energy=low, valence=bright);
+    Theme=Love is about the lyric topic. NB: ''Romantic'' in the Mood field is an alias for Tender; in
+    Theme it is an alias for Love.'
+  display:
+    code: LOV
+    emoji: ❤️
+    icon: mdi:heart
+    color: '#7CB342'
+- id: heartbreak
+  canonical: Heartbreak
+  aliases:
+  - Breakup
+  - Lost Love
+  - Torch
+  category: context
+  description: Heartbreak / breakup / lost-love lyric topic. The complement of the Love theme (happy love)
+    — Heartbreak is sad/lost love. Typical of blues sets. Distinct from Mood 'Melancholic' (emotional
+    fingerprint) — Heartbreak is about lyric content.
+  display:
+    code: HRT
+    emoji: 💔
+    icon: mdi:heart-broken
+    color: '#7CB342'
+- id: chillout
+  canonical: Chillout
+  aliases:
+  - Chill-out
+  - Lounge Mood
+  category: context
+  description: Relaxation listening context (background, cocktail hour, lounge). Distinct from Mood 'Cool'
+    (restrained jazz feel) — the Chillout theme is about the atmospheric setting, not the mood.
+  display:
+    code: CHL
+    emoji: 🧊
+    icon: mdi:sofa
+    color: '#7CB342'
+- id: driving
+  canonical: Driving
+  aliases:
+  - Road Trip
+  - In-Car
+  - Travel
+  category: context
+  description: In-car / road-trip listening context. Distinct from Mood 'Driving' (high/dark relentless
+    motor) — Theme=Driving is about the listening situation (driving in a car); Mood=Driving is about
+    the rhythmic feel.
+  display:
+    code: DRV
+    emoji: 🚗
+    icon: mdi:car
+    color: '#7CB342'
+- id: workout
+  canonical: Workout
+  aliases:
+  - Gym
+  - Exercise
+  - Fitness
+  category: context
+  description: Gym / exercise / running listening context.
+  display:
+    code: WKO
+    emoji: 🏋️
+    icon: mdi:dumbbell
+    color: '#7CB342'
+- id: cocktail
+  canonical: Cocktail
+  aliases:
+  - Cocktail Hour
+  - Lounge
+  - Aperitif
+  category: event
+  description: Cocktail-hour ambient — pre-event background.
+  display:
+    code: CKT
+    emoji: 🍸
+    icon: mdi:glass-cocktail
+    color: '#7CB342'
+- id: late-night
+  canonical: Late Night
+  aliases:
+  - Late-Night
+  - After Hours
+  category: context
+  description: Late-night listening — intimate, low-energy, smoky.
+  display:
+    code: LTE
+    emoji: 🌙
+    icon: mdi:weather-night
+    color: '#7CB342'

@@ -1,0 +1,39 @@
+{
+  "description": "SDTS path/filename ingest — read-time projection. Each case: a relative path + the shared from_path rule, the expected projected SDTS fields, and the expected unmapped tail tokens. Language-neutral; synthetic paths only.",
+  "rule": {
+    "match": "swing/!root/*.mp3",
+    "mask": "%artist% - %title% <tail>",
+    "rating": { "to": "rating", "scale": "clamp10" },
+    "year": { "to": "recording_year", "pattern": "\\b(19|20)\\d{2}\\b" },
+    "codes": {
+      "LIN": { "dances": "Lindy Hop" },
+      "BAL": { "dances": "Balboa" },
+      "CH": { "dances": "Charleston" },
+      "PIANO": { "instrument_led": "Piano" }
+    }
+  },
+  "cases": [
+    {
+      "path": "swing/!root/1953 Bob Crosby - Ja-Da BAL LIN ++++++.mp3",
+      "expect": {
+        "artist": ["Bob Crosby"],
+        "title": ["Ja-Da"],
+        "dances": ["Balboa", "Lindy Hop"],
+        "rating": ["6"],
+        "recording_year": ["1953"]
+      },
+      "unmapped": []
+    },
+    {
+      "path": "swing/!root/Boardwalk OST - Harlem Strut PIANO LIN CH +++.mp3",
+      "expect": {
+        "artist": ["Boardwalk OST"],
+        "title": ["Harlem Strut"],
+        "dances": ["Lindy Hop", "Charleston"],
+        "instrument_led": ["Piano"],
+        "rating": ["3"]
+      },
+      "unmapped": []
+    }
+  ]
+}

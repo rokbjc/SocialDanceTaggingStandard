@@ -1,0 +1,140 @@
+{
+  "suite_version": "0.1.0-draft",
+  "doc": "../../../docs/standard/profile.md",
+  "comment": "Personal Profile resolution-semantics vectors (profile.md §9 — the one normative obligation). Each case builds a profile from `profile`, then runs one `kind`: 'project' (read-time IngestMapper.Project, expect exact per-dimension output), 'validate' (ProfileValidator, expect error/warning substrings), or 'hash' (resolve a term, assert StableHash(term.canonical) == StableHash(hash_of) — proving the hashed value is the bare canonical, never the user- id or a display label). Display is never hashed and never asserted by a 'project' case. Resolved against the default baseline vocabulary (swing + blues packs).",
+  "cases": [
+    { "name": "baseline display code resolves: dances LH -> Lindy Hop",
+      "kind": "project", "profile": {},
+      "input": { "dances": ["LH"] },
+      "expect": { "projected": { "dances": ["Lindy Hop"] } } },
+
+    { "name": "'#' shorthand is NOT baseline: dances #LH passes through unresolved",
+      "kind": "project", "profile": {},
+      "input": { "dances": ["#LH"] },
+      "expect": { "projected": { "dances": ["#LH"] } } },
+
+    { "name": "profile alias restores a personal '#' code on a PACK dance term: #LH -> Lindy Hop",
+      "kind": "project", "profile": { "add_aliases": { "dances": { "Lindy Hop": ["#LH"] } } },
+      "input": { "dances": ["#LH"] },
+      "expect": { "projected": { "dances": ["Lindy Hop"] } } },
+
+    { "name": "profile alias resolves: custom 'My Swing' -> Swing",
+      "kind": "project", "profile": { "add_aliases": { "genre": { "Swing": ["My Swing"] } } },
+      "input": { "genre": ["My Swing"] },
+      "expect": { "projected": { "genre": ["Swing"] } } },
+
+    { "name": "cross-dimension keep (ci match): genre Slovenian -> artist_country SI, source kept",
+      "kind": "project",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "Slovenian", "to_dimension": "artist_country", "to_value": "SI", "on_source": "keep", "match": "ci" } ] },
+      "input": { "genre": ["Slovenian"] },
+      "expect": { "projected": { "artist_country": ["SI"], "genre": ["Slovenian"] } } },
+
+    { "name": "cross-dimension ci matches a differently-cased token",
+      "kind": "project",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "Slovenian", "to_dimension": "artist_country", "to_value": "SI", "on_source": "keep", "match": "ci" } ] },
+      "input": { "genre": ["slovenian"] },
+      "expect": { "projected": { "artist_country": ["SI"], "genre": ["Slovenian"] } } },
+
+    { "name": "cross-dimension exact does NOT match a differently-cased token (vocab still canonicalises)",
+      "kind": "project",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "Slovenian", "to_dimension": "artist_country", "to_value": "SI", "on_source": "keep", "match": "exact" } ] },
+      "input": { "genre": ["slovenian"] },
+      "expect": { "projected": { "genre": ["Slovenian"] } } },
+
+    { "name": "cross-dimension drop source: only the target remains",
+      "kind": "project",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "Slovenian", "to_dimension": "artist_country", "to_value": "SI", "on_source": "drop" } ] },
+      "input": { "genre": ["Slovenian"] },
+      "expect": { "projected": { "artist_country": ["SI"] } } },
+
+    { "name": "unknown value passes through verbatim (never lost)",
+      "kind": "project", "profile": {},
+      "input": { "genre": ["Totally Made Up"] },
+      "expect": { "projected": { "genre": ["Totally Made Up"] } } },
+
+    { "name": "hash-safety: a custom term hashes its bare canonical, not the user- id",
+      "kind": "hash",
+      "profile": { "add_terms": { "genre": [ { "id": "user-balkan-brass", "canonical": "Balkan Brass", "aliases": ["Brass BG"] } ] } },
+      "expect": { "term": { "dimension": "genre", "value": "Balkan Brass" }, "hash_of": "Balkan Brass" } },
+
+    { "name": "hash-safety: a display-label override (rename) does not move the hashed canonical",
+      "kind": "hash",
+      "profile": { "display": [ { "dimension": "dances", "value": "Balboa", "label": "Bal" } ] },
+      "expect": { "term": { "dimension": "dances", "value": "Balboa" }, "hash_of": "Balboa" } },
+
+    { "name": "governance: an unprefixed custom id is an error",
+      "kind": "validate",
+      "profile": { "add_terms": { "genre": [ { "id": "balkanbrass", "canonical": "Balkan Brass" } ] } },
+      "expect": { "valid": false, "errors_contain": ["balkanbrass"] } },
+
+    { "name": "governance: a custom canonical colliding with a baseline term is an error",
+      "kind": "validate",
+      "profile": { "add_terms": { "genre": [ { "id": "user-swing", "canonical": "Swing" } ] } },
+      "expect": { "valid": false, "errors_contain": ["collides"] } },
+
+    { "name": "governance: an alias resolving to two canonicals is an error",
+      "kind": "validate",
+      "profile": { "add_aliases": { "genre": { "Blues": ["Swing"] } } },
+      "expect": { "valid": false, "errors_contain": ["already resolves"] } },
+
+    { "name": "governance: a same-dimension cross-rule is an error (use an alias)",
+      "kind": "validate",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "Swing", "to_dimension": "genre", "to_value": "Big Band" } ] },
+      "expect": { "valid": false, "errors_contain": ["its own dimension"] } },
+
+    { "name": "governance: a dangling cross-dimension target is a warning (rule dropped)",
+      "kind": "validate",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "Slovenian", "to_dimension": "mood", "to_value": "NotARealMood" } ] },
+      "expect": { "warnings_contain": ["NotARealMood"] } },
+
+    { "name": "two cross-dimension rules on one source both project (no first-wins loss)",
+      "kind": "project",
+      "profile": { "cross_dimension": [
+        { "from_dimension": "genre", "from_value": "Slovenian", "to_dimension": "artist_country", "to_value": "SI" },
+        { "from_dimension": "genre", "from_value": "Slovenian", "to_dimension": "artist_region", "to_value": "EU" }
+      ] },
+      "input": { "genre": ["Slovenian"] },
+      "expect": { "projected": { "artist_country": ["SI"], "artist_region": ["EU"], "genre": ["Slovenian"] } } },
+
+    { "name": "cross-dimension to a non-vocabulary field is accepted verbatim",
+      "kind": "project",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "MyGenre", "to_dimension": "custom_field", "to_value": "CustomValue" } ] },
+      "input": { "genre": ["MyGenre"] },
+      "expect": { "projected": { "custom_field": ["CustomValue"], "genre": ["MyGenre"] } } },
+
+    { "name": "cross-dimension rule does not fire on a non-matching source value",
+      "kind": "project",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "StandardGenre", "to_dimension": "artist_country", "to_value": "SI" } ] },
+      "input": { "genre": ["UnknownGenre"] },
+      "expect": { "projected": { "genre": ["UnknownGenre"] } } },
+
+    { "name": "an alias on a custom term resolves to its canonical",
+      "kind": "project",
+      "profile": { "add_terms": { "genre": [ { "id": "user-balkan", "canonical": "Balkan", "aliases": ["BGMusic"] } ] } },
+      "input": { "genre": ["BGMusic"] },
+      "expect": { "projected": { "genre": ["Balkan"] } } },
+
+    { "name": "governance: a custom term on the dances dimension is an error (use a custom pack)",
+      "kind": "validate",
+      "profile": { "add_terms": { "dances": [ { "id": "user-my-dance", "canonical": "My Dance" } ] } },
+      "expect": { "valid": false, "errors_contain": ["dances"] } },
+
+    { "name": "migrate: a migrate:true cross-rule with on_source drop plans a canonical write + a source removal",
+      "kind": "migrate",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "Slovenian", "to_dimension": "artist_country", "to_value": "SI", "on_source": "drop", "migrate": true } ] },
+      "input": { "genre": ["Slovenian"] },
+      "expect": { "writes": [ { "dimension": "artist_country", "value": "SI" } ], "removals": [ { "dimension": "genre", "value": "Slovenian" } ] } },
+
+    { "name": "migrate: on_source keep plans the write but no removal",
+      "kind": "migrate",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "Slovenian", "to_dimension": "artist_country", "to_value": "SI", "on_source": "keep", "migrate": true } ] },
+      "input": { "genre": ["Slovenian"] },
+      "expect": { "writes": [ { "dimension": "artist_country", "value": "SI" } ], "removals": [] } },
+
+    { "name": "migrate: a migrate:false rule contributes nothing (read-time only)",
+      "kind": "migrate",
+      "profile": { "cross_dimension": [ { "from_dimension": "genre", "from_value": "Slovenian", "to_dimension": "artist_country", "to_value": "SI", "migrate": false } ] },
+      "input": { "genre": ["Slovenian"] },
+      "expect": { "writes": [], "removals": [] } }
+  ]
+}

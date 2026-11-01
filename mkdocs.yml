@@ -1,0 +1,100 @@
+site_name: Social-Dance Tagging Standard (SDTS)
+site_description: A portable tag standard for social/partner-dance DJ music libraries.
+repo_url: https://github.com/rokbjc/SocialDanceTaggingStandard
+repo_name: rokbjc/SocialDanceTaggingStandard
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - content.code.copy
+  palette:
+    - scheme: default
+      toggle: { icon: material/weather-night, name: Dark }
+    - scheme: slate
+      toggle: { icon: material/weather-sunny, name: Light }
+
+nav:
+  - Home: README.md
+  - Understand the music:
+      - The model: model/index.md
+      - Field reference: standard/fields/README.md
+      - Vocabulary: model/vocabulary/README.md
+      - Dances:
+          - Overview: model/vocabulary/dances.md
+          - Swing: model/vocabulary/dances/swing.md
+          - Blues: model/vocabulary/dances/blues.md
+          - Tango (Argentine): model/vocabulary/dances/tango.md
+          - Ballroom (International): model/vocabulary/dances/ballroom.md
+          - Street Latin: model/vocabulary/dances/street-latin.md
+          - West Coast Swing: model/vocabulary/dances/west-coast-swing.md
+          - Carolina Shag: model/vocabulary/dances/carolina-shag.md
+          - Early Social Dances: model/vocabulary/dances/early.md
+          - Routines: model/vocabulary/routine.md
+      - Musical dimensions:
+          - Musical character:
+              - Genre: model/vocabulary/genre.md
+              - Mood: model/vocabulary/mood.md
+          - Ensemble & voice:
+              - Vocality: model/vocabulary/vocality.md
+              - Instrumentation: model/vocabulary/instrumentation.md
+              - Instrument: model/vocabulary/instrument.md
+          - Rhythm & structure:
+              - Rhythmic feel: model/vocabulary/rhythmic_feel.md
+              - Song form: model/vocabulary/song_form.md
+          - Recording metadata:
+              - Recording context: model/vocabulary/recording_context.md
+              - Recording quality era: model/vocabulary/recording_quality_era.md
+              - Credit role: model/vocabulary/credit_role.md
+          - Theme: model/vocabulary/theme.md
+  - Build with it:
+      - Usage scenarios: standard/usage-scenarios.md
+      - Sync strategy: sync/sync-strategy.md
+      - Tool comparison: sync/tool-comparison.md
+      - StableHash (sync baseline): standard/stable-hash.md
+      - Versioning & releases: standard/versioning.md
+      - Field rationale: standard/field-rationale.md
+      - Author a profile with an LLM: standard/authoring-profile-llm.md
+  - Spec:
+      - Overview: standard/spec.md
+      - Vocabulary alignment: standard/spec-alignment.md
+      - Frame appendices: standard/spec-frames.md
+      - Personal Profile (optional): standard/profile.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      permalink: true
+
+# Upgrades the rhythmic-feel "Hear it" synth-clip LINK into an inline <audio> player on the site
+# (raw GitHub keeps the link). See docs/javascripts/sdt-audio.js.
+extra_javascript:
+  - javascripts/sdt-audio.js
+
+# Strict build: broken links / missing nav fail the build (the docs CI gate). Docs that reference
+# out-of-docs sources (data/, conformance/) link via absolute GitHub URLs so they resolve in both the
+# site and on GitHub.
+strict: true
+
+# Internal brainstorming/plan scratch (the superpowers skill writes specs/plans under docs/superpowers/
+# by default) is dev-only — never part of the published standard. Excluded from the build so it can never
+# ship even if the directory is recreated.
+exclude_docs: |
+  superpowers/
+
+# The generated per-field catalog (standard/fields/id3/, /sdts/) is browsed via its curated index
+# (standard/fields/README.md, grouped by the question each field answers) rather than the sidebar, so it
+# is intentionally kept out of the nav tree — without tripping --strict's "not in nav" check.
+not_in_nav: |
+  /standard/fields/id3/*
+  /standard/fields/sdts/*

@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rokbjc/SocialDanceTaggingStandard/HEAD/schemas/sdvo.schema.json
+schemaVersion: 2
+
+# The authoritative '#'-code -> canonical -> dimension mapping, as an overlay.
+#
+# These 17 codes were baseline dance aliases until 2026-07-18, when they were relocated here: they are
+# one DJ's personal shorthand, not part of the standard. No external body, scene convention, or tool
+# uses the '#'-prefixed form; every public citation in this repo (WRRC, WDSF/WDC) is for a BARE code.
+#
+# Load this overlay if your library already contains '#'-coded values, so they keep canonicalizing on
+# READ. It does not affect what gets WRITTEN: the MediaMonkey mirror emits each term's display code
+# (LH, BAL, SLS, …), which is short enough to scan in the Occasion column and is part of the standard.
+#
+# TWO CODES ARE READ-ONLY: '#SBL' (Balboa) and '#BL' (Blues) were never emitted by the mirror even
+# before the relocation, because it only ever wrote the FIRST '#' alias on a term. They are listed so
+# existing values still resolve.
+#
+# DO NOT migrate on-disk values by stripping the '#'. The two namespaces are not parallel:
+#   '#SLS' is Salsa, while bare 'SLS' is the display code of St. Louis Shag.
+# Resolve each value through the vocabulary and write back the canonical or the display code.
+
+owner: rok
+description: Legacy personal '#' dance codes, relocated out of the SDTS baseline on 2026-07-18.
+
+add_aliases:
+  dances:
+    # ── swing pack ───────────────────────────────────────────────────────────
+    Lindy Hop:        ["#LH"]
+    Balboa:           ["#BLB", "#SBL"]      # #SBL read-only
+    Collegiate Shag:  ["#CSH"]
+    St. Louis Shag:   ["#STLS"]
+    East Coast Swing: ["#ECS"]
+    Jive:             ["#JV"]
+    Boogie Woogie:    ["#BW"]
+    Solo Jazz:        ["#SJ"]
+    Charleston:       ["#CH"]
+    Tap Dance:        ["#TAP"]
+    Electro Swing:    ["#ES"]
+    # ── blues pack ───────────────────────────────────────────────────────────
+    Blues:            ["#BLS", "#BL"]       # #BL read-only
+    Slow Drag:        ["#SD"]
+    # ── street-latin pack ────────────────────────────────────────────────────
+    Salsa:            ["#SLS"]              # NB: bare 'SLS' is St. Louis Shag, a different dance
+    Mambo:            ["#MMB"]

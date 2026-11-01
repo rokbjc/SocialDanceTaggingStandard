@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SocialDanceTaggingStandard.Id3</RootNamespace>
+    <AssemblyName>SocialDanceTaggingStandard.Id3</AssemblyName>
+    <PackageId>SocialDanceTaggingStandard.Id3</PackageId>
+    <Description>ID3v2.4 binding for the Social-Dance Tagging Standard (SDTS): reads and writes the SDTS model to and from MP3 ID3 tags via TagLibSharp.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SocialDanceTaggingStandard\SocialDanceTaggingStandard.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TagLibSharp" Version="2.3.0">
+      <PrivateAssets>compile</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

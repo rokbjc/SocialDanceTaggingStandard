@@ -1,0 +1,169 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+pack: blues
+dimension: dances
+families:
+- blues-partner
+- blues-idiom
+values:
+- id: blues-dancing
+  canonical: Blues
+  aliases:
+  - Blues Dancing
+  tradition: blues-vernacular
+  family: blues-partner
+  tempo_min: 50
+  tempo_max: 160
+  tempo_note: 'Upper bound raised from 120 to 160 so fast blues (struttin'', uptempo shuffles) is not
+    excluded; per the consumer''s dance-taxonomy research (2026-06-19), the scene dances fast blues at
+    120-160+ BPM. The idioms below carry no tempo: no blues-dance source gives them BPM figures.'
+  typical_genres:
+  - Chicago Blues
+  - Soul Blues
+  - Delta Blues
+  - Vocal Jazz
+  description: A partner dance to blues music in close embrace built on improvisation and emotional expression,
+    revived from the 2000s within the swing community out of African-American juke-joint traditions. Distinguished
+    from Lindy Hop by being more intimate, slower and 'grounded' (bent knees, low center, body-to-body),
+    with no fixed basic figure.
+  display:
+    code: BLS
+    emoji: 🎸
+    icon: mdi:guitar-acoustic
+    color: '#C4B1FF'
+- id: slow-drag
+  canonical: Slow Drag
+  tradition: blues-vernacular
+  family: blues-partner
+  parent: blues-dancing
+  tempo_min: 40
+  tempo_max: 70
+  typical_genres:
+  - Delta Blues
+  - Soul Blues
+  description: 'The oldest documented African-American blues partner dance: a very slow, intimate close
+    embrace where partners ''drag'' across the floor with minimal travel. Distinguished as the extreme-slow
+    idiom (40-70 BPM) emphasizing body contact, shared breathing and micro-movements (vs general Blues
+    Dancing, of which it is the slowest, most minimal form).'
+  display:
+    code: SD
+    emoji: 🫂
+    icon: mdi:human-male-female
+    color: '#9887FE'
+- id: struttin
+  canonical: 'Struttin'''
+  aliases:
+  - Struttin
+  tradition: blues-vernacular
+  family: blues-idiom
+  parent: blues-dancing
+  typical_genres:
+  - Delta Blues
+  - Country Blues
+  description: 'A jookin'' blues idiom from the bars of Beale Street in Memphis (1930s-50s): partners in
+    an inward-leaning close embrace step on every beat by default, each with independent, syncopated
+    footwork. Distinguishing trait: compact, independent syncopated footwork in close embrace (vs. the
+    travelling, rolling-torso Strut of New Orleans jazz-blues, a separate idiom this value does not
+    cover).'
+  display:
+    code: STT
+    emoji: 🎩
+    icon: mdi:shoe-formal
+    color: '#1E88E5'
+- id: savoy-walk
+  canonical: Savoy Walk
+  aliases: []
+  tradition: blues-vernacular
+  family: blues-idiom
+  parent: blues-dancing
+  typical_genres:
+  - Jazz Blues
+  - Classic Vaudeville Blues
+  - Barrelhouse Piano
+  description: 'A ballroomin'' blues idiom from the Savoy Ballroom, danced to slow jazz-blues: a
+    close-embrace slow-quick two-step (slow-slow-quick-quick) broken up by flashy turns, lifts and dips
+    timed to the melody rather than to the rhythm section. Distinguishing trait: an upright slow-quick
+    walk with tricks on the melody (vs. the grounded jookin'' idioms, such as Struttin'', that hold a
+    steady pulse in place).'
+  display:
+    code: SVW
+    emoji: 🚶
+    icon: material-symbols:footprint
+    color: '#6ECCFA'
+- id: texas-shuffle
+  canonical: Texas Shuffle
+  aliases: []
+  tradition: blues-vernacular
+  family: blues-idiom
+  parent: blues-dancing
+  typical_genres:
+  - West Coast Blues
+  description: 'A jookin'' blues idiom danced to West Coast blues, the music Texas musicians made in
+    California, where the dance itself originated despite its name: sliding, shuffling footwork over a
+    subtle triple pulse, with stretch and compression and passes and turns along a slotted track.
+    Distinguishing trait: a slotted track with stretch-and-pull passes (vs. Struttin'', which stays in
+    close embrace in place, and the explicit triple-step basic of Chicago Triple).'
+  display:
+    code: TXS
+    emoji: 🤠
+    icon: mdi:shoe-print
+    color: '#96A0DD'
+- id: chicago-triple
+  canonical: Chicago Triple
+  aliases: []
+  tradition: blues-vernacular
+  family: blues-idiom
+  parent: blues-dancing
+  typical_genres:
+  - Chicago Blues
+  description: 'A blues idiom created in Chicago to electric Chicago blues with a shuffle rhythm, built
+    on a triple-step basic that dancers leave and return to, with stretch, compression and a swinging
+    feel; suited to mid- and up-tempo tunes. Distinguishing trait: a triple step with stretch and
+    compression to an electric band shuffle (vs. the relaxed, in-place triple of Piedmont Triple to
+    acoustic fingerpicking).'
+  display:
+    code: CHT
+    emoji: 🏙️
+    icon: mdi:guitar-electric
+    color: '#7B79C2'
+- id: piedmont-triple
+  canonical: Piedmont Triple
+  aliases: []
+  tradition: blues-vernacular
+  family: blues-idiom
+  parent: blues-dancing
+  typical_genres:
+  - Piedmont Blues
+  description: 'A relaxed jookin'' spot dance built on a near-constant shuffling triple, three foot
+    movements in two beats kept under the hips, while the body stays in place and the partners move
+    toward and away from each other through the upper body; danced to acoustic, ragtime-based,
+    fingerpicked Piedmont blues. Distinguishing trait: stationary triple footwork to acoustic
+    fingerpicking (vs. the stretch and compression of Chicago Triple to an electric band shuffle).'
+  display:
+    code: PDT
+    emoji: 👣
+    icon: material-symbols:footprint
+    color: '#1785AF'
+- id: funky-butt
+  canonical: Funky Butt
+  aliases: []
+  tradition: blues-vernacular
+  family: blues-idiom
+  parent: blues-dancing
+  typical_genres:
+  - Chicago Blues
+  - West Coast Blues
+  - Jump Blues
+  - Funk
+  description: 'A jookin'' blues idiom whose name is recorded as early as the late 19th century: the
+    pelvis sways forward and back while stepping side to side, two beats per side, the hips extending
+    back to counterbalance the partner and create compression and leverage; danced to funk-leaning
+    blues. Distinguishing trait: pelvis-led counterbalance on a two-beat side-to-side step (vs. the
+    footwork-led triples of Chicago Triple and Piedmont Triple).'
+  display:
+    code: FKB
+    emoji: 🌀
+    icon: mdi:human-female-dance
+    color: '#649AF8'

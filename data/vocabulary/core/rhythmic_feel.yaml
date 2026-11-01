@@ -1,0 +1,1208 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+dimension: rhythmic_feel
+layer: core
+axes:
+- name: pulse
+  values:
+  - 2
+  - 3
+  - 4
+  - mixed
+  description: How many felt beats per bar.
+- name: subdivision
+  values:
+  - straight
+  - triplet
+  - bass-feel
+  - mixed
+  description: Whether the 8ths are straight or swung; 'bass-feel' = the subdivision is set by the walking-bass
+    pattern.
+- name: accent
+  values:
+  - on-beat
+  - off-beat
+  - backbeat
+  - clave
+  - none
+  description: Where the main accents fall.
+- name: tier
+  values:
+  - 1
+  - 2
+  - 3
+  description: Rank of a feel inside its cluster, 1 = the general feel. Absent on a feel with no general parent
+    in its cluster; such a feel is ranked per dance scene in feel_scenes.yaml.
+- name: cluster
+  values:
+  - swing
+  - bass-line
+  - shuffle
+  - compound-triplet
+  - straight
+  - waltz
+  - latin
+  - brazilian
+  - march
+  - tango
+  grouping: true
+  labels:
+    swing: "Swing"
+    bass-line: "Bass line"
+    shuffle: "Shuffle"
+    compound-triplet: "Compound triplet"
+    straight: "Straight"
+    waltz: "Waltz"
+    latin: "Latin"
+    brazilian: "Brazilian"
+    march: "March"
+    tango: "Tango"
+  description: The family of related feels a feel belongs to.
+values:
+- id: jazz-swing-8ths
+  canonical: Jazz Swing 8ths
+  cluster: swing
+  aliases:
+  - Swing 8ths
+  - Swing
+  - Jazz Swing
+  - Swung 8ths
+  - Swinging
+  dsl_key: JazzSwing8ths
+  pulse: 4
+  subdivision: triplet
+  accent: off-beat
+  tier: 1
+  bpm_range:
+  - 80
+  - 300
+  description: 'The 8th notes are swung in a triplet feel (first 8th ~2/3, second ~1/3 of a triplet),
+    giving a light bouncing pulse over 4 beats per bar; it is the foundational feel of the swing era.
+    Distinguishing trait: lighter and less accented than Shuffle (jazz context vs. blues), and unlike
+    Straight 4 the 8ths are uneven.'
+  display:
+    code: SW8
+    emoji: 🎷
+    icon: mdi:saxophone
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/jazz-swing-8ths.mp3
+    youtube: https://www.youtube.com/watch?v=FS0JOTmiieo
+    youtube_label: Benny Goodman — Sing, Sing, Sing
+- id: walking-4
+  canonical: Walking 4
+  cluster: bass-line
+  aliases:
+  - Walking
+  - Walking Bass
+  - Four-on-the-floor (jazz)
+  dsl_key: Walking4
+  pulse: 4
+  subdivision: bass-feel
+  accent: on-beat
+  tier: 1
+  bpm_range:
+  - 120
+  - 280
+  description: 'A 4-beat bass feel where the bass line plays a melodic note on every beat (four quarter
+    notes per bar), often with chromatic walk-ups, rather than skipping beats. Distinguishing trait: vs
+    Cut Time, the bass walks all four beats instead of hitting only 1 and 3; it is orthogonal to swing
+    subdivision and usually layered with Jazz Swing 8ths.'
+  display:
+    code: WLK
+    emoji: 🚶
+    icon: mdi:walking
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/walking-4.mp3
+    youtube: https://www.youtube.com/watch?v=g3JyQnYPkZk
+    youtube_label: Count Basie — One O'Clock Jump
+- id: shuffle
+  canonical: Shuffle
+  cluster: shuffle
+  aliases:
+  - Bouncy Shuffle
+  dsl_key: Shuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 1
+  bpm_range:
+  - 70
+  - 170
+  description: 'Triplet 8ths with the accent on the second 8th of each pair (the ''and''), producing a
+    heavy, bouncy, dragging-and-jumping groove that is the backbone of jump and Chicago blues. Distinguishing
+    trait: heavier and more accented than Jazz Swing 8ths, and triplet rather than the straight 8-to-the-bar
+    of Boogie Shuffle.'
+  display:
+    code: SHF
+    emoji: 🔀
+    icon: material-symbols:shuffle
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=P1EG__jgefA
+    youtube_label: Louis Jordan & His Tympany Five — Choo Choo Ch'Boogie
+- id: boogie-shuffle
+  canonical: Boogie Shuffle
+  cluster: bass-line
+  aliases:
+  - Boogie
+  - Boogie 8-to-bar
+  - 8-to-the-bar
+  - 8 to the Bar
+  - Boogie Slow
+  - Rockabilly Piano
+  dsl_key: BoogieShuffle
+  pulse: 4
+  subdivision: straight
+  accent: on-beat
+  tier: 1
+  bpm_range:
+  - 120
+  - 200
+  description: 'The piano left hand (or bass) drives eight even straight 8th notes per bar (''8 to the
+    bar'') as a rolling motor, the signature of boogie-woogie. Distinguishing trait: despite its name
+    it is straight, not triplet like Shuffle, and uses eight notes per bar rather than the four of Walking
+    4.'
+  display:
+    code: BGE
+    emoji: 🎹
+    icon: mdi:piano
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/boogie-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=BYrcZp7Pdh8
+    youtube_label: Pine Top Smith — Pine Top's Boogie Woogie
+- id: slow-drag
+  canonical: Slow Drag
+  cluster: shuffle
+  aliases:
+  - Slow Blues Shuffle
+  - Slow Blues
+  dsl_key: SlowDrag
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 1
+  bpm_range:
+  - 40
+  - 75
+  description: 'A very slow triplet/shuffle feel (roughly 40-75 BPM) with soft, held-back accents, the
+    signature blues-dance feel for intimate slow socials. Distinguishing trait: shares Shuffle''s triplet
+    subdivision but is set apart primarily by its much slower tempo and gentler, non-bouncy intensity.'
+  display:
+    code: SDR
+    emoji: 🐌
+    icon: mdi:snail
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/slow-drag.mp3
+    youtube: https://www.youtube.com/watch?v=VAPDJheC0Jk
+    youtube_label: T-Bone Walker — (Call It) Stormy Monday
+- id: compound-triplet
+  canonical: Compound Triplet
+  cluster: compound-triplet
+  aliases:
+  - 12/8
+  - Slow 12/8
+  - Rolling Triplet
+  - 12-8
+  - 12-8 Feel
+  dsl_key: CompoundTriplet
+  pulse: 4
+  subdivision: triplet
+  accent: on-beat
+  tier: 1
+  bpm_range:
+  - 50
+  - 130
+  description: 'A slow rolling 12/8 feel where each of the 4 felt beats divides into three even 8ths,
+    giving a long, swaying, smooth character (slow blues ballads, doo-wop, gospel). Distinguishing trait:
+    smooth and rolling rather than Shuffle''s hard bounce, with gentle on-beat accents instead of a heavy
+    backbeat.'
+  display:
+    code: C12
+    emoji: 🌀
+    icon: mdi:numeric-3-circle
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/compound-triplet.mp3
+    youtube: https://www.youtube.com/watch?v=1qJU8G7gR_g
+    youtube_label: Etta James — At Last
+- id: stride
+  canonical: Stride
+  cluster: bass-line
+  aliases:
+  - Stride Piano
+  dsl_key: Stride
+  pulse: 4
+  subdivision: bass-feel
+  accent: on-beat
+  tier: 1
+  bpm_range:
+  - 80
+  - 200
+  description: 'A solo-piano left-hand feel that alternates a low bass note on beats 1 and 3 with a mid-range
+    chord on beats 2 and 4 (''oom-pah-oom-pah''), rooted in the Harlem stride tradition. Distinguishing
+    trait: vs Walking 4, the left hand alternates bass and chord rather than walking a bass note on every
+    beat.'
+  display:
+    code: STR
+    emoji: 👣
+    icon: ph:footprints
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/stride.mp3
+    youtube: https://www.youtube.com/watch?v=kIFoAwJPtm4
+    youtube_label: Fats Waller — Handful of Keys
+- id: backbeat
+  canonical: Backbeat
+  cluster: straight
+  aliases:
+  - 2-and-4
+  - Snare Backbeat
+  dsl_key: Backbeat
+  pulse: 4
+  subdivision: straight
+  accent: backbeat
+  tier: 1
+  bpm_range:
+  - 100
+  - 200
+  description: 'Straight 8ths over 4 beats with the snare accenting beats 2 and 4 while the kick plays
+    1 and 3, the signature rock & roll, rockabilly and R&B feel. Distinguishing trait: vs Shuffle it is
+    straight (not triplet) and defined by its 2-and-4 snare accent rather than an internal subdivision.'
+  display:
+    code: BKB
+    emoji: 🥁
+    icon: lucide:drum
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/backbeat.mp3
+    youtube: https://www.youtube.com/watch?v=uFeZ_x--aRg
+    youtube_label: Chuck Berry — Johnny B. Goode
+- id: straight-4
+  canonical: Straight 4
+  cluster: straight
+  aliases:
+  - Straight 4/4
+  - Four-on-the-floor
+  - Electronic 4-on-the-floor
+  dsl_key: Straight4
+  pulse: 4
+  subdivision: straight
+  accent: on-beat
+  tier: 1
+  bpm_range:
+  - 60
+  - 300
+  description: 'Even, non-swung 8th notes over a 4-beat pulse, with no triplet feel, common in bebop,
+    cool/modal jazz and Latin jazz. Distinguishing trait: vs Jazz Swing 8ths, the 8ths are all equal length
+    (a metronomic ''da-da-da-da'' rather than the swung ''ne-ke-den'').'
+  display:
+    code: STG
+    emoji: ⬛
+    icon: mdi:square-wave
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/straight-4.mp3
+    youtube: https://www.youtube.com/watch?v=ylXk1LBvIqU
+    youtube_label: Miles Davis — So What
+- id: waltz
+  canonical: Waltz
+  cluster: waltz
+  aliases:
+  - 3/4
+  - Slow Waltz
+  dsl_key: Waltz
+  pulse: 3
+  subdivision: straight
+  accent: on-beat
+  tier: 1
+  bpm_range:
+  - 80
+  - 200
+  description: 'A 3-beats-per-bar pulse (''ONE-two-three'') with a strong downbeat, drawn from European
+    ballroom tradition and adopted into jazz from the 1950s onward. Distinguishing trait: its unmistakable
+    triple meter (not 4 or 2 beats) makes it rarely confused with any other feel.'
+  display:
+    code: WLZ
+    emoji: 💃
+    icon: mdi:dance-ballroom
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/waltz.mp3
+    youtube: https://www.youtube.com/watch?v=lbjZPFBD6JU
+    youtube_label: Norah Jones — Come Away With Me
+- id: two-beat
+  canonical: Two-Beat
+  cluster: bass-line
+  aliases:
+  - Two Beat
+  - 2-Beat
+  - 2 Beat
+  - Cut Time
+  - Cut-Time
+  - Alla Breve
+  - Early Swing
+  - Ragtime Two-Beat
+  - Ragtime syncopation
+  dsl_key: TwoBeat
+  pulse: 2
+  subdivision: bass-feel
+  accent: on-beat
+  tier: 1
+  bpm_range:
+  - 120
+  - 240
+  description: 'A pre-swing ''oom-pah'' feel that stresses beats 1 and 3 in 4/4, with the bass on the
+    roots and banjo/guitar on the afterbeats, characteristic of Dixieland, ragtime and New Orleans hot
+    jazz. Distinguishing trait: vs Jazz Swing 8ths it is bouncier, more duple and less legato (1927 Armstrong
+    Hot Five vs 1937 Goodman big band).'
+  display:
+    code: 2BT
+    emoji: ✂️
+    icon: mdi:scissors
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/two-beat.mp3
+    youtube: https://www.youtube.com/watch?v=65SBsF28dnc
+    youtube_label: Louis Armstrong and His Hot Seven — Potato Head Blues
+- id: latin-clave
+  canonical: Latin Clave
+  cluster: latin
+  aliases:
+  - Clave
+  - Son Clave
+  - Rumba Clave
+  - Latin
+  - Mambo
+  dsl_key: LatinClave
+  pulse: 4
+  subdivision: straight
+  accent: clave
+  tier: 2
+  bpm_range:
+  - 80
+  - 220
+  description: 'An Afro-Cuban 5-note rhythmic pattern spanning a 2-bar cycle (son/rumba clave) that organizes
+    the whole band, the foundation of son, salsa, mambo and Latin jazz. Distinguishing trait: vs Habanera
+    it is a 20th-century cross-bar accent pattern rather than a per-bar bass figure, and it is Cuban 4/4
+    rather than Brazilian (Bossa Nova).'
+  display:
+    code: CLV
+    emoji: 🪘
+    icon: mingcute:drum-fill
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/latin-clave.mp3
+    youtube: https://www.youtube.com/watch?v=BpAXzTpANNw
+    youtube_label: Tito Puente — Oye Como Va
+- id: habanera
+  canonical: Habanera
+  cluster: latin
+  aliases:
+  - Tango Habanera
+  dsl_key: Habanera
+  pulse: 2
+  subdivision: straight
+  accent: clave
+  tier: 2
+  bpm_range:
+  - 80
+  - 140
+  description: 'A 19th-century Cuban bass figure (dotted-8th + 16th + 8th + 8th) repeating in a 2-beat
+    frame, the ''Spanish tinge'' that fed early New Orleans jazz, blues and Argentine tango. Distinguishing
+    trait: vs Latin Clave it is a per-bar bass pattern rather than clave''s 5-note cross-bar accent pattern.'
+  display:
+    code: HAB
+    emoji: 🌹
+    icon: lucide:rose
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/habanera.mp3
+    youtube: https://www.youtube.com/watch?v=K7BE7trV_oQ
+    youtube_label: Maria Callas — Habanera, Bizet's Carmen
+- id: bossa-nova
+  canonical: Bossa Nova
+  cluster: brazilian
+  aliases:
+  - Bossa
+  - Brazilian
+  dsl_key: BossaNova
+  pulse: 2
+  subdivision: straight
+  accent: clave
+  tier: 2
+  bpm_range:
+  - 100
+  - 160
+  description: 'A Brazilian feel derived from samba crossed with cool jazz: a syncopated guitar chord
+    pattern over a steady, quiet bass in a flowing 2/4 pulse. Distinguishing trait: vs Latin Clave it
+    is Brazilian 2/4 (not Cuban 4/4), and vs Straight 4 it is 2-pulse with an identifying bossa guitar
+    comp.'
+  display:
+    code: BSA
+    emoji: 🏖️
+    icon: mdi:beach
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/bossa-nova.mp3
+    youtube: https://www.youtube.com/watch?v=s61-e29Vr6Q
+    youtube_label: Stan Getz feat. Astrud Gilberto — The Girl from Ipanema
+- id: second-line
+  canonical: Second Line
+  cluster: march
+  aliases:
+  - NOLA Second Line
+  - Second-Line
+  dsl_key: SecondLine
+  pulse: 4
+  subdivision: straight
+  accent: backbeat
+  tier: 3
+  bpm_range:
+  - 100
+  - 160
+  description: 'The specific New Orleans brass-band parade/procession drum feel: kick on 1 and 3 with
+    a syncopated street-beat snare and dominant bass drum, played by a brass ensemble. Distinguishing
+    trait: vs Cut Time it is the genre-specific NO variant identified by sousaphone/tuba bass, brass-band
+    instrumentation and the syncopated snare.'
+  display:
+    code: 2LN
+    emoji: 🎺
+    icon: mdi:trumpet
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/second-line.mp3
+    youtube: https://www.youtube.com/watch?v=iDaneKADnZw
+    youtube_label: Rebirth Brass Band — When the Saints Go Marching In
+- id: two-step
+  canonical: Two-step
+  cluster: bass-line
+  aliases:
+  - Country Two-Step
+  - Two Step
+  dsl_key: TwoStep
+  pulse: 4
+  subdivision: straight
+  accent: on-beat
+  tier: 3
+  bpm_range:
+  - 120
+  - 180
+  description: 'A country/western feel with a walking bass on all four beats and straight 8ths, the predictable
+    groove of Bob Wills-era western swing. Distinguishing trait: musically close to Walking 4 but set
+    apart by its country context and instrumentation (fiddle, steel guitar, country vocals) rather than
+    jazz.'
+  display:
+    code: 2ST
+    emoji: 🤠
+    icon: ph:cowboy-hat
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/two-step.mp3
+    youtube: https://www.youtube.com/watch?v=dxDacEgmMpo
+    youtube_label: Bob Wills & His Texas Playboys — Take Me Back to Tulsa
+- id: jump-shuffle
+  canonical: Jump Shuffle
+  cluster: shuffle
+  aliases:
+  - Jump-Blues Shuffle
+  dsl_key: JumpShuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 1
+  bpm_range:
+  - 120
+  - 200
+  description: 'An uptempo, driving shuffle with an emphasized backbeat and punchy horn riffs, the bridge
+    feel of jump blues and early R&B (Louis Jordan, Big Joe Turner). Distinguishing trait: vs plain Shuffle
+    it is the faster, horn-driven variant, and vs Boogie Shuffle it rides a walking bass and horn hooks
+    rather than a boogie-woogie bass pattern.'
+  display:
+    code: JMP
+    emoji: ⚡
+    icon: mdi:flash
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/jump-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=PR6pHtiNT_k
+    youtube_label: Louis Jordan — Caldonia
+- id: manouche-swing
+  canonical: Manouche Swing
+  cluster: swing
+  aliases:
+  - Pompé
+  - Gypsy Swing
+  - Django Swing
+  dsl_key: ManoucheSwing
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 2
+  bpm_range:
+  - 140
+  - 280
+  description: 'The gypsy-jazz ''la pompe'' rhythm-guitar technique: two or more rhythm guitars strum
+    all four beats with an alternating down-up chop to create nonstop drive without drums. Distinguishing
+    trait: vs Jazz Swing 8ths it is a specific rhythm-guitar technique (rather than the melodic swing
+    of soloists) and carries a subtle swing bias absent from a perfectly even Straight 4.'
+  display:
+    code: MAN
+    emoji: 🎸
+    icon: ph:guitar
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/manouche-swing.mp3
+    youtube: https://www.youtube.com/watch?v=uTlo809EIlo
+    youtube_label: Django Reinhardt — Minor Swing
+- id: chicago-shuffle
+  canonical: Chicago Shuffle
+  cluster: shuffle
+  aliases: []
+  dsl_key: ChicagoShuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 2
+  bpm_range:
+  - 80
+  - 140
+  description: 'A medium-tempo electric-blues shuffle with triplet 8ths and a hard backbeat, the band-tight
+    ensemble groove of post-war Chicago blues (Muddy Waters, Little Walter). Distinguishing trait: vs
+    the generic Shuffle it is the amplified, full-band Chicago variant; vs Jump Shuffle it sits slower
+    and is guitar/harmonica-led rather than horn-driven.'
+  display:
+    code: CHI
+    emoji: 🏙️
+    icon: mdi:city
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/chicago-shuffle.mp3
+    youtube: https://www.youtube.com/results?search_query=Little%20Walter%20My%20Babe
+    youtube_label: Little Walter — My Babe
+- id: nola-shuffle
+  canonical: NOLA Shuffle
+  cluster: shuffle
+  aliases:
+  - New Orleans Shuffle
+  dsl_key: NolaShuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 2
+  bpm_range:
+  - 90
+  - 140
+  description: 'A New Orleans shuffle with triplet 8ths and a backbeat, carrying a loose, syncopated street-parade
+    lilt rooted in the city''s piano-and-drums tradition (Professor Longhair, Fats Domino). Distinguishing
+    trait: vs Chicago Shuffle it swings looser and more rolling, and vs Second Line it is a band shuffle
+    rather than the brass-band parade beat.'
+  display:
+    code: NLA
+    emoji: ⚜️
+    icon: mdi:fleur-de-lis
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/nola-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=ox5eCN_V9mQ
+    youtube_label: Fats Domino — I'm Walkin'
+- id: soul-shuffle
+  canonical: Soul Shuffle
+  cluster: shuffle
+  aliases: []
+  dsl_key: SoulShuffle
+  pulse: 4
+  subdivision: mixed
+  accent: backbeat
+  tier: 2
+  bpm_range:
+  - 80
+  - 130
+  description: 'A shuffle with a mixed straight/triplet feel and a firm backbeat, blending a soul/R&B
+    horn-and-organ sensibility into the groove (1960s-70s soul). Distinguishing trait: vs Blues Shuffle
+    it carries a smoother soul phrasing and its subdivision is mixed rather than strictly triplet, and
+    vs R&B Shuffle it leans warmer and more polished.'
+  display:
+    code: SOU
+    emoji: 💜
+    icon: mdi:heart
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/soul-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=T_uSM-i_c_I
+    youtube_label: Wilson Pickett — Mustang Sally
+- id: retro-soul-shuffle
+  canonical: Retro Soul Shuffle
+  cluster: shuffle
+  aliases: []
+  dsl_key: RetroSoulShuffle
+  pulse: 4
+  subdivision: mixed
+  accent: backbeat
+  tier: 2
+  bpm_range:
+  - 80
+  - 130
+  description: 'A modern revival of the soul shuffle with a mixed straight/triplet feel and backbeat,
+    recorded to evoke vintage 1960s soul (Daptone-style retro-soul, Sharon Jones, Amy Winehouse). Distinguishing
+    trait: musically near-identical to Soul Shuffle but flagged as a contemporary throwback recording
+    rather than a period-original.'
+  display:
+    code: RSO
+    emoji: 📻
+    icon: mdi:radio
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/retro-soul-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=HoqSO0hAjZw
+    youtube_label: Amy Winehouse — Rehab
+- id: rock-shuffle
+  canonical: Rock Shuffle
+  cluster: shuffle
+  aliases: []
+  dsl_key: RockShuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 2
+  bpm_range:
+  - 100
+  - 160
+  description: 'An uptempo triplet shuffle with a heavy backbeat driven by electric guitar and a rock
+    band, the blues-rock shuffle of acts like ZZ Top and Stevie Ray Vaughan. Distinguishing trait: vs
+    Blues Shuffle it is harder and more amplified with a rock attack, and vs Jump Shuffle it is guitar-driven
+    rather than horn-driven.'
+  display:
+    code: RCK
+    emoji: 🤘
+    icon: mdi:guitar-electric
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/rock-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=I3MTGhRC82s
+    youtube_label: Stevie Ray Vaughan & Double Trouble — Pride and Joy
+- id: rb-shuffle
+  canonical: R&B Shuffle
+  cluster: shuffle
+  aliases:
+  - Rhythm & Blues Shuffle
+  dsl_key: RBShuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 2
+  bpm_range:
+  - 90
+  - 140
+  description: 'A triplet shuffle with a strong backbeat in the classic rhythm-and-blues mold, vocal-forward
+    with horns and a danceable mid-tempo bounce. Distinguishing trait: vs Jump Shuffle it is slower and
+    less frantic, and vs Soul Shuffle it stays strictly triplet rather than mixed.'
+  display:
+    code: RNB
+    emoji: 🎙️
+    icon: mdi:microphone
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/rb-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=6uTDa3771HM
+    youtube_label: Ray Charles — What'd I Say
+- id: blues-shuffle
+  canonical: Blues Shuffle
+  cluster: shuffle
+  aliases: []
+  dsl_key: BluesShuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 2
+  bpm_range:
+  - 80
+  - 140
+  description: 'The unmarked mid-tempo triplet shuffle with a backbeat that underpins most twelve-bar
+    blues, the default blues-dance shuffle feel. Distinguishing trait: vs the parent Shuffle it is explicitly
+    blues-scoped rather than the jump/Chicago archetype, and vs the regional variants (Chicago, Delta,
+    Piedmont, NOLA, Swamp) it carries no specific scene, so use it when no regional flavor is identified.'
+  display:
+    code: BLS
+    emoji: 💙
+    icon: tdesign:guitar
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/blues-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=u8AIFxp1euM
+    youtube_label: B.B. King — Everyday I Have the Blues (Live at the Regal, 1964)
+- id: piedmont-shuffle
+  canonical: Piedmont Shuffle
+  cluster: shuffle
+  aliases: []
+  dsl_key: PiedmontShuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 3
+  bpm_range:
+  - 80
+  - 140
+  description: 'A triplet shuffle with a backbeat tied to the East Coast Piedmont blues tradition, built
+    around fingerpicked acoustic guitar with an alternating-bass ragtime lilt (Blind Boy Fuller, Rev.
+    Gary Davis). Distinguishing trait: vs Delta Shuffle it is brighter and more syncopated with a ragtime
+    bounce rather than a heavy, dragging groove.'
+  display:
+    code: PMT
+    emoji: 🏔️
+    icon: mdi:mountain
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/piedmont-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=M2oIWyr4v7U
+    youtube_label: Blind Boy Fuller — Step It Up and Go (1940)
+- id: delta-shuffle
+  canonical: Delta Shuffle
+  cluster: shuffle
+  aliases: []
+  dsl_key: DeltaShuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 3
+  bpm_range:
+  - 80
+  - 140
+  description: 'A triplet shuffle with a backbeat in the Mississippi Delta acoustic-blues tradition, raw
+    and often loosely metered around a droning slide or fingerpicked guitar (Son House, Robert Johnson
+    lineage). Distinguishing trait: vs Piedmont Shuffle it is darker and heavier with less ragtime syncopation,
+    and rougher than the band-tight Chicago Shuffle.'
+  display:
+    code: DLT
+    emoji: 🛶
+    icon: mdi:water
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/delta-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=Ug0ZRSbmCRM
+    youtube_label: Robert Johnson — Sweet Home Chicago (1936)
+- id: western-swing-shuffle
+  canonical: Western Swing Shuffle
+  cluster: shuffle
+  aliases:
+  - Western Shuffle
+  dsl_key: WesternSwingShuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 2
+  bpm_range:
+  - 100
+  - 180
+  description: 'An uptempo triplet shuffle with a backbeat from the western-swing tradition, swung jazz
+    feel played on fiddle and steel guitar with a country accent (Bob Wills and the Texas Playboys). Distinguishing
+    trait: vs Jump Shuffle it carries country/western instrumentation rather than horns, and vs the Two-step
+    it is a swung shuffle rather than straight 8ths.'
+  display:
+    code: WSW
+    emoji: 🐎
+    icon: mdi:violin
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/western-swing-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=dxDacEgmMpo
+    youtube_label: Bob Wills & the Texas Playboys — Take Me Back to Tulsa
+- id: swamp-shuffle
+  canonical: Swamp Shuffle
+  cluster: shuffle
+  aliases: []
+  dsl_key: SwampShuffle
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 3
+  bpm_range:
+  - 60
+  - 120
+  description: 'A slow, greasy triplet shuffle with a backbeat from the Louisiana swamp-blues tradition,
+    sparse and laid-back with a heavy lazy pocket (Slim Harpo, Lightnin'' Slim). Distinguishing trait:
+    vs Blues Shuffle it sits slower and dirtier with a dragging swamp feel, and vs NOLA Shuffle it is
+    rural and minimal rather than parade-influenced.'
+  display:
+    code: SWP
+    emoji: 🐊
+    icon: mdi:snake
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/swamp-shuffle.mp3
+    youtube: https://www.youtube.com/watch?v=-5x7NIqga8M
+    youtube_label: Slim Harpo — Baby Scratch My Back
+- id: nola-rhumba
+  canonical: NOLA Rhumba
+  cluster: latin
+  aliases:
+  - Rhumba Boogie
+  - New Orleans Rhumba
+  dsl_key: NolaRhumba
+  pulse: 4
+  subdivision: mixed
+  accent: clave
+  tier: 3
+  bpm_range:
+  - 90
+  - 160
+  description: 'A New Orleans groove with a mixed feel built over a clave/habanera-derived accent, the
+    ''rhumba-boogie'' that grafts a Latin tinge onto a rolling NO beat (Professor Longhair). Distinguishing
+    trait: vs Latin Clave it is a New Orleans piano-blues feel using the clave as a flavor rather than
+    a true Afro-Cuban band pattern, and vs NOLA Shuffle it rides a Latin accent instead of a straight
+    shuffle.'
+  display:
+    code: NRH
+    emoji: 🥥
+    icon: lucide-lab:coconut
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/nola-rhumba.mp3
+    youtube: https://www.youtube.com/watch?v=5IILlTLqBOY
+    youtube_label: Professor Longhair — Tipitina
+- id: bebop
+  canonical: Bebop
+  cluster: swing
+  aliases:
+  - Be-Bop
+  dsl_key: Bebop
+  pulse: 4
+  subdivision: triplet
+  accent: off-beat
+  tier: 2
+  bpm_range:
+  - 140
+  - 280
+  description: 'A fast swung-triplet feel with off-beat accents and a light ride-cymbal pulse, the agile
+    small-group jazz feel of 1940s bebop (Charlie Parker, Dizzy Gillespie). Distinguishing trait: vs Jazz
+    Swing 8ths it runs faster and more virtuosic with sharper off-beat phrasing, and vs Hard Bop Swing
+    it is lighter and less blues/gospel-inflected.'
+  display:
+    code: BOP
+    emoji: 💫
+    icon: mdi:music-note-eighth
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/bebop.mp3
+    youtube: https://www.youtube.com/watch?v=BUHwR-khV20
+    youtube_label: Charlie Parker — Ornithology (1946)
+- id: hard-bop
+  canonical: Hard Bop Swing
+  cluster: swing
+  aliases:
+  - Hard Bop
+  dsl_key: HardBop
+  pulse: 4
+  subdivision: triplet
+  accent: off-beat
+  tier: 2
+  bpm_range:
+  - 100
+  - 240
+  description: 'A swung-triplet feel with off-beat accents carrying a heavier blues-and-gospel groove,
+    the soulful 1950s-60s development of bebop (Art Blakey, Horace Silver). Distinguishing trait: vs Bebop
+    it is more grounded with a stronger blues/gospel pocket rather than fast, light bebop phrasing.'
+  display:
+    code: HBP
+    emoji: 🔥
+    icon: mdi:fire
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/hard-bop.mp3
+    youtube: https://www.youtube.com/watch?v=Cv9NSR-2DwM
+    youtube_label: Art Blakey & the Jazz Messengers — Moanin'
+- id: rockabilly
+  canonical: Rockabilly
+  cluster: shuffle
+  aliases: []
+  dsl_key: Rockabilly
+  pulse: 4
+  subdivision: triplet
+  accent: backbeat
+  tier: 2
+  bpm_range:
+  - 120
+  - 200
+  description: 'A triplet-leaning shuffle with a slapping upright bass and a driving backbeat, the 1950s
+    country-meets-rock-and-roll feel of early Sun Records (Carl Perkins, early Elvis). Distinguishing
+    trait: vs Backbeat it carries a shuffle bias and a slap-bass attack rather than straight 8ths, and
+    vs Boogie Shuffle it is guitar-and-slap-bass rather than boogie-piano driven.'
+  display:
+    code: RKB
+    emoji: 🕺
+    icon: tabler:guitar-pick
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/rockabilly.mp3
+    youtube: https://www.youtube.com/watch?v=I-LH_cMVzEA
+    youtube_label: Carl Perkins — Blue Suede Shoes
+- id: bachata-derecho
+  canonical: Bachata (Derecho)
+  cluster: latin
+  aliases:
+  - Bachata Feel
+  pulse: 4
+  subdivision: straight
+  accent: backbeat
+  description: 'A Dominican 4/4 led by the requinto guitar with a bongo/güira pulse and the dance''s tap
+    on beat 4. Distinguishing trait: vs Bolero-Rumba it is guitar-driven, faster and backbeat-leaning
+    rather than a slow clave ballad.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: BAC
+    emoji: 🎸
+    icon: ph:guitar
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/bachata-derecho.mp3
+- id: bolero-rumba
+  canonical: Bolero-Rumba
+  cluster: latin
+  aliases:
+  - Bolero Feel
+  pulse: 4
+  subdivision: straight
+  accent: clave
+  description: 'A slow, romantic Cuban 4/4 on a gentle cinquillo/clave — the ballad feel the ballroom
+    Rumba is danced to. Distinguishing trait: vs Compound Triplet it rests on a Cuban cinquillo rather
+    than a 12/8 roll, and vs Latin Clave it is slow and lyrical.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: BLR
+    emoji: 🕺
+    icon: mdi:heart
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/bolero-rumba.mp3
+- id: cha-cha-cha
+  canonical: Cha-Cha-Chá
+  cluster: latin
+  aliases:
+  - Cha Cha Feel
+  pulse: 4
+  subdivision: straight
+  accent: on-beat
+  description: 'A clave-based Cuban 4/4 with the signature triple-step landing on 4-and-1. Distinguishing
+    trait: vs Latin Clave it is squarer and more on-beat, defined by the güiro and the 4-&-1 cha-cha-cha
+    triple rather than the son tumbao.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: CHA
+    emoji: 🕺
+    icon: game-icons:maracas
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/cha-cha-cha.mp3
+- id: kizomba
+  canonical: Kizomba
+  cluster: brazilian
+  aliases:
+  - Kizomba Feel
+  pulse: 4
+  subdivision: straight
+  accent: on-beat
+  description: 'A slow Angolan 4/4 (~80-110 BPM) derived from semba — a smooth, grounded pulse emphasising
+    connection over subdivision. Distinguishing trait: vs Zouk-Lambada it is slower and more grounded
+    with a steady African pulse rather than lambada syncopation.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: KIZ
+    emoji: 🫂
+    icon: openmoji:people-hugging
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/kizomba.mp3
+- id: merengue
+  canonical: Merengue
+  cluster: latin
+  aliases:
+  - Merengue Feel
+  pulse: 2
+  subdivision: straight
+  accent: on-beat
+  description: 'A fast Dominican 2/4 march built on the tambora drum and güira scrape — an even, driving
+    two-step. Distinguishing trait: vs Two-Beat its tambora/güira instrumentation and clave-free straight
+    march set it apart from the jazz oom-pah.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: MRG
+    emoji: 🥁
+    icon: lucide:drum
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/merengue.mp3
+- id: milonga-traspie
+  canonical: Milonga con Traspié
+  cluster: tango
+  aliases:
+  - Traspié
+  - Contratiempo Milonga
+  pulse: 2
+  subdivision: straight
+  accent: off-beat
+  description: 'The playful syncopated milonga with traspié (contratiempo double-steps) over the habanera
+    frame. Distinguishing trait: vs Habanera it adds the off-beat contratiempo lift rather than riding
+    the plain bass cell.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: MTR
+    emoji: 🪗
+    icon: mdi:metronome
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/milonga-traspie.mp3
+- id: paso-doble-march
+  canonical: Paso Doble March
+  cluster: march
+  aliases:
+  - España Cañí
+  pulse: 2
+  subdivision: straight
+  accent: on-beat
+  description: 'A Spanish 2/4 military-march feel (the ''España cañí'' cadence) for the ballroom Paso
+    Doble. Distinguishing trait: vs Two-Beat it carries a flamenco-tinged Spanish march phrasing built
+    around dramatic accents and halts.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: PDM
+    emoji: 🕺
+    icon: game-icons:bull-horns
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/paso-doble-march.mp3
+- id: samba-batucada
+  canonical: Samba (Batucada)
+  cluster: brazilian
+  aliases:
+  - Samba Feel
+  - Batucada
+  pulse: 2
+  subdivision: straight
+  accent: off-beat
+  description: 'A Brazilian 2/4 surdo-and-tamborim battery with a strong ''two'' and busy 16th-note off-beats
+    — the engine of street and ballroom samba. Distinguishing trait: vs Bossa Nova it is a full high-energy
+    percussion battery rather than bossa''s whispered guitar comp.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: SMB
+    emoji: 🥁
+    icon: lucide:drum
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/samba-batucada.mp3
+- id: tango-marcato
+  canonical: Tango Marcato
+  cluster: tango
+  aliases:
+  - Marcato
+  - Marcato in 4
+  pulse: 4
+  subdivision: straight
+  accent: on-beat
+  description: 'The driving 4/4 pulse marking every beat (''marcato in 4''), the rhythmic backbone of
+    D''Arienzo-style Golden-Age tango. Distinguishing trait: vs Straight 4 it is bandoneon-led with a
+    heavy, grounded on-beat marking and rubato phrasing on top.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: TGM
+    emoji: 🪗
+    icon: mdi:metronome
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/tango-marcato.mp3
+- id: tango-sincopa
+  canonical: Tango Síncopa
+  cluster: tango
+  aliases:
+  - Síncopa
+  - Tango Staccato
+  pulse: 2
+  subdivision: straight
+  accent: off-beat
+  description: 'The sharp syncopated/staccato tango accent displacing weight onto the off-beat over a
+    2-felt marcato frame (D''Arienzo, Biagi). Distinguishing trait: vs Tango Marcato it crisply hits the
+    ''1-and'' off-beat rather than every even beat.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: TSC
+    emoji: 🪗
+    icon: mdi:metronome
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/tango-sincopa.mp3
+- id: tango-vals
+  canonical: Tango Vals
+  cluster: tango
+  aliases:
+  - Vals Cruzado
+  pulse: 3
+  subdivision: straight
+  accent: on-beat
+  description: 'A continuously-flowing 3/4 tango-waltz lilt felt one-per-bar with a strong beat 1, tied
+    to Golden-Age valses. Distinguishing trait: vs the Waltz it is faster and more circular, stepping
+    on accented beats across the bar rather than a square ONE-two-three.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: TVL
+    emoji: 🪗
+    icon: mdi:metronome
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/tango-vals.mp3
+- id: viennese-waltz
+  canonical: Viennese Waltz
+  cluster: waltz
+  aliases:
+  - Quick Waltz Feel
+  pulse: 3
+  subdivision: straight
+  accent: on-beat
+  description: 'A fast rotary 3/4 (~58 mpm) felt one-per-bar, driving continuous natural/reverse turns.
+    Distinguishing trait: vs the Waltz the felt unit is the whole bar, not the individual beat — you swing
+    once per measure, not three times.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: VWZ
+    emoji: 💃
+    icon: tabler:tornado
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/viennese-waltz.mp3
+- id: zouk-lambada
+  canonical: Zouk-Lambada
+  cluster: brazilian
+  aliases:
+  - Brazilian Zouk Feel
+  pulse: 4
+  subdivision: straight
+  accent: backbeat
+  description: 'A Brazilian-zouk 4/4 with a slow, syncopated tum-tum-tchi spread across the bar for flowing
+    body-wave movement. Distinguishing trait: vs Kizomba it is lambada-derived with long count-and-a syncopation
+    rather than a grounded steady pulse.'
+  source: 'SDTS scene-completeness rework (2026-06): rhythm feel the scene''s dances are danced to, absent
+    from the swing/blues-seeded catalog.'
+  display:
+    code: ZLB
+    emoji: 🕺
+    icon: mdi:human-female-dance
+    color: '#00838F'
+  audio:
+    clip: rhythmic_feel/zouk-lambada.mp3

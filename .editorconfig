@@ -1,0 +1,256 @@
+# =====================================================================
+# SDTS canonical .editorconfig
+#
+# Applies to:    all dotnet (and generally, source) files in this repository.
+#                Inheritance via editorconfig walkup — sub-folders should NOT
+#                create their own .editorconfig unless they have genuine
+#                project-specific overrides that cannot live here.
+#
+# Version:       1.0 (2026-04-12)
+# =====================================================================
+
+root = true
+
+# ---- Cross-language defaults ----
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# ---- MSBuild / config / data files ----
+[*.{csproj,props,targets,slnx,nuspec}]
+indent_size = 2
+
+[*.{json,yaml,yml,xml}]
+indent_size = 2
+
+[*.razor]
+indent_size = 4
+
+# ---- Markdown: preserve trailing whitespace (some renderers treat it as <br>) ----
+[*.md]
+trim_trailing_whitespace = false
+
+# =====================================================================
+# C# rules
+# =====================================================================
+[*.cs]
+
+# ---- Naming: private const fields → PascalCase ----
+# Rule must appear BEFORE private_fields_must_be_camel_case so that const
+# and static readonly fields match this more-specific rule first. Roslyn
+# evaluates naming rules top-to-bottom and picks the first match.
+dotnet_naming_rule.private_const_fields_are_pascal_case.symbols = private_const_fields
+dotnet_naming_rule.private_const_fields_are_pascal_case.style = pascal_case
+dotnet_naming_rule.private_const_fields_are_pascal_case.severity = warning
+
+dotnet_naming_symbols.private_const_fields.applicable_kinds = field
+dotnet_naming_symbols.private_const_fields.applicable_accessibilities = private, private_protected
+dotnet_naming_symbols.private_const_fields.required_modifiers = const
+
+# ---- Naming: private static readonly fields → PascalCase ----
+dotnet_naming_rule.private_static_readonly_fields_are_pascal_case.symbols = private_static_readonly_fields
+dotnet_naming_rule.private_static_readonly_fields_are_pascal_case.style = pascal_case
+dotnet_naming_rule.private_static_readonly_fields_are_pascal_case.severity = warning
+
+dotnet_naming_symbols.private_static_readonly_fields.applicable_kinds = field
+dotnet_naming_symbols.private_static_readonly_fields.applicable_accessibilities = private, private_protected
+dotnet_naming_symbols.private_static_readonly_fields.required_modifiers = static, readonly
+
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+# ---- Naming: private instance fields → _camelCase ----
+# This rule applies to private fields that are neither const nor static readonly.
+# The more-specific rules above match those first.
+dotnet_naming_rule.private_fields_must_be_camel_case.symbols = private_fields
+dotnet_naming_rule.private_fields_must_be_camel_case.style = camel_case_underscore
+dotnet_naming_rule.private_fields_must_be_camel_case.severity = warning
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private, private_protected
+
+dotnet_naming_style.camel_case_underscore.required_prefix = _
+dotnet_naming_style.camel_case_underscore.capitalization = camel_case
+
+# ---- Naming: interfaces → IPascalCase ----
+dotnet_naming_rule.interfaces_must_begin_with_i.symbols = interfaces
+dotnet_naming_rule.interfaces_must_begin_with_i.style = begins_with_i
+dotnet_naming_rule.interfaces_must_begin_with_i.severity = warning
+
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+
+dotnet_naming_style.begins_with_i.required_prefix = I
+dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+# ---- Naming: generic type parameters → TPascalCase ----
+dotnet_naming_rule.type_parameters_must_begin_with_t.symbols = type_parameters
+dotnet_naming_rule.type_parameters_must_begin_with_t.style = begins_with_t
+dotnet_naming_rule.type_parameters_must_begin_with_t.severity = warning
+
+dotnet_naming_symbols.type_parameters.applicable_kinds = type_parameter
+
+dotnet_naming_style.begins_with_t.required_prefix = T
+dotnet_naming_style.begins_with_t.capitalization = pascal_case
+
+# ---- C# style preferences (matches Jifftea legacy + modern C# 12) ----
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+csharp_style_expression_bodied_accessors = true:suggestion
+csharp_style_prefer_primary_constructors = true:suggestion
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = false:suggestion
+csharp_style_prefer_pattern_matching = true:suggestion
+csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_prefer_not_pattern = true:suggestion
+csharp_prefer_simple_using_statement = true:suggestion
+csharp_style_prefer_null_check_over_type_check = true:suggestion
+
+# ---- Null checks ----
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
+
+# ---- Code quality ----
+dotnet_code_quality_unused_parameters = all:suggestion
+dotnet_style_readonly_modifier = true:suggestion
+
+# ---- Formatting (braces, new lines, spaces) ----
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_indent_case_contents = true
+csharp_space_after_cast = false
+csharp_preserve_single_line_statements = true
+
+# ---- Using directives ----
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# =====================================================================
+# Policy decisions (2026-04-12 Rider inspection review)
+# =====================================================================
+
+# --- Policy 1: library public API .Global family suppressions ---
+# Rationale: library projects expose public APIs consumed by external
+# code that Rider's solution-wide analyzer cannot see. These rules
+# produce false-positive "unused" diagnostics on legitimate public
+# members. Dead public code detection is delegated to code review +
+# tests + semantic versioning, which are more reliable signals than
+# the .Global hint family.
+resharper_class_never_instantiated_global_highlighting = none
+resharper_member_can_be_private_global_highlighting = none
+resharper_member_can_be_protected_global_highlighting = none
+resharper_unused_member_global_highlighting = none
+resharper_unused_method_return_value_global_highlighting = none
+resharper_unused_member_in_super_global_highlighting = none
+resharper_unused_parameter_global_highlighting = none
+resharper_unused_type_global_highlighting = none
+resharper_introduce_optional_parameters_global_highlighting = none
+# Added 2026-08-07. The list above had a hole and this was the expensive one: same family, same
+# rationale, and the only member ReSharper ships at WARNING rather than suggestion — so a repo
+# carrying the list minus this line still got the full count in Rider. Measured at 77 in
+# a downstream consumer against 0 for every rule above it.
+resharper_unused_auto_property_accessor_global_highlighting = none
+
+# NOT suppressed — retained as warning signal on real design issues:
+#   - NotAccessedPositionalProperty.Global (record DTO with dead prop)
+# Lowered to hint (visible but not actionable pressure):
+resharper_property_can_be_made_init_only_global_highlighting = hint
+
+# --- Policy 2: GCSuppressFinalize canonical-pattern relaxation ---
+# Modern .NET guidance: GC.SuppressFinalize(this) in a sealed class
+# without a finalizer is a no-op and dead code. We delete existing
+# calls rather than suppress the rule — the rule stays at its
+# default (hint) severity; use it as a signal on future code.
+
+# --- Policy 3: UseCollectionExpression as warning ---
+# C# 12 collection expressions (`[x]`) replace verbose array/list
+# initializers (`new[] { x }`, `new List<int> { 1, 2, 3 }`). Modern
+# positioning, trivial migration, prevents new-code regression.
+resharper_use_collection_expression_highlighting = warning
+dotnet_diagnostic.IDE0300.severity = warning
+
+# --- Policy 4: UseAwaitUsing as warning ---
+# Sync `using` on IAsyncDisposable in an async method is a
+# sync-over-async hazard (thread pool starvation under load).
+# Correctness concern, not just style.
+resharper_use_await_using_highlighting = warning
+
+# --- Compiler warning overrides ---
+
+# CS0649: field is never assigned to, and will always have its default
+# value null. Suppressed because DI / auto-mock patterns legitimately
+# rely on runtime assignment the compiler cannot see.
+dotnet_diagnostic.CS0649.severity = none
+
+# CS8509: non-exhaustive switch expression — a MISSING NAMED member/case.
+# Elevated to error so the "no default arm on a closed DU/enum" rule in
+# defensive-coding.md is actually load-bearing — adding a variant breaks the
+# build until every switch handles it. See standards.md / defensive-coding.md
+# §Make Illegal States Unrepresentable.
+# CS8524: the UNNAMED-enum-value case ((MyEnum)9 casts). It fires on EVERY
+# enum switch even when all named members are handled, so error here would
+# force a `_ =>` arm — which suppresses CS8509 and defeats the guard above.
+# Keep it suggestion; cast garbage fails fast at runtime as
+# SwitchExpressionException. (Corrected 2026-07-10; was error.)
+dotnet_diagnostic.CS8509.severity = error
+dotnet_diagnostic.CS8524.severity = suggestion
+
+# --- CA1859: "use concrete type for perf" demoted ---
+# CA1859 pushes internal methods to return a concrete List/Dictionary instead of the
+# IReadOnly* abstraction the Data Modeling standard prefers. Keep it visible but non-nagging.
+dotnet_diagnostic.CA1859.severity = suggestion
+
+# --- CA1716: cross-language keyword-collision rule demoted ---
+# CA1716 flags idiomatic C# names (Get/Set/Error/…) that collide with VB/other-language keywords.
+# This repository ships C#-only libraries — this is the VSTHRD001/010 situation (rule N/A to
+# our platform). Keep it a whisper, not a build warning.
+dotnet_diagnostic.CA1716.severity = suggestion
+
+# --- ReSharper InconsistentNaming suppression ---
+# ReSharper's InconsistentNaming inspection reads `dotnet_naming_rule.*`
+# entries but does not fully honor Roslyn's specificity evaluation for
+# rules differentiated by `required_modifiers`. This means private const
+# and private static readonly fields with PascalCase names (the .NET
+# canonical convention for constants) are flagged under the general
+# private-instance-field camelCase rule. Disabled here to eliminate
+# false positives. Roslyn's native naming analyzer (IDE1006) still
+# enforces the dotnet_naming_rule.* rules at their declared severity,
+# so real naming violations are still caught via `dotnet build`.
+resharper_inconsistent_naming_highlighting = none
+
+# --- Logging (structured templates) + exception rethrow — added 2026-07-11 ---
+# From coding/_cross-cutting/observability.md + error-handling.md. Warning-first rollout: burn down, then escalate.
+dotnet_diagnostic.CA2254.severity = warning    # log message template must be static (no interpolation/concat)
+dotnet_diagnostic.CA1727.severity = warning    # PascalCase named placeholders
+dotnet_diagnostic.CA2017.severity = warning    # log template arg-count matches the args
+dotnet_diagnostic.CA2200.severity = warning    # rethrow with throw; not throw ex; (preserve the stack)
+
+# =====================================================================
+# Folder-scoped overrides
+# =====================================================================
+
+# Roslyn analyzer DiagnosticDescriptor fields conventionally use the
+# pattern {LIBRARY-PREFIX}{NNNN}_{PascalCase} (e.g., "NI0001_IKernelUsage",
+# "AD0001_AuthenticationContextUsage") to mirror the actual diagnostic
+# ID that ships in the analyzer's [Obsolete] attribute on the shim
+# types. This pattern does not match the default static-readonly-field
+# naming rule (which wants plain PascalCase), but it is the de-facto
+# community standard followed by Microsoft.CodeAnalysis.FxCopAnalyzers
+# and most public Roslyn analyzers.
+[**/Libraries/**/*Diagnostics.cs]
+resharper_inconsistent_naming_highlighting = none
+dotnet_diagnostic.IDE1006.severity = none
+
+# Test method names use underscores by deliberate readability convention
+# (Method_Scenario_Expectation). CA1707 flags underscores in identifiers — off in tests only,
+# kept as warning in product code. See standards.md §Analyzers.
+[{tests/**,**/tests/**}]
+dotnet_diagnostic.CA1707.severity = none
+# CA1305 (IFormatProvider): tests compare controlled, ASCII values (parsed YAML) — culture-invariance is
+# moot, and a real culture bug would surface as a failing test. Kept as warning in shipping code.
+dotnet_diagnostic.CA1305.severity = none

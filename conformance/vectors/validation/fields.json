@@ -1,0 +1,1068 @@
+{
+  "suite_version": "0.1.0-draft",
+  "doc": "../../README.md",
+  "fields": {
+    "bpm": {
+      "constraints": {
+        "type": "int",
+        "cardinality": "single",
+        "min": 1,
+        "max": 330
+      },
+      "cases": [
+        {
+          "value": "120",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "186",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "250",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "400",
+          "valid": false,
+          "error": "out_of_range"
+        },
+        {
+          "value": "fast",
+          "valid": false,
+          "error": "not_integer"
+        }
+      ]
+    },
+    "energy": {
+      "constraints": {
+        "type": "int",
+        "cardinality": "single",
+        "min": 1,
+        "max": 10
+      },
+      "cases": [
+        {
+          "value": "3",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "5",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "8",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "0",
+          "valid": false,
+          "error": "out_of_range"
+        },
+        {
+          "value": "11",
+          "valid": false,
+          "error": "out_of_range"
+        },
+        {
+          "value": "hot",
+          "valid": false,
+          "error": "not_integer"
+        }
+      ]
+    },
+    "valence": {
+      "constraints": {
+        "type": "int",
+        "cardinality": "single",
+        "min": 1,
+        "max": 10
+      },
+      "cases": [
+        {
+          "value": "3",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "6",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "9",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "0",
+          "valid": false,
+          "error": "out_of_range"
+        },
+        {
+          "value": "11",
+          "valid": false,
+          "error": "out_of_range"
+        },
+        {
+          "value": "bright",
+          "valid": false,
+          "error": "not_integer"
+        }
+      ]
+    },
+    "danceability": {
+      "constraints": {
+        "type": "int",
+        "cardinality": "single",
+        "min": 1,
+        "max": 10
+      },
+      "cases": [
+        {
+          "value": "10",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "5",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "2",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "0",
+          "valid": false,
+          "error": "out_of_range"
+        },
+        {
+          "value": "11",
+          "valid": false,
+          "error": "out_of_range"
+        }
+      ]
+    },
+    "intro_duration": {
+      "constraints": {
+        "type": "int",
+        "cardinality": "single",
+        "min": 0
+      },
+      "cases": [
+        {
+          "value": "0",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "4200",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "12000",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "-1",
+          "valid": false,
+          "error": "out_of_range"
+        },
+        {
+          "value": "8s",
+          "valid": false,
+          "error": "not_integer"
+        }
+      ]
+    },
+    "outro_duration": {
+      "constraints": {
+        "type": "int",
+        "cardinality": "single",
+        "min": 0
+      },
+      "cases": [
+        {
+          "value": "0",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "3000",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "11000",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "3s",
+          "valid": false,
+          "error": "not_integer"
+        }
+      ]
+    },
+    "playback_start": {
+      "constraints": {
+        "type": "int",
+        "cardinality": "single",
+        "min": 0
+      },
+      "cases": [
+        {
+          "value": "8000",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "0",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "12500",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "-5",
+          "valid": false,
+          "error": "out_of_range"
+        }
+      ]
+    },
+    "playback_stop": {
+      "constraints": {
+        "type": "int",
+        "cardinality": "single",
+        "min": 1
+      },
+      "cases": [
+        {
+          "value": "195000",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "201500",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "0",
+          "valid": false,
+          "error": "out_of_range"
+        }
+      ]
+    },
+    "fade_in_duration": {
+      "constraints": {
+        "type": "int",
+        "cardinality": "single",
+        "min": 0
+      },
+      "cases": [
+        {
+          "value": "0",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "1500",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "2000",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "1.5",
+          "valid": false,
+          "error": "not_integer"
+        }
+      ]
+    },
+    "fade_out_duration": {
+      "constraints": {
+        "type": "int",
+        "cardinality": "single",
+        "min": 0
+      },
+      "cases": [
+        {
+          "value": "0",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "2000",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "4000",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "-1",
+          "valid": false,
+          "error": "out_of_range"
+        }
+      ]
+    },
+    "meter": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single",
+        "values": [
+          "2",
+          "3",
+          "4",
+          "2/4",
+          "3/4",
+          "4/4",
+          "6/8",
+          "12/8"
+        ]
+      },
+      "cases": [
+        {
+          "value": "4/4",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "3",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "3/4",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "12/8",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "5",
+          "valid": false,
+          "error": "not_in_enum"
+        },
+        {
+          "value": "4/8",
+          "valid": false,
+          "error": "not_in_enum"
+        }
+      ]
+    },
+    "tempo_stability": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single",
+        "values": [
+          "stable",
+          "drift",
+          "rubato",
+          "accelerando",
+          "tempo-change"
+        ]
+      },
+      "cases": [
+        {
+          "value": "stable",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "rubato",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "accelerando",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "fast",
+          "valid": false,
+          "error": "not_in_enum"
+        }
+      ]
+    },
+    "ending_type": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single",
+        "values": [
+          "definitive",
+          "fade",
+          "cold-stop"
+        ]
+      },
+      "cases": [
+        {
+          "value": "definitive",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "fade",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "cold-stop",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "fade-out",
+          "valid": false,
+          "error": "not_in_enum"
+        },
+        {
+          "value": "big-finish",
+          "valid": false,
+          "error": "not_in_enum"
+        }
+      ]
+    },
+    "recording_origin": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single",
+        "values": [
+          "period-original",
+          "faithful-revival",
+          "reissue"
+        ]
+      },
+      "cases": [
+        {
+          "value": "period-original",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "faithful-revival",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "reissue",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "original",
+          "valid": false,
+          "error": "not_in_enum"
+        }
+      ]
+    },
+    "sdts_version": {
+      "constraints": {
+        "type": "string",
+        "cardinality": "single",
+        "pattern": "\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?"
+      },
+      "cases": [
+        {
+          "value": "0.1.0",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "0.2.0",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "v1",
+          "valid": false,
+          "error": "no_match"
+        },
+        {
+          "value": "1.0",
+          "valid": false,
+          "error": "no_match"
+        }
+      ]
+    },
+    "original_title": {
+      "constraints": {
+        "type": "string",
+        "cardinality": "single"
+      },
+      "cases": [
+        {
+          "value": "Stormy Monday",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Sing Sing Sing",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "lyric_language": {
+      "constraints": {
+        "type": "string",
+        "cardinality": "multi",
+        "delimiter": "; ",
+        "pattern": "instrumental|[a-z]{2}"
+      },
+      "cases": [
+        {
+          "value": "en",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "en; fr",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "sl",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "instrumental",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "English",
+          "valid": false,
+          "error": "no_match"
+        }
+      ]
+    },
+    "confirmation_gates": {
+      "constraints": {
+        "type": "composite",
+        "cardinality": "multi",
+        "delimiter": "; ",
+        "pattern": "[A-Za-z][A-Za-z0-9]*:[0-9]+(:[0-9a-f]{4})?"
+      },
+      "cases": [
+        {
+          "value": "BPM:1:a3f2; Genres:1; Moods:2",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Beats:1; Structure:1; Segments:1",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Occasions:1; Comments:1; Lyrics:1",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "BPM",
+          "valid": false,
+          "error": "no_match"
+        },
+        {
+          "value": "BPM:1:ZZZZ",
+          "valid": false,
+          "error": "no_match"
+        }
+      ]
+    },
+    "regions": {
+      "constraints": {
+        "type": "composite",
+        "cardinality": "multi",
+        "delimiter": "; ",
+        "pattern": "[0-9]+:[0-9]+:(silence|speech|music-boundary)(:[^;]*)?"
+      },
+      "cases": [
+        {
+          "value": "0:3200:silence; 3200:8500:speech",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "185000:190000:music-boundary",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "0:3200",
+          "valid": false,
+          "error": "no_match"
+        },
+        {
+          "value": "0:3200:noise",
+          "valid": false,
+          "error": "no_match"
+        },
+        {
+          "value": "0.5:3200:silence",
+          "valid": false,
+          "error": "no_match"
+        }
+      ]
+    },
+    "dance": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "multi",
+        "delimiter": "; ",
+        "grades": [
+          "core",
+          "edge",
+          "fusion"
+        ],
+        "allow_validation_marker": true
+      },
+      "cases": [
+        {
+          "value": "Lindy Hop",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Lindy Hop; Balboa",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Blues; Slow Drag",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Blues:fusion",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Lindy Hop:core?",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "East Coast Swing:edge",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Blues:traditional",
+          "valid": false,
+          "error": "bad_grade"
+        }
+      ]
+    },
+    "routine": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "multi",
+        "delimiter": "; ",
+        "grades": [
+          "original",
+          "alternative",
+          "experimental"
+        ],
+        "allow_validation_marker": true
+      },
+      "cases": [
+        {
+          "value": "Shim Sham:original",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Shim Sham:alternative; Big Apple:experimental",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Tranky Doo:original",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Shim Sham:primary",
+          "valid": false,
+          "error": "bad_grade"
+        }
+      ]
+    },
+    "genre": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "multi",
+        "delimiter": "; "
+      },
+      "cases": [
+        {
+          "value": "Swing; Big Band",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Chicago Blues",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Gypsy Jazz",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Jump Blues; Boogie Woogie",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Vocal Jazz",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "mood": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "multi",
+        "delimiter": "; "
+      },
+      "cases": [
+        {
+          "value": "Joyful",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Bluesy; Soulful",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Melancholic",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Hot; Wild",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Tender",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "theme": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "multi",
+        "delimiter": "; "
+      },
+      "cases": [
+        {
+          "value": "Christmas",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Cocktail; Late Night",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Wedding",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Heartbreak",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "instrument_led": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "multi",
+        "delimiter": "; "
+      },
+      "cases": [
+        {
+          "value": "Piano",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Saxophone",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Clarinet",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Reed",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Trumpet; Trombone",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "vocality": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single"
+      },
+      "cases": [
+        {
+          "value": "Instrumental",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Female",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Male",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Group",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Feature",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "rhythmic_feel": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single"
+      },
+      "cases": [
+        {
+          "value": "Jazz Swing 8ths",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Shuffle",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Slow Drag",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Stride",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Manouche Swing",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "instrumentation": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single"
+      },
+      "cases": [
+        {
+          "value": "Big Band",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Jazz Combo",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Solo Piano",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Vocal + Piano",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Manouche",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "recording_context": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single"
+      },
+      "cases": [
+        {
+          "value": "Studio",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Live",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Radio Broadcast",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Jam Session",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "recording_quality_era": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single"
+      },
+      "cases": [
+        {
+          "value": "Acoustic Era",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Electrical Mono",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Hi-Fi Mono",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Stereo Era",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Digital Era",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "song_form": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single"
+      },
+      "cases": [
+        {
+          "value": "12-bar Blues",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "AABA",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "ABAC",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Ragtime",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "Rhythm Changes",
+          "valid": true,
+          "error": null
+        }
+      ]
+    },
+    "artist_country": {
+      "constraints": {
+        "type": "enum",
+        "cardinality": "single"
+      },
+      "cases": [
+        {
+          "value": "France",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "United States",
+          "valid": true,
+          "error": null
+        },
+        {
+          "value": "United Kingdom",
+          "valid": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}

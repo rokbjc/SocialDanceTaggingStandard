@@ -1,0 +1,176 @@
+# Doc-only counter-examples merged into the per-field docs by scripts/gen_field_docs.py.
+# Keyed by field id (data/fields.yaml#fields) or by standard-frame slug (lowercased frame,
+# e.g. TOPE -> tope). Each value is a list of markdown strings "`bad` — why it's wrong".
+# Not loaded by the library — purely to illustrate what NOT to write.
+
+# --- Taxonomy core (A) ---
+dance:
+  - "`#LH` as the STORED value — the canonical form is the name `Lindy Hop`; `#LH` is an alias (genre model)"
+  - "`Lindy Hop, Balboa` — wrong delimiter; multi-value uses `; ` → `Lindy Hop; Balboa`"
+  - "a name that is neither a catalog Dance Style canonical name nor an alias of one"
+  - "`Blues:traditional` — the purity grade is `core`/`edge`/`fusion`, not free-text"
+  - "migrating a `#`-code by just dropping the `#` — the two namespaces are NOT parallel: `#SLS` is an alias of **Salsa**, while bare `SLS` is the display code of **St. Louis Shag**. Resolve through the vocabulary; never rewrite the token by hand"
+  - "purity stored in a separate field — it rides INLINE on the dance name (`Blues:fusion`), because purity is per-(track×dance)"
+genre:
+  - "`Swing/Big Band` — use `; ` not `/` → `Swing; Big Band`"
+  - "`Swing; Hot Jazz; NOLA Jazz` — don't stack a parent and its child; keep the most specific"
+  - "`13` — never ID3v1 numeric genre codes; store canonical text"
+mood:
+  - "`Happy` — not a catalog mood; the nearest is `Joyful`"
+  - "`Joyful/Hot` — use `; ` → `Joyful; Hot`"
+  - "writing it to `TXXX:MOOD` instead of `TMOO` — that shadows the real standard frame"
+vocality:
+  - "`Instrumental; Male` — single-valued; pick the one dominant vocality"
+  - "`(vm)` — legacy comment form; it resolves to `Male`, don't store the raw token"
+  - "`Vocals` — not canonical; use `Vocal` as the generic fallback"
+rhythmic_feel:
+  - "`Swing` — too vague; use a catalog feel like `Jazz Swing 8ths`"
+  - "`Jazz Swing 8ths; Shuffle` — single-valued; one primary feel"
+  - "`Stride` meant as the blues idiom — beware the name collision; here it is the rhythmic feel"
+
+# --- Taxonomy core (B) ---
+instrumentation:
+  - "`Saxophone` — that's a lead instrument (instrument_led), not an ensemble; use e.g. `Jazz Combo`"
+  - "`Big Band; Orchestra` — single-valued; pick one"
+  - "`Quartet` — not a catalog ensemble value"
+instrument_led:
+  - "`Piano Led` — store it BARE: `Piano` (the ' Led' suffix is stripped on read)"
+  - "`Saxophone, Trumpet` — wrong delimiter; `Saxophone; Trumpet`"
+  - "`Keys` — not a catalog value (use `Piano`, or the family `Novelty`)"
+recording_context:
+  - "`Studio; Live` — single-valued; pick the dominant context"
+  - "`Concert` — not a catalog value (use `Live`)"
+  - "`Remastered` — that's a recording-meta flag, not a capture context"
+theme:
+  - "`#JAM` — dance-floor `#`-markers moved off `theme` to the dance/occasion side"
+  - "`Xmas` — use the canonical `Christmas`"
+  - "`Tender` — that's a Mood, not a Theme"
+recording_quality_era:
+  - "`Excellent` — that's a fidelity GRADE (a false friend), not a recording era"
+  - "`Hi-Fi Mono; Stereo Era` — single-valued; one era"
+  - "`Digital` — use the canonical `Digital Era`"
+song_form:
+  - "`12-bar` — use the canonical `12-bar Blues`"
+  - "`AABA; 12-bar Blues` — single-valued; one harmonic form"
+  - "`Verse-Chorus` — not a catalog form value"
+
+# --- Measured & confirmation ---
+bpm:
+  - "`120.5` — fractional BPM is non-conformant in `TBPM`; store an integer"
+  - "`120; 180` — never multi-value in `TBPM` (it breaks every reader); use bpm + tempo_stability + the beat grid"
+  - "`fast` — `TBPM` is a number, not a word"
+rating:
+  - "`6` stars — the max is 5 (10 half-stars)"
+  - "`★★★` — store the `POPM` byte, not glyphs"
+  - "minting `TXXX:SDTS_RATING` — use the standard `POPM` frame; don't shadow it"
+confirmation_gates:
+  - "`BPM` — a gate needs a version: `BPM:1`"
+  - "`BPM:1, Moods:2` — wrong delimiter; `; ` → `BPM:1; Moods:2`"
+  - "`Tempo:1` — not a canonical gate name"
+sdts_version:
+  - "`v0.1` — use a bare semver: `0.1.0`"
+  - "`latest` — must be a concrete version string"
+
+# --- Proposed: tempo & structure ---
+energy:
+  - "`0` or `11` — out of range; energy is 1–10"
+  - "`200` — don't copy POPM's 0–255 byte; store the plain integer"
+  - "`high` — it's a number; the qualitative axis lives in mood"
+valence:
+  - "`0` or `11` — out of range; valence is 1–10"
+  - "`bright` — it's a number; the named affect lives in mood"
+  - "a low number to mean 'a weak track' — valence is dark↔bright, not bad↔good; quality is `rating`"
+  - "`8` copied from the mood's own valence — the field is the TRACK's coordinate, not a mood echo"
+tempo_stability:
+  - "`fast` — that's a speed (a 'Tempo' false friend), not stability; use `stable`/`drift`/…"
+  - "`stable; drift` — single-valued"
+  - "`steady` — use the canonical `stable`"
+meter:
+  - "`4` — write the full signature `4/4`"
+  - "`4/4; 3/4` — single-valued; the '/' is part of the value, not a delimiter"
+  - "`common` or `C` — use `4/4`"
+intro_duration:
+  - "`8s` / `4.2` — integer milliseconds only (e.g. `8000`)"
+  - "using it to TRIM the intro — that's `playback_start`; `intro_duration` only DESCRIBES the length"
+outro_duration:
+  - "`3s` — integer milliseconds (e.g. `3000`)"
+  - "using it to TRIM — that's `playback_stop`; `outro_duration` only DESCRIBES the length"
+ending_type:
+  - "`fade-out` — the value is `fade` (one of definitive|fade|cold-stop)"
+  - "`big-finish` — use `definitive`"
+playback_start:
+  - "`8.0` or `8s` — integer milliseconds only (`8000`)"
+  - "a value ≥ playback_stop or ≥ track length — the cue-in must come before both"
+  - "a negative value — must be ≥ 0 (absent/0 = start at the beginning)"
+playback_stop:
+  - "`195` — that's seconds; use ms (`195000`)"
+  - "a value ≤ playback_start — the cue-out must come after the cue-in"
+  - "using it as a resume/bookmark — it's a fixed cue-out, not a moving position"
+fade_in_duration:
+  - "`2s` or `2.0` — integer milliseconds (`2000`)"
+  - "a curve name like `equal-power` — the curve isn't stored; this is only a duration"
+  - "a negative value — 0 = hard in (no fade)"
+regions:
+  - "`0:3200` — every region needs a kind: `0:3200:silence`"
+  - "`0:3200:noise` — kind is a closed set: silence | speech | music-boundary"
+  - "`0.5:3200:silence` — the bounds are integer milliseconds, not seconds or fractions"
+  - "`3200:0:silence` — end must come after start (the per-value validator can't catch this; a consumer must)"
+  - "`{\"start\":0,\"end\":3200}` — no JSON in tags; regions is a `; `-joined list of `start:end:kind`"
+  - "a single cue point squeezed in as a zero-length region — that's `playback_start` / `playback_stop`"
+fade_out_duration:
+  - "`200000+2000` — don't encode a composite; set playback_stop=200000 and fade_out_duration=2000 separately"
+  - "`4s` — integer ms (`4000`)"
+  - "a negative value — 0 = cold stop"
+
+# --- Proposed: dance semantics ---
+routine:
+  - "`ShimSham:original` — write the canonical name WITH spaces: `Shim Sham:original` (spaceless / #-forms are aliases)"
+  - "`Shim Sham:primary` — the tier is one of original|alternative|experimental (the old primary/alternate/caller vocab is gone)"
+  - "`Shim Sham` — needs a fitness tier: `Shim Sham:original`"
+  - "`#ShimSham` — that's the dance tag in SDTS_DANCES; this field declares THE recording (`Shim Sham:original`)"
+danceability:
+  - "`0` or `11` — out of range; 1–10"
+  - "`200` — a plain integer, not a POPM byte"
+  - "`danceable` — it's a number, not a word"
+# --- Proposed: content & provenance ---
+original_title:
+  - "the same string as TIT2 — leave it EMPTY when this recording IS the work; a consumer falls back to TIT2"
+  - "`Stormy Monday (T-Bone Walker)` — the performer goes in TOPE, not in the title"
+  - "`Call It Stormy Monday (cover)` — no decorations; the work's title only"
+  - "the original ALBUM — that is TOAL, a different frame and a different fact"
+  - "filling it on an original-era recording — like TOPE, it stays empty unless this performs someone else's work"
+lyric_language:
+  - "`English` — use the ISO 639-1 code `en`"
+  - "`en, fr` — wrong delimiter; `en; fr`"
+  - "`en` on an instrumental — use the sentinel `instrumental` (and it must agree with Vocality=Instrumental)"
+recording_origin:
+  - "`original` — use the canonical `period-original`"
+  - "`period-original; reissue` — single-valued"
+  - "`Digital Era` — that's recording_quality_era, a different axis"
+artist_country:
+  - "`French` — use the canonical country name `France` (or its ISO alias `FR`)"
+  - "`Paris` — that's a recording-location / city, not the artist's country of origin"
+  - "the release-country (where it was published) — this field is artist/music ORIGIN, a different concept"
+
+# --- Standard music frames (keyed by frame slug) ---
+tit2:
+  - "`` (empty) — every track needs a title"
+  - "`Sing Sing Sing — Benny Goodman` — keep the artist out of the title (it goes in TPE1)"
+tpe1:
+  - "`Various` on a single-artist track"
+  - "the composer's name — that's TCOM, not the performer"
+talb:
+  - "the ORIGINAL album of a reissue — that goes in TOAL, not TALB"
+comm:
+  - "structured data (vocality / energy / dance tags) — those have dedicated fields now"
+tit1:
+  - "treating it as a portable SDTS field — it's a frozen pass-through"
+  - "inventing new tokens — the vocabulary is catalog-owned (`workflow_tags`)"
+tope:
+  - "mirroring TPE1 on an original-era recording — leave TOPE empty unless it's a cover/tribute"
+  - "the composer — TOPE is the original PERFORMER (composer is TCOM)"
+toal:
+  - "this reissue's album — that's TALB; TOAL is the ORIGINAL album"
+tdor:
+  - "this reissue's date — that's TDRC; TDOR is the ORIGINAL date"
+  - "a decade like `30s` — TDOR is a date/year; SDTS has no decade field (derive the era from the year)"

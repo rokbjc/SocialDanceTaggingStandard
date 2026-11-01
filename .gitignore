@@ -1,0 +1,37 @@
+## .NET
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+.vs/
+.idea/
+artifacts/
+*.nupkg
+TestResults/
+
+## Docs site (MkDocs)
+_site/
+site/
+
+## Python
+__pycache__/
+.pytest_cache/
+*.egg-info/
+.mypy_cache/
+
+## Editor
+.obsidian/
+
+## Loop working state (production-readiness run — not part of the published standard)
+.loop/
+
+## Internal-only trees — untracked for the public repo (kept locally). They still contain the private
+## catalog path / consumer name, so they must never enter the published tree. Strip handoff task A.
+.handoffs/
+docs/superpowers/
+CLAUDE.md
+
+## Internal maintainer runbook (owner-only; not part of the published standard).
+PUBLISHING.md

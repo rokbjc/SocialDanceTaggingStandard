@@ -1,0 +1,60 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+pack: early
+dimension: dances
+families:
+- early-social
+values:
+- id: one-step
+  canonical: One-Step
+  aliases:
+  - One Step
+  - Onestep
+  tradition: early-social
+  family: early-social
+  typical_genres:
+  - Ragtime
+  - Dixieland
+  description: 'A walking couple dance of the 1910s, danced in a close hold to ragtime, with one step to each beat and no set pattern; the dance the Castles popularised before the social Fox Trot displaced it. Distinguishing trait: plain walking steps on every beat (vs. the Fox Trot, which mixes slow and quick steps).'
+  disambiguation: 'The early-1910s ragtime walking dance. NOT the swing-era Lindy Hop or the Slow Foxtrot of the ballroom pack.'
+  display:
+    code: OS
+    emoji: 👣
+    icon: mdi:shoe-print
+    color: '#B0B082'
+- id: polka
+  canonical: Polka
+  aliases: []
+  tradition: early-social
+  family: early-social
+  meter: 2/4
+  typical_genres:
+  - Folk
+  description: 'A lively couple dance in 2/4 that spread from Bohemia across Europe and the Americas in the nineteenth century, built on a hop-step-close pattern turned around the floor. Distinguishing trait: the bouncy two-beat pulse (vs. the walking One-Step and the gliding Fox Trot).'
+  disambiguation: 'The couple dance in 2/4. Also the name of a music form that is not a genre value in this vocabulary.'
+  display:
+    code: PLK
+    emoji: 🪗
+    icon: mdi:shoe-print
+    color: '#A6974A'
+- id: fox-trot
+  canonical: Fox Trot
+  aliases:
+  - Foxtrot
+  - Social Foxtrot
+  tradition: early-social
+  family: early-social
+  meter: 4/4
+  typical_genres:
+  - Dixieland
+  - Big Band
+  - Swing
+  description: 'The 1910s American social couple dance of mixed slow and quick walking steps in 4/4, the ancestor of the International Standard Slow Foxtrot. Distinguishing trait: the relaxed, social walk of the era (vs. the codified, gliding Slow Foxtrot of the ballroom pack).'
+  disambiguation: 'The early American social fox trot. NOT the International Standard Slow Foxtrot (ballroom pack, Slow Foxtrot), which is its codified descendant.'
+  display:
+    code: FXT
+    emoji: 🦊
+    icon: mdi:paw
+    color: '#D8BA7B'

@@ -1,0 +1,425 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+dimension: song_form
+layer: core
+axes:
+- name: bars
+  values:
+  - 8
+  - 12
+  - 16
+  - 24
+  - 28
+  - 32
+  - 48
+  - 64
+  description: Number of bars in one chorus.
+- name: tier
+  values:
+  - 1
+  - 2
+  - 3
+  description: 1 = essential (~95%), 2 = important (~4%), 3 = edge case (~1%).
+- name: meter
+  values:
+  - 4/4
+  - 2/4
+  - 12/8
+  description: Implied meter (time signature).
+values:
+- id: blues12-bar
+  canonical: 12-bar Blues
+  aliases:
+  - Blues12
+  - 12 Bar Blues
+  - Blues 12
+  - Twelve-bar Blues
+  dsl_key: Blues12
+  bars: 12
+  pattern: A4+A4+B4
+  meter: 4/4
+  tier: 1
+  typical_genres:
+  - Blues
+  - Jump Blues
+  - Boogie Woogie
+  - Rhythm & Blues
+  - Rockabilly
+  typical_share: 0.3
+  description: A 12-bar blues chorus built on a I-IV-V progression, split into three 4-bar phrases following
+    an A-A'-B (statement, varied repeat, answer) pattern that repeats throughout the song. By far the
+    most common form in blues, jump blues, boogie woogie and R&B; distinguished from other blues forms
+    purely by its 12-bar length (vs 8, 16 or 24).
+  display:
+    code: B12
+    emoji: 🎺
+    icon: mdi:format-list-numbered
+    color: '#455A64'
+- id: bar-form
+  canonical: Bar Form
+  aliases:
+  - Stollen-Stollen-Abgesang
+  - VVC
+  - Verse-Verse-Chorus
+  - AAB Section Form
+  dsl_key: AAB
+  bars: null
+  pattern: Verse + Verse + Chorus (at the section level)
+  meter: 4/4
+  tier: 1
+  typical_genres:
+  - Folk
+  - Country
+  - Rockabilly
+  description: 'A section-level AAB structure (Stollen-Stollen-Abgesang): two similar verses followed
+    by a contrasting closing chorus, the whole pattern often repeating across the song. Unlike 12-bar
+    Blues, the AAB here operates at the section level (verse + verse + chorus, 16+ bars each) rather than
+    the bar level. Its roots are medieval German Meistersang, and it shapes many Lutheran hymns and the
+    Prize Song in Wagner''s Die Meistersinger.'
+  display:
+    code: AAB
+    emoji: 📜
+    icon: mdi:scroll
+    color: '#455A64'
+- id: aaba32-bar
+  canonical: AABA
+  aliases:
+  - 32-bar AABA
+  - 32 Bar AABA
+  - Standard AABA
+  dsl_key: AABA
+  bars: 32
+  pattern: A8+A8+B8+A8
+  meter: 4/4
+  tier: 1
+  typical_genres:
+  - Swing
+  - Big Band
+  - Vocal Jazz
+  - Gypsy Jazz
+  typical_share: 0.4
+  description: 'The classic Tin Pan Alley / Great American Songbook form: 32 bars in four 8-bar sections
+    (A-A-B-A), where the B ''bridge'' contrasts harmonically and melodically and the final A recapitulates
+    the opening. The defining trait is that the fourth section returns to the first; if it does not, it
+    is ABAC instead.'
+  display:
+    code: AABA
+    emoji: 🎼
+    icon: mdi:vector-square
+    color: '#455A64'
+- id: abac32-bar
+  canonical: ABAC
+  aliases:
+  - 32-bar ABAC
+  - 32 Bar ABAC
+  dsl_key: ABAC
+  bars: 32
+  pattern: A8+B8+A8+C8
+  meter: 4/4
+  tier: 1
+  typical_genres:
+  - Vocal Jazz
+  - Adult Standards
+  typical_share: 0.15
+  description: 'A 32-bar form in four 8-bar sections (A-B-A-C) where, unlike AABA, the final section (C)
+    introduces new material rather than recapitulating the opening A. The primary distinguishing cue:
+    after the second A, the melody does NOT return but resolves with something new. It is common among
+    standards written for Hollywood films.'
+  display:
+    code: ABAC
+    emoji: 🎶
+    icon: lucide:shapes
+    color: '#455A64'
+- id: double16-32-bar
+  canonical: Double 16
+  aliases:
+  - 32-bar Double16
+  - 32 Bar Double16
+  - AB Double16
+  - Double16
+  dsl_key: Double16
+  bars: 32
+  pattern: A16+B16
+  meter: 4/4
+  tier: 1
+  typical_genres:
+  - Vocal Jazz
+  - Adult Standards
+  typical_share: 0.05
+  description: A 32-bar form built as two equal 16-bar sections (A16+B16) with no internal 8-bar subdivisions;
+    the melodic phrase runs a full 16 bars without repeating, giving a 'long-flow' feel. It is the most
+    ambiguous 32-bar form, since many standards (e.g. 'All of Me') can equally be heard as AABA or ABAC
+    at the 8-bar level.
+  display:
+    code: D16
+    emoji: 🪞
+    icon: mdi:mirror
+    color: '#455A64'
+- id: ragtime-multistrain
+  canonical: Ragtime
+  aliases:
+  - Multi-strain Ragtime
+  - Multi-strain
+  - Ragtime Multi-strain
+  dsl_key: Ragtime
+  bars: 64
+  pattern: AABBACCDD or AABBCCDD
+  meter: 2/4
+  tier: 1
+  typical_genres:
+  - Ragtime
+  - Hot Jazz
+  - Stride Piano
+  - Dixieland
+  typical_share: 0.05
+  description: A multi-strain march-derived form with several distinct 16-bar themes ('strains'), typically
+    AABBACCDD or AABBCCDD, often with an intro and transition bridges and a 'trio' strain modulating to
+    the subdominant. Distinguished from cyclic forms by the fact that the melody keeps moving to brand-new
+    strains instead of returning (and from a medley, since it is one composition).
+  display:
+    code: RAG
+    emoji: 🎹
+    icon: mdi:piano
+    color: '#455A64'
+- id: blues8-bar
+  canonical: 8-bar Blues
+  aliases:
+  - Blues8
+  - 8 Bar Blues
+  - Blues 8
+  dsl_key: Blues8
+  bars: 8
+  pattern: I-V-IV-I
+  meter: 4/4
+  tier: 2
+  typical_genres:
+  - Blues
+  - Country Blues
+  - Delta Blues
+  description: A compressed 8-bar blues that keeps the I-IV-V harmonic basis of 12-bar blues in just 8
+    bars, common in early country/Delta blues. Distinguished from 12-bar Blues purely by its shorter 8-bar
+    chorus that comes back around noticeably faster.
+  display:
+    code: B8
+    emoji: 🎸
+    icon: mingcute:guitar-line
+    color: '#455A64'
+- id: blues16-bar
+  canonical: 16-bar Blues
+  aliases:
+  - Blues16
+  - 16 Bar Blues
+  - Blues 16
+  - Major Blues 16
+  dsl_key: Blues16
+  bars: 16
+  pattern: AAAB or extended 12-bar
+  meter: 4/4
+  tier: 2
+  typical_genres:
+  - Blues
+  description: An extended major-key blues of 16 bars, usually heard as a 12-bar progression with an added
+    4-bar section or as an AAAB structure (three repeats plus an answer). Distinguished from 12-bar Blues
+    by its longer chorus, and from 16-bar AB by its blues (I-IV-V) harmony rather than a folk A8+B8.
+  display:
+    code: B16
+    emoji: 🎵
+    icon: mdi:music-note
+    color: '#455A64'
+- id: blues16-minor
+  canonical: 16-bar Minor Blues
+  aliases:
+  - Blues16Minor
+  - Minor Blues 16
+  - 16-bar Minor
+  dsl_key: Blues16Minor
+  bars: 16
+  pattern: i-iv-V7
+  meter: 4/4
+  tier: 2
+  typical_genres:
+  - Gypsy Jazz
+  description: A 16-bar form in a minor key using an i-iv-V7 cycle, most iconic in gypsy jazz / manouche
+    (Django Reinhardt's 'Minor Swing' is the prototype), often in four 4-bar sections. The minor key (i-iv-V7)
+    is the key distinguisher from the major-key 16-bar Blues (I-IV-V).
+  display:
+    code: B16m
+    emoji: 🌑
+    icon: mdi:ghost
+    color: '#455A64'
+- id: ab16-bar
+  canonical: AB
+  aliases:
+  - 16-bar AB
+  - 16 Bar AB
+  - AB 16
+  dsl_key: AB
+  bars: 16
+  pattern: A8+B8
+  meter: 4/4
+  tier: 2
+  typical_genres:
+  - Folk
+  description: 'A short 16-bar form of two contrasting 8-bar sections (A8+B8) with no recapitulation,
+    common in folk, hymns and children''s songs but rare in jazz. Critically, it must NOT be confused
+    with 32-bar Double16: this is the short A8+B8 form, not the long A16+B16.'
+  display:
+    code: AB
+    emoji: 🔁
+    icon: mingcute:repeat-line
+    color: '#455A64'
+- id: aabb32-bar
+  canonical: AABB
+  aliases:
+  - 32-bar AABB
+  - 32 Bar AABB
+  dsl_key: AABB
+  bars: 32
+  pattern: A8+A8+B8+B8
+  meter: 4/4
+  tier: 2
+  typical_genres:
+  - Folk
+  description: 'A 32-bar double-strain form (A8+A8+B8+B8): two themes, each repeated, with no bridge or
+    recapitulation, rooted in marching-band, folk, Celtic and western-swing traditions. Distinguished
+    from AABA by the absence of a contrasting bridge/return — the last section is the repeated B, not
+    a return to A.'
+  display:
+    code: AABB
+    emoji: 🥁
+    icon: lucide:drum
+    color: '#455A64'
+- id: rhythm-changes
+  canonical: Rhythm Changes
+  aliases:
+  - Rhythm Changes 32
+  - I Got Rhythm
+  dsl_key: RhythmChanges
+  bars: 32
+  pattern: AABA with Gershwin harmony
+  meter: 4/4
+  tier: 2
+  typical_genres:
+  - Swing
+  - Bebop
+  description: A variant of 32-bar AABA fixed to the harmony of Gershwin's 'I Got Rhythm' (I-vi-ii-V turnarounds
+    in the A sections, a cycle-of-fifths bridge), used by the bebop era as the basis for countless contrafacts.
+    Structurally identical to AABA, it is identified by that specific harmony rather than by its shape;
+    when unsure, tag plain AABA.
+  display:
+    code: RC
+    emoji: 🌀
+    icon: mdi:metronome
+    color: '#455A64'
+- id: aaba-with-verse
+  canonical: AABA with Verse
+  aliases:
+  - AABAWithVerse
+  - AABA + Verse
+  - AABA w/ Verse
+  dsl_key: AABAWithVerse
+  bars: 48
+  pattern: 16 verse + 32 AABA chorus
+  meter: 4/4
+  tier: 2
+  typical_genres:
+  - Adult Standards
+  - Vocal Jazz
+  description: 'An older Tin Pan Alley convention: a 16-bar narrative ''introductory verse'' (often rubato,
+    played only once) preceding a standard 32-bar AABA refrain, for roughly 48 bars total. Distinguished
+    from plain AABA by that one-time sectional verse — not the repeating verse of modern pop, and not
+    a mere band intro.'
+  display:
+    code: AABAv
+    emoji: 🎤
+    icon: mdi:microphone
+    color: '#455A64'
+- id: blues-with-verse
+  canonical: Blues with Verse
+  aliases:
+  - BluesWithVerse
+  - Blues + Verse
+  - Verse Blues
+  dsl_key: BluesWithVerse
+  bars: 28
+  pattern: 16 verse + 12 AAB blues chorus
+  meter: 4/4
+  tier: 2
+  typical_genres:
+  - Classic Vaudeville Blues
+  description: 'A compound race-records form: a 16-bar introductory verse played once, followed by a repeating
+    12-bar AAB blues chorus (roughly 28 bars across the opening). It is the blues analogue of AABA-with-Verse,
+    distinguished from plain 12-bar Blues by the one-time verse and from AABA-with-Verse by its 12-bar
+    blues refrain.'
+  display:
+    code: BvV
+    emoji: 🗣️
+    icon: mingcute:speech-line
+    color: '#455A64'
+- id: blues24-bar
+  canonical: 24-bar Blues
+  aliases:
+  - Blues24
+  - 24 Bar Blues
+  - Blues 24
+  dsl_key: Blues24
+  bars: 24
+  pattern: extended 12-bar
+  meter: 4/4
+  tier: 3
+  typical_genres:
+  - Blues
+  description: A rare, largely theoretical extended blues of 24 bars, understood either as a doubled/expanded
+    12-bar cycle (bebop-style, with secondary dominants) or as two 12-bar choruses joined into one macro-chorus.
+    Distinguished from 12-bar Blues by a chorus cycle that returns roughly twice as slowly; nearly absent
+    from real-world repertoire.
+  display:
+    code: B24
+    emoji: 📏
+    icon: mdi:ruler
+    color: '#455A64'
+- id: abcd32-bar
+  canonical: ABCD
+  aliases:
+  - 32-bar ABCD
+  - Through-composed 32
+  dsl_key: ABCD
+  bars: 32
+  pattern: A8+B8+C8+D8
+  meter: 4/4
+  tier: 3
+  typical_genres:
+  - Jazz
+  description: A through-composed 32-bar form of four distinct, non-repeating 8-bar sections (A-B-C-D),
+    often modulating without returning to the home key. Distinguished from AABA/ABAC by the fact that
+    all four sections sound different with no recapitulation; genuinely rare, as most apparent ABCD songs
+    are really ABAC.
+  display:
+    code: ABCD
+    emoji: 🔤
+    icon: bi:alphabet
+    color: '#455A64'
+- id: irregular
+  canonical: Irregular
+  aliases:
+  - Non-standard
+  - Custom Form
+  - Through-composed
+  dsl_key: Irregular
+  bars: 0
+  pattern: varies
+  meter: varies
+  tier: 3
+  typical_genres:
+  - Experimental
+  description: A sentinel catch-all for songs that fit no standard pattern — odd chorus lengths (28, 36,
+    40 bars), through-composed structures, or odd meters like 5/4, 7/4 and 9/8 (e.g. 'Take Five', 'Blue
+    Rondo a la Turk'). Use only after ruling out miscounting, extended variants of standard forms, compound
+    forms and medleys; bars=0 means 'variable', not literally zero.
+  display:
+    code: IRR
+    emoji: 🌊
+    icon: mdi:sine-wave
+    color: '#455A64'

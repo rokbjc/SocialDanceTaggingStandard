@@ -1,0 +1,32 @@
+# SDTS baseline vocabulary index — hand-maintained (edit data/vocabulary/ directly).
+# Bindings in data/fields.yaml; field docs in docs/standard/fields/.
+# Regenerate derived artifacts: python scripts/gen_vocab_docs.py
+#
+vocabulary_version: 0.1.0-draft
+core:
+  dimensions:
+  - genre
+  - mood
+  - rhythmic_feel
+  - vocality
+  - instrumentation
+  - instrument
+  - recording_context
+  - recording_quality_era
+  - theme
+  - song_form
+  - credit_role
+  - routine
+packs:
+- swing
+- blues
+- tango
+- ballroom
+- street-latin
+- west-coast-swing
+- carolina-shag
+- early
+deferred_dance_families:
+- niche
+excluded_dance_families:
+- status

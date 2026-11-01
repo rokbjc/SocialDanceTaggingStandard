@@ -1,0 +1,19 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+pack: swing
+display_name: Swing
+description: Swing-era partner, solo-rhythmic, and boogie/rock'n'roll dances.
+extends: core
+families:
+- swing-partner
+- boogie-rocknroll
+- solo-rhythmic
+- electro
+family_labels:
+  swing-partner: "Swing partner"
+  solo-rhythmic: "Solo & rhythmic"
+  boogie-rocknroll: "Boogie & rock'n'roll"
+  electro: "Electro"
+dances: dances.yaml

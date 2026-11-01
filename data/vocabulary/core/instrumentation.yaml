@@ -1,0 +1,506 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+dimension: instrumentation
+layer: core
+axes:
+- name: size
+  values:
+  - solo
+  - duo
+  - trio
+  - small
+  - medium
+  - large
+  grouping: true
+  labels:
+    solo: "Solo"
+    duo: "Duo"
+    trio: "Trio"
+    small: "Small group"
+    medium: "Medium group"
+    large: "Large group"
+  description: Ensemble size.
+values:
+- id: solo-piano
+  canonical: Solo Piano
+  aliases:
+  - Piano Solo
+  size: solo
+  typical_genres:
+  - Ragtime
+  - Stride Piano
+  - Boogie Woogie
+  description: 'A single pianist covering every role from one instrument: the left hand is the rhythm
+    section (bass plus chords), the right hand carries melody and improvisation, spanning composed ragtime,
+    improvised stride, and driving boogie-woogie. Distinguished by the left-hand style (ragtime oom-pah
+    march, stride''s wide bass-to-chord leaps, boogie''s relentless eight-to-the-bar ostinato).'
+  display:
+    code: SoP
+    emoji: 🎹
+    icon: mdi:piano
+    color: '#546E7A'
+- id: solo-blues-performer
+  canonical: Solo Blues Performer
+  aliases:
+  - Solo Blues
+  - Solo Blues Singer
+  - Solo Blues Guitar
+  size: solo
+  typical_genres:
+  - Delta Blues
+  - Country Blues
+  - Piedmont Blues
+  description: One person with a guitar and voice (often open-tuning slide/bottleneck plus a moaning,
+    growling vocal) — the most intimate form of blues, with no band and no production. Distinguished by
+    its non-metronomic, breathing 'human' rhythm and slide guitar that imitates the voice; unlike Vocal
+    + Piano, the single performer plays and sings simultaneously rather than being two musicians.
+  display:
+    code: SoB
+    emoji: 🎸
+    icon: mdi:guitar-acoustic
+    color: '#546E7A'
+- id: solo
+  canonical: Solo
+  aliases:
+  - Solo Performer
+  size: solo
+  typical_genres: []
+  description: 'A single performer of any kind — the generic catch-all when one musician carries the whole
+    track but the instrument is unspecified or not piano/guitar. Distinguishing trait: use this only when
+    the more specific Solo Piano or Solo Blues Performer does not apply; it asserts ensemble size of one
+    without naming the instrument.'
+  display:
+    code: SOL
+    emoji: 👤
+    icon: lucide:mic-vocal
+    color: '#546E7A'
+- id: vocal-piano
+  canonical: Vocal + Piano
+  aliases:
+  - Vocal and Piano
+  - Voice and Piano
+  - Vocal Piano Duo
+  size: duo
+  typical_genres:
+  - Classic Vaudeville Blues
+  - Vocal Jazz
+  - Cabaret
+  description: One singer plus one pianist — the smallest ensemble that still gives the vocal full harmonic
+    and rhythmic support, with the piano covering bass, chords, fills, and solos so the singer has expressive
+    freedom. Distinguished by maximum intimacy and a sparse palette where every word and keystroke is
+    audible; unlike Solo Blues Performer it is two distinct musicians, and unlike Jazz Trio it has no
+    bass or drums.
+  display:
+    code: VoP
+    emoji: 🎤
+    icon: mdi:piano
+    color: '#546E7A'
+- id: duo-generic
+  canonical: Duo
+  aliases:
+  - Duet Ensemble
+  size: duo
+  typical_genres: []
+  description: 'Any two-musician pairing — the generic two-piece when the specific instrument combination
+    is unspecified or does not fit Vocal + Piano or Blues Duo. Distinguishing trait: use this only when
+    the more specific duo values do not apply; it asserts an ensemble of two without naming the instruments
+    or idiom.'
+  display:
+    code: Duo
+    emoji: 👥
+    icon: mdi:account-multiple
+    color: '#546E7A'
+- id: blues-duo
+  canonical: Blues Duo
+  aliases:
+  - Blues Duet
+  size: duo
+  typical_genres:
+  - Blues
+  - Country Blues
+  description: 'Two musicians playing blues, typically a guitarist and a second guitar, harmonica, or
+    voice in the country-blues tradition. Distinguishing trait: larger than the lone Solo Blues Performer
+    (two distinct players) but smaller than the rhythm-section Blues Band, with an acoustic, intimate
+    feel and no drums.'
+  display:
+    code: BlD
+    emoji: 🎶
+    icon: mdi:guitar-acoustic
+    color: '#546E7A'
+- id: jazz-trio
+  canonical: Jazz Trio
+  aliases:
+  - Piano Trio
+  - Trio
+  size: trio
+  typical_genres:
+  - Vocal Jazz
+  - Soul Jazz
+  - Cool Jazz
+  description: Piano plus double bass plus drums — the most intimate jazz ensemble that still carries
+    a rhythm section, serving either as backing for a vocalist or as a standalone group. Distinguished
+    by the 'air' and space that a big band cannot offer, supporting a soloist or singer without competing
+    with the voice.
+  display:
+    code: JzT
+    emoji: 🎼
+    icon: mdi:piano
+    color: '#546E7A'
+- id: rockabilly-trio
+  canonical: Rockabilly Trio
+  aliases: []
+  size: trio
+  typical_genres:
+  - Rockabilly
+  - Early Rock 'n' Roll
+  description: Guitar plus slap bass plus drums (often drumless) — the minimal lineup that defined the
+    Sun Records rockabilly sound, raw and garage-like with slapback echo making a small group sound big.
+    Distinguished by the slap bass that is simultaneously bass and percussion, and frequently absent or
+    minimal drums.
+  display:
+    code: RbT
+    emoji: 🤠
+    icon: mdi:guitar-electric
+    color: '#546E7A'
+- id: jazz-combo
+  canonical: Jazz Combo
+  aliases:
+  - Jazz Group
+  - Small Jazz Combo
+  - Jazz Quartet
+  - Jazz Quintet
+  - Jazz Sextet
+  - Modern Swing Combo
+  - Small Swing Combo
+  size: small
+  typical_genres:
+  - Hot Jazz
+  - Jump Blues
+  - Bebop
+  - Cool Jazz
+  - Hard Bop
+  - Modal Jazz
+  - Soul Jazz
+  - Modern Swing Revival
+  description: A small jazz group from trio to octet, most commonly a quintet (trumpet, sax, piano, bass,
+    drums), using the same lineup across hot jazz, bebop, and hard bop where the difference is playing
+    style rather than instrumentation. Distinguished by improvisational freedom and intimate interplay,
+    more open and unpredictable than scored big band arrangements.
+  display:
+    code: JzC
+    emoji: 🎷
+    icon: mdi:saxophone
+    color: '#546E7A'
+- id: blues-band
+  canonical: Blues Band
+  aliases:
+  - Electric Blues Band
+  - Chicago Blues Band
+  size: small
+  typical_genres:
+  - Chicago Blues
+  - Blues
+  description: Electric guitar plus amplified harmonica plus rhythm section — the Chicago Blues sound
+    born when Delta players electrified to cut through loud urban bars. Distinguished by a steady, danceable
+    shuffle groove (drums and bass keep the tempo in the pocket) that retains blues rawness, a compromise
+    between authenticity and danceability that solo Delta blues lacks.
+  display:
+    code: BlB
+    emoji: ⚡
+    icon: mdi:guitar-electric
+    color: '#546E7A'
+- id: manouche-ensemble
+  canonical: Manouche
+  aliases:
+  - Manouche Ensemble
+  - Gypsy Jazz Ensemble
+  - Manouche Group
+  - Gypsy Jazz
+  size: small
+  typical_genres:
+  - Gypsy Jazz
+  description: Acoustic guitars plus violin plus double bass with no drums and no horns — the all-string
+    Hot Club format Django Reinhardt created, where rhythm comes entirely from 'la pompe' rhythm guitar
+    and walking bass. Distinguished by being a unique all-acoustic lineup found in no other jazz genre,
+    with the percussive 'la pompe' standing in for drums.
+  display:
+    code: Man
+    emoji: 🌹
+    icon: mdi:guitar-acoustic
+    color: '#546E7A'
+- id: string-band
+  canonical: String Band
+  aliases:
+  - Country String Band
+  - Hillbilly Band
+  size: small
+  typical_genres:
+  - Country
+  - Old Time
+  - Western Swing
+  description: Fiddle plus guitar plus banjo plus double bass — the original all-acoustic country lineup
+    from rural American home music-making, rooted in Irish/Scottish (fiddle) and African (banjo) traditions.
+    Distinguished by a warm, organic, homemade folk sound where fiddle and banjo create the recognizable
+    country character.
+  display:
+    code: StB
+    emoji: 🪕
+    icon: dinkie-icons:banjo
+    color: '#546E7A'
+- id: new-orleans-small-group
+  canonical: New Orleans Small Group
+  aliases:
+  - NOLA Small Group
+  - New Orleans Combo
+  - NOLA Combo
+  - Rhythm Kings
+  size: small
+  typical_genres:
+  - New Orleans Jazz
+  - Hot Jazz
+  - Dixieland
+  description: 'A small hot-jazz combo (front-line trumpet, clarinet, trombone over a rhythm section)
+    playing the New Orleans/Dixieland repertoire in a club setting rather than the street — the seated,
+    recording-band equivalent of the brass band (New Orleans Rhythm Kings, early Armstrong sides). Distinguishing
+    trait: smaller and tighter than the marching New Orleans Brass Band, with a fixed seated rhythm section
+    rather than portable tuba-and-banjo, while keeping the same collective front-line improvisation.'
+  display:
+    code: NOG
+    emoji: 🎺
+    icon: mdi:trumpet
+    color: '#546E7A'
+- id: rockabilly-combo
+  canonical: Rockabilly Combo
+  aliases: []
+  size: small
+  typical_genres:
+  - Rockabilly
+  - Early Rock 'n' Roll
+  description: A 4-6 piece rockabilly band that expands the classic trio with extra instruments such as
+    a separate lead guitar, sax, piano, and a full drum kit. Distinguished from the Rockabilly Trio by
+    being more layered and fuller rather than the raw, minimal three-piece Sun Records sound.
+  display:
+    code: RbC
+    emoji: 🕺
+    icon: ph:cowboy-hat
+    color: '#546E7A'
+- id: jump-blues-combo
+  canonical: Jump Blues Combo
+  aliases: []
+  size: small
+  typical_genres:
+  - Jump Blues
+  - Rhythm & Blues
+  description: A 5-7 piece sax-led R&B/jump format of the 1940s-50s (Louis Jordan's Tympany Five archetype)
+    with tight rhythm, lead sax, vocal, and horn riffs, bridging big band swing and early R&B/rock'n'roll.
+    Distinguished by sax-led dominance in the jump-blues idiom; unlike the later R&B Combo it sits in
+    the 1940s-55 era with heavier sax focus.
+  display:
+    code: JBC
+    emoji: 💥
+    icon: mdi:saxophone
+    color: '#546E7A'
+- id: rb-combo
+  canonical: R&B Combo
+  aliases:
+  - R&B Combo with Piano
+  size: small
+  typical_genres:
+  - Rhythm & Blues
+  description: A 4-6 piece pre-soul R&B band of the 1950s-65 era with a mixed lead instrument (guitar,
+    piano, or sax) and vocal-led repertoire, bridging the sax-led Jump Blues Combo and the horn-driven
+    Soul Combo. Distinguished by its mixed lead and R&B repertoire of that era; unlike Soul Combo it predates
+    the horn-section-dominant gospel-vocal soul sound.
+  display:
+    code: RnB
+    emoji: 🎵
+    icon: mdi:piano
+    color: '#546E7A'
+- id: soul-combo
+  canonical: Soul Combo
+  aliases:
+  - Retro Soul Combo
+  - Motown Combo
+  size: small
+  typical_genres:
+  - Soul
+  - Southern Soul
+  description: A 4-7 piece soul band of the 1965-and-later era (Stax/Atlantic/Motown lineage) with a tight
+    rhythm section, horn section, and gospel-derived expressive vocal. Distinguished from the R&B Combo
+    by a more prominent horn section and gospel-rooted vocal expressiveness.
+  display:
+    code: SoC
+    emoji: ❤️
+    icon: mdi:microphone-variant
+    color: '#546E7A'
+- id: rock-combo
+  canonical: Rock Combo
+  aliases: []
+  size: small
+  typical_genres:
+  - Rock
+  - Classic Rock
+  description: 'The post-1965 standard rock band format invented in the Beatles era: lead vocal plus two
+    guitars plus bass plus drums. Distinguished from the Rockabilly Combo by being modern (post-1965)
+    without slap bass and twang guitar; rarely used in a swing context.'
+  display:
+    code: RkC
+    emoji: 🤘
+    icon: mdi:guitar-electric
+    color: '#546E7A'
+- id: new-orleans-brass-band
+  canonical: New Orleans Brass Band
+  aliases:
+  - NOLA Brass Band
+  - Brass Band
+  size: medium
+  typical_genres:
+  - New Orleans Jazz
+  - Dixieland
+  - Trad Jazz
+  description: A street wind ensemble — the roots of jazz — where three front-line horns (cornet/trumpet,
+    clarinet, trombone) collectively improvise over a portable rhythm section of tuba, banjo, and marching
+    drums. Distinguished by three-voice collective polyphony ('organized chaos') in which no one solos
+    in the modern sense, and a recognizable syncopated second-line rhythm.
+  display:
+    code: NOB
+    emoji: 🎺
+    icon: mdi:trumpet
+    color: '#546E7A'
+- id: dixieland-ensemble
+  canonical: Dixieland
+  aliases:
+  - Dixieland Ensemble
+  - Dixieland Band
+  - Dixieland Combo
+  size: medium
+  typical_genres:
+  - Dixieland
+  - Trad Jazz
+  description: 'A traditional-jazz band built on collective front-line polyphony (cornet/trumpet, clarinet,
+    trombone) over a banjo/piano/bass/drums rhythm section, playing the 1920s trad and revival repertoire.
+    Distinguishing trait: closely overlaps the New Orleans Small Group but names the revival/trad-jazz
+    idiom and lineup broadly; unlike a Jazz Combo it favors collective ensemble polyphony over sequential
+    individual solos.'
+  display:
+    code: Dix
+    emoji: 🎺
+    icon: mdi:trumpet
+    color: '#546E7A'
+- id: soul-blues-band
+  canonical: Soul Blues Band
+  aliases:
+  - Soul Blues Combo
+  - R&B Band
+  size: medium
+  typical_genres:
+  - Soul Blues
+  - Rhythm & Blues
+  description: Front-and-center vocal plus horn section plus rhythm section — a more produced sound than
+    the Blues Band, pairing a gospel-trained voice with a polished rhythmic engine and 'glamorous' horns
+    (Memphis Stax/Hi style). Distinguished by the vocal as protagonist (not the guitar) and the polish
+    of horns and organ, making it the most accessible blues for a wide audience.
+  display:
+    code: SBB
+    emoji: 🔥
+    icon: mdi:microphone-variant
+    color: '#546E7A'
+- id: western-swing-band
+  canonical: Western Swing Band
+  aliases: []
+  size: medium
+  typical_genres:
+  - Western Swing
+  description: Country instruments (fiddle, steel guitar) playing swing jazz — a unique fusion found in
+    no other genre, with the lineup expanding from 5 to 18+ players and jazz elements (sax, trumpet) added
+    on top. Distinguished by jazz sophistication and improvisation in a country form, with steel guitar
+    tone and fiddle jazz solos that no jazz big band has, setting it apart from pure country.
+  display:
+    code: WSB
+    emoji: 🐎
+    icon: ph:cowboy-hat
+    color: '#546E7A'
+- id: big-band-ensemble
+  canonical: Big Band
+  aliases:
+  - Big Band Ensemble
+  - Swing Big Band
+  - Modern Big Band
+  - Big Band Revival
+  - Latin Jazz Big Band
+  size: large
+  typical_genres:
+  - Swing
+  - Big Band
+  - Kansas City Jazz
+  - Neo-Swing
+  - Latin Jazz
+  description: A large ensemble organized into sections (saxes, trumpets, trombones, rhythm) that trade
+    and answer each other — the sound that defined the swing era and created the music for Lindy Hop,
+    built on Fletcher Henderson's arranging template. Distinguished by a 'wall of sound' and huge dynamic
+    range (whisper to full-ensemble shout chorus) that no smaller group can reproduce.
+  display:
+    code: BB
+    emoji: 🎺
+    icon: mdi:trumpet
+    color: '#546E7A'
+- id: orchestra
+  canonical: Orchestra
+  aliases:
+  - String Orchestra
+  - Symphony Orchestra
+  size: large
+  typical_genres:
+  - Vocal Jazz
+  - Easy Listening
+  - Adult Standards
+  description: 'A large ensemble built around a string section, often with woodwinds, brass, and a rhythm
+    section behind a singer — the lush studio backing of vocal-jazz, easy-listening, and pop-standards
+    sessions (Sinatra-with-strings, Nelson Riddle arrangements). Distinguishing trait: led by bowed strings
+    rather than the sax/trumpet/trombone sections that define a Big Band, producing a sweeping, smooth
+    backdrop rather than a swinging, sectional shout.'
+  display:
+    code: Orc
+    emoji: 🎻
+    icon: mdi:violin
+    color: '#546E7A'
+- id: vocal-acapella-group
+  canonical: Vocal Acapella
+  aliases:
+  - Vocal Acapella Group
+  - Vocal Quartet
+  - Acapella
+  - Vocal Ensemble (Acapella)
+  size: small
+  typical_genres:
+  - Doo-wop
+  - Vocal Jazz
+  - Gospel
+  description: A vocal-only ensemble of 3-6 voices with no instrumental accompaniment (occasionally percussion
+    or hand-claps), where the voices are the entire instrumentation in lead-plus-harmony arrangements.
+    Distinguished from a combo-with-vocals by having only voices, and from Vocal + Piano by being three
+    or more voices with no piano.
+  display:
+    code: Aca
+    emoji: 🎙️
+    icon: mdi:account-group
+    color: '#546E7A'
+- id: electronic-swing
+  canonical: Electronic Swing
+  aliases:
+  - Electronic with Swing Samples
+  - Electroswing Production
+  - Swing Samples
+  size: small
+  typical_genres:
+  - Electro Swing
+  description: A DAW-produced format (one or two producers) combining programmed beats, synthesized bass,
+    and sampled vintage big band brass and vocals — not an acoustic ensemble but a production. Distinguished
+    from every acoustic instrumentation category by being studio production-based rather than a live ensemble.
+  display:
+    code: ElS
+    emoji: 🎛️
+    icon: lucide:turntable
+    color: '#546E7A'

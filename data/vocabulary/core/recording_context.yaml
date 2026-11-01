@@ -1,0 +1,130 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+dimension: recording_context
+layer: core
+values:
+- id: studio
+  canonical: Studio
+  aliases:
+  - Studio Recording
+  - Studio Session
+  description: Standard studio recording — the most polished; most commercial singles, 1925 onward.
+  display:
+    code: STU
+    emoji: 🎙️
+    icon: mdi:microphone-variant
+    color: '#78909C'
+- id: live
+  canonical: Live
+  aliases:
+  - Live Concert
+  - Concert
+  - Live Hall
+  musicbrainz_type: Live
+  description: Live recording (concert/hall) — audible crowd reaction and band interaction.
+  examples:
+  - Carnegie Hall 1938 (Goodman)
+  - Ellington at Newport (1956)
+  - Basie Live at Birdland
+  display:
+    code: LIV
+    emoji: 🎤
+    icon: mdi:microphone
+    color: '#78909C'
+- id: live-club
+  canonical: Live Club
+  aliases:
+  - Club Date
+  - Live in Club
+  musicbrainz_type: Live
+  description: Smaller, intimate setting — more intimate than a (concert) Live recording.
+  examples:
+  - Jazz at the Philharmonic recordings
+  - small combo club dates
+  display:
+    code: LCB
+    emoji: 🍸
+    icon: mdi:glass-cocktail
+    color: '#78909C'
+- id: radio-broadcast
+  canonical: Radio Broadcast
+  aliases:
+  - Radio
+  - AFRS
+  - Broadcast
+  - AFRS Broadcast
+  - V-Disc
+  musicbrainz_type: Broadcast
+  description: AM/FM radio broadcast (often preserved as a transcription disc).
+  examples:
+  - AFRS broadcasts
+  - V-Discs
+  - Let's Dance radio shows (Goodman 1935-36)
+  display:
+    code: RAD
+    emoji: 📻
+    icon: mdi:radio
+    color: '#78909C'
+- id: film-soundtrack
+  canonical: Film Soundtrack
+  aliases:
+  - Film
+  - Soundtrack
+  - Movie
+  musicbrainz_type: Soundtrack
+  description: A recording taken from a film.
+  examples:
+  - Stormy Weather (1943)
+  - The Glenn Miller Story (1954)
+  - Bird (1988)
+  display:
+    code: OST
+    emoji: 🎬
+    icon: material-symbols:movie
+    color: '#78909C'
+- id: bootleg
+  canonical: Bootleg
+  aliases:
+  - Unauthorized
+  - Fan Recording
+  musicbrainz_type: Bootleg (release status)
+  description: Unauthorized live recording — often lower quality.
+  examples:
+  - Fan recordings of Parker gigs
+  - lost Ellington tours
+  display:
+    code: BTL
+    emoji: 🥷
+    icon: mdi:incognito
+    color: '#78909C'
+- id: jam-session
+  canonical: Jam Session
+  aliases:
+  - After-Hours
+  - Informal Session
+  description: Informal jam — often after-hours, not a formal concert.
+  examples:
+  - Minton's Playhouse (bebop birth)
+  - Jazz at the Philharmonic afterhours
+  display:
+    code: JAM
+    emoji: 🎷
+    icon: mdi:saxophone
+    color: '#78909C'
+- id: transcription-disc
+  canonical: Transcription Disc
+  aliases:
+  - Transcription
+  - Transcription Recording
+  musicbrainz_type: Broadcast
+  description: Radio transcription disc — high quality, used for broadcast.
+  examples:
+  - Lunceford transcription discs
+  - Miller transcription discs
+  display:
+    code: TXD
+    emoji: 💿
+    icon: mdi:record-player
+    color: '#78909C'

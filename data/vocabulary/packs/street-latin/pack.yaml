@@ -1,0 +1,17 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+pack: street-latin
+display_name: Street Latin
+description: Social / street Latin dances — Salsa, Bachata, Merengue, Kizomba, Zouk, Son Cubano. Distinct from the ballroom pack's codified International Latin.
+extends: core
+source: SDTS-authored (social-Latin community conventions)
+validation: expert-review-pending
+families:
+- street-latin
+traditions:
+- street-latin
+family_labels:
+  street-latin: "Street Latin"
+dances: dances.yaml

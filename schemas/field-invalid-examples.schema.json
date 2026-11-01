@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rokbjc/SocialDanceTaggingStandard/HEAD/schemas/field-invalid-examples.schema.json",
+  "title": "SDTS invalid-example sidecar (data/field-invalid-examples.yaml)",
+  "description": "Map of field id -> list of counter-examples (each a short 'bad value -- why' markdown string).",
+  "type": "object",
+  "additionalProperties": {
+    "type": "array",
+    "minItems": 1,
+    "items": { "type": "string", "minLength": 1 }
+  }
+}

@@ -1,0 +1,15 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+pack: blues
+display_name: Blues
+description: Blues partner dances and the blues idioms (jookin' and ballroomin').
+extends: core
+families:
+- blues-partner
+- blues-idiom
+family_labels:
+  blues-partner: "Blues partner"
+  blues-idiom: "Blues idioms"
+dances: dances.yaml

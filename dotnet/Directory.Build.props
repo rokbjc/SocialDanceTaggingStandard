@@ -1,0 +1,70 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Pin LangVersion (NOT `latest`) so a newer SDK can't silently change the compiled language
+         version — reproducible builds (csharp/standards.md §Required Project Settings). -->
+    <LangVersion>14.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <WarningsAsErrors>nullable</WarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- Mandatory analyzers.
+       PrivateAssets=all: dev-only, not transitive, not shipped in the package. -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="18.7.23">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Meziantou.Analyzer" Version="3.0.115">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- Shared package metadata (applies to packable projects). -->
+  <PropertyGroup>
+    <Product>SocialDanceTaggingStandard</Product>
+    <Authors>rokbjc</Authors>
+    <Version>0.1.0</Version>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/rokbjc/SocialDanceTaggingStandard</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/rokbjc/SocialDanceTaggingStandard</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <!-- Consumer output redirection. A sibling repo that builds SDTS from source through a ProjectReference
+       (e.g. a consumer whose parallel worktrees share ONE SDTS checkout via a junction) passes
+       -p:SdtsArtifactsPath=<dir> to send EVERY SDTS output — bin AND the obj intermediate, incl. ref
+       assemblies — under <dir>, so parallel lanes stop racing for the same dotnet/src/*/{bin,obj}. Unset
+       (SDTS's own build and CI): nothing changes, the legacy per-project bin/obj layout stays. One property
+       moves both, because UseArtifactsOutput relocates bin and obj together. -->
+  <PropertyGroup Condition="'$(SdtsArtifactsPath)' != ''">
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+    <ArtifactsPath>$(SdtsArtifactsPath)</ArtifactsPath>
+  </PropertyGroup>
+
+  <!-- Reproducible builds + Source Link. Source Link ships in the .NET SDK (8.0.100+), so no package
+       reference is needed; these switches embed commit + repo info and publish a snupkg symbol package. -->
+  <PropertyGroup>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <!-- Ship a package README (nuget.org renders it). Applies to packable projects; non-packable projects
+       (tests, samples) set IsPackable=false and never consume it. -->
+  <PropertyGroup>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,53 @@
+name: Release
+
+# Cuts a release when a tag vX.Y.Z (or a pre-release vX.Y.Z-beta.N / -rc.N / -alpha.N) is pushed:
+# builds + tests, packs the NuGet packages at the tag's version, opens a GitHub Release with generated
+# notes, and (stable tags only) publishes the packages to nuget.org.
+#
+# Pre-release tags (a SemVer identifier after the '-') are marked as a GitHub pre-release and are NOT
+# pushed to nuget.org — the packages are still built and attached to the GitHub Release for trial.
+# Stable publishing needs one repository secret: NUGET_API_KEY (nuget.org push key).
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write # create the GitHub Release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Derive version + pre-release flag from the tag
+        id: ver
+        run: |
+          V="${GITHUB_REF_NAME#v}"
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          # a SemVer pre-release identifier (e.g. 0.1.0-beta.1) → GitHub pre-release, hold nuget.org
+          if [[ "$V" == *-* ]]; then echo "prerelease=true" >> "$GITHUB_OUTPUT"; else echo "prerelease=false" >> "$GITHUB_OUTPUT"; fi
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: dotnet/global.json
+
+      - run: dotnet build dotnet/SocialDanceTaggingStandard.slnx -c Release -p:Version=${{ steps.ver.outputs.version }}
+      - run: dotnet test dotnet/SocialDanceTaggingStandard.slnx -c Release --no-build
+      - run: dotnet pack dotnet/SocialDanceTaggingStandard.slnx -c Release --no-build -p:Version=${{ steps.ver.outputs.version }} -o artifacts
+
+      - name: Publish to NuGet (stable releases only)
+        if: steps.ver.outputs.prerelease == 'false'
+        run: >
+          dotnet nuget push "artifacts/*.nupkg"
+          --api-key "${{ secrets.NUGET_API_KEY }}"
+          --source https://api.nuget.org/v3/index.json
+          --skip-duplicate
+
+      - name: GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          prerelease: ${{ steps.ver.outputs.prerelease }}
+          files: artifacts/*.nupkg

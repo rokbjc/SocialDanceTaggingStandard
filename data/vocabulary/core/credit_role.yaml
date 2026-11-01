@@ -1,0 +1,148 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# SDTS-authored (no catalog source): the common production/technical credit ROLES for the ID3v2.4
+# TIPL (Involved People List) frame — who did WHAT behind the recording. This is an OPEN vocabulary:
+# a role not listed here resolves to the generic term carrying the raw string (typed resolution is a
+# semantic-layer concern; the container keeps TIPL raw). Instruments (TMCL) resolve against the `instrument` dimension.
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+dimension: credit_role
+layer: core
+values:
+- id: producer
+  canonical: Producer
+  aliases:
+  - Prod
+  - Produced By
+  - Production
+  description: Oversaw the recording session and shaped the final sound — the person in charge of the record.
+  display:
+    code: PRD
+    emoji: 🎛️
+    icon: mdi:account-music
+    color: '#455A64'
+- id: executive-producer
+  canonical: Executive Producer
+  aliases:
+  - Exec Producer
+  - Exec. Producer
+  - Executive Production
+  description: Financed or greenlit the project — the business/oversight producer, distinct from the hands-on producer.
+  display:
+    code: EXP
+    emoji: 💼
+    icon: mdi:account-tie
+    color: '#455A64'
+- id: arranger
+  canonical: Arranger
+  aliases:
+  - Arranged By
+  - Arrangement
+  description: Wrote the arrangement — how the tune is voiced across the ensemble — without necessarily composing it.
+  display:
+    code: ARR
+    emoji: 🎼
+    icon: mdi:music-note-plus
+    color: '#455A64'
+- id: conductor
+  canonical: Conductor
+  aliases:
+  - Cond
+  - Conducted By
+  description: Directed the ensemble in performance, setting tempo and dynamics from the podium.
+  display:
+    code: CND
+    emoji: 🪄
+    icon: mdi:human-male-board
+    color: '#455A64'
+- id: bandleader
+  canonical: Bandleader
+  aliases:
+  - Band Leader
+  - Leader
+  - Directed By
+  description: Led the band — the named front of the group whose name the recording usually carries.
+  display:
+    code: BND
+    emoji: 🎺
+    icon: mdi:account-star
+    color: '#455A64'
+- id: recording-engineer
+  canonical: Recording Engineer
+  aliases:
+  - Engineer
+  - Recorded By
+  - Recording
+  description: Captured the performance at the session — mic placement, levels, and the tracking chain.
+  display:
+    code: ENG
+    emoji: 🎚️
+    icon: mdi:tune-vertical
+    color: '#455A64'
+- id: mixing-engineer
+  canonical: Mixing Engineer
+  aliases:
+  - Mixed By
+  - Mixer
+  - Mixing
+  description: Balanced and blended the recorded tracks into the finished stereo mix.
+  display:
+    code: MIX
+    emoji: 🎛️
+    icon: mdi:tune
+    color: '#455A64'
+- id: mastering-engineer
+  canonical: Mastering Engineer
+  aliases:
+  - Mastered By
+  - Master
+  - Mastering
+  description: Prepared the final master — level, tone, and consistency across the release.
+  display:
+    code: MST
+    emoji: 💿
+    icon: mdi:disc
+    color: '#455A64'
+- id: remixer
+  canonical: Remixer
+  aliases:
+  - Remixed By
+  - Remix
+  description: Reworked the original recording into a new version, often for a different floor or era.
+  display:
+    code: RMX
+    emoji: 🔀
+    icon: mdi:shuffle-variant
+    color: '#455A64'
+- id: songwriter
+  canonical: Songwriter
+  aliases:
+  - Writer
+  - Written By
+  - Words And Music
+  description: Wrote the song — words and/or music — as credited on the recording.
+  display:
+    code: SNG
+    emoji: ✍️
+    icon: mdi:pencil
+    color: '#455A64'
+- id: transcriber
+  canonical: Transcriber
+  aliases:
+  - Transcribed By
+  - Transcription
+  description: Notated an existing recording or arrangement into written form.
+  display:
+    code: TRN
+    emoji: 📝
+    icon: mdi:script-text
+    color: '#455A64'
+- id: credit-generic
+  canonical: Credit
+  aliases: []
+  description: Generic involved-person credit — use when the specific role is unknown, unspecified, or outside the listed set.
+  display:
+    code: CR
+    emoji: 👤
+    icon: mdi:account
+    color: '#455A64'

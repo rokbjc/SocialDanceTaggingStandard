@@ -1,0 +1,17 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+pack: early
+display_name: Early Social Dances
+description: The pre-swing social couple dances of the 1900s-1920s that DJs still play for vintage and historical dance floors — One-Step, Polka and the social Fox Trot.
+extends: core
+source: SDTS-authored (names and meters only; no tempo band is given where no source states one)
+validation: expert-review-pending
+families:
+- early-social
+traditions:
+- early-social
+family_labels:
+  early-social: "Early social"
+dances: dances.yaml

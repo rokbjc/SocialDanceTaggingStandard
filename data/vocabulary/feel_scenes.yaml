@@ -1,0 +1,248 @@
+# HAND-MAINTAINED — scene-relative feel ranking, from the dance->genre->feel walk (not swing-biased).
+# Replaces the single global rhythmic_feel `tier`: each feel lists the scene(s) whose dances use it and
+# its tier WITHIN that scene (1 = anchor/core … 3 = niche). A feel with no scenes is unanchored (a
+# cross-genre/listening flavor with no social dance). `anchors` = the dances the feel is core to.
+# Consumed by scripts/gen_vocab_docs.py to group the rhythmic-feel page by scene. Keys: feels: {<id>: …}.
+#
+feels:
+  jazz-swing-8ths:
+    scenes:
+      swing: 1
+      blues: 2
+      ballroom: 2
+    anchors:
+    - lindy-hop
+    - balboa
+    - collegiate-shag
+    - st-louis-shag
+    - solo-jazz
+    - tap-dance
+    - foxtrot-slow
+    - quickstep
+  walking-4:
+    scenes:
+      swing: 1
+      ballroom: 2
+    anchors:
+    - lindy-hop
+    - balboa
+    - collegiate-shag
+    - st-louis-shag
+    - solo-jazz
+    - foxtrot-slow
+  jump-shuffle:
+    scenes:
+      swing: 1
+      ballroom: 2
+    anchors:
+    - jive
+    - east-coast-swing
+    - boogie-woogie-dance
+    - jive-ballroom
+  backbeat:
+    scenes:
+      swing: 1
+      ballroom: 2
+    anchors:
+    - jive
+    - boogie-woogie-dance
+    - jive-ballroom
+  boogie-shuffle:
+    scenes:
+      swing: 1
+    anchors:
+    - boogie-woogie-dance
+  rockabilly:
+    scenes:
+      swing: 2
+    anchors:
+    - jive
+    - boogie-woogie-dance
+  manouche-swing:
+    scenes:
+      swing: 2
+    anchors:
+    - lindy-hop
+    - balboa
+  two-beat:
+    scenes:
+      swing: 1
+      ballroom: 2
+    anchors:
+    - charleston
+    - tap-dance
+    - quickstep
+  stride:
+    scenes:
+      swing: 2
+    anchors:
+    - charleston
+    - tap-dance
+  straight-4:
+    scenes:
+      swing: 2
+    anchors:
+    - electro-swing-dance
+  blues-shuffle:
+    scenes:
+      blues: 1
+    anchors:
+    - blues-dancing
+  slow-drag:
+    scenes:
+      blues: 1
+    anchors:
+    - blues-dancing
+    - slow-drag
+  compound-triplet:
+    scenes:
+      blues: 1
+    anchors:
+    - blues-dancing
+    - slow-drag
+  chicago-shuffle:
+    scenes:
+      blues: 1
+    anchors:
+    - blues-dancing
+  soul-shuffle:
+    scenes:
+      blues: 1
+    anchors:
+    - blues-dancing
+  delta-shuffle:
+    scenes:
+      blues: 3
+    anchors:
+    - blues-dancing
+    - slow-drag
+  habanera:
+    scenes:
+      tango: 1
+      ballroom: 2
+      street-latin: 2
+    anchors:
+    - milonga
+    - canyengue
+    - son-cubano
+  latin-clave:
+    scenes:
+      street-latin: 1
+      ballroom: 2
+    anchors:
+    - salsa
+    - son-cubano
+    - mambo
+    - cha-cha
+    - rumba-ballroom
+  bossa-nova:
+    scenes:
+      ballroom: 3
+    anchors: []
+  waltz:
+    scenes:
+      ballroom: 1
+      tango: 2
+    anchors:
+    - waltz-slow
+  second-line:
+    scenes: {}
+    anchors: []
+  two-step:
+    scenes: {}
+    anchors: []
+  nola-shuffle:
+    scenes:
+      blues: 2
+    anchors: []
+  retro-soul-shuffle:
+    scenes:
+      blues: 2
+    anchors: []
+  rock-shuffle:
+    scenes:
+      blues: 3
+    anchors: []
+  rb-shuffle:
+    scenes:
+      blues: 2
+    anchors: []
+  piedmont-shuffle:
+    scenes:
+      blues: 3
+    anchors: []
+  western-swing-shuffle:
+    scenes: {}
+    anchors: []
+  swamp-shuffle:
+    scenes:
+      blues: 3
+    anchors: []
+  nola-rhumba:
+    scenes:
+      blues: 3
+    anchors: []
+  bebop:
+    scenes:
+      swing: 3
+    anchors: []
+  hard-bop:
+    scenes:
+      swing: 3
+    anchors: []
+  tango-marcato:
+    scenes:
+      tango: 1
+      ballroom: 2
+    anchors: []
+  tango-sincopa:
+    scenes:
+      tango: 2
+    anchors: []
+  tango-vals:
+    scenes:
+      tango: 1
+    anchors: []
+  milonga-traspie:
+    scenes:
+      tango: 1
+    anchors: []
+  viennese-waltz:
+    scenes:
+      ballroom: 1
+    anchors: []
+  cha-cha-cha:
+    scenes:
+      street-latin: 1
+      ballroom: 2
+    anchors: []
+  bolero-rumba:
+    scenes:
+      ballroom: 1
+      street-latin: 2
+    anchors: []
+  samba-batucada:
+    scenes:
+      street-latin: 1
+      ballroom: 2
+    anchors: []
+  paso-doble-march:
+    scenes:
+      ballroom: 1
+    anchors: []
+  bachata-derecho:
+    scenes:
+      street-latin: 1
+    anchors: []
+  merengue:
+    scenes:
+      street-latin: 1
+    anchors: []
+  kizomba:
+    scenes:
+      street-latin: 1
+    anchors: []
+  zouk-lambada:
+    scenes:
+      street-latin: 1
+    anchors: []

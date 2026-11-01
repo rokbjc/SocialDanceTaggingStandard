@@ -1,0 +1,38 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+pack: west-coast-swing
+dimension: dances
+families:
+- west-coast-swing
+values:
+- id: west-coast-swing
+  canonical: West Coast Swing
+  aliases:
+  - Westie
+  tradition: west-coast-swing
+  family: west-coast-swing
+  parent: swing
+  tempo_min: 80
+  tempo_max: 128
+  meter: 4/4
+  typical_genres:
+  - Blues
+  - Rhythm & Blues
+  - Pop
+  - Hip Hop
+  description: 'A slotted partner dance that grew out of Lindy Hop in mid-20th-century Southern
+    California: the follower travels back and forth along an imaginary line (the slot) while the leader
+    stays largely in it, with stretch, compression and an elastic connection. It is now a scene of its
+    own, danced to almost any 4/4 music (blues, R&B, pop, hip hop, acoustic covers) rather than to
+    swing-era jazz. Distinguishing trait: the slot and elastic connection to contemporary music (vs. the
+    rotational Lindy Hop to swing jazz).'
+  display:
+    code: WCS
+    emoji: ↔️
+    icon: mdi:dance-ballroom
+    color: '#00ACC1'
+  tempo_note: Social WCS DJ guidance runs about 80-120 BPM (westcoastswingonline.com 90-120, 95-105 for
+    newer dancers; udansa DJ guide 80-115); UCWDC 2014-16 contest rules set 102-114 (108 preferred); the
+    historical 'ideal' was 128 BPM (32 mpm). Band 80-128.

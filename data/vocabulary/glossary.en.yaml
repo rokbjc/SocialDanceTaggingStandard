@@ -1,0 +1,74 @@
+# HAND-MAINTAINED — glossary of axis VALUES + genre families, rendered + linked by gen_vocab_docs.py.
+# Neutral across all social-dance scenes (swing/blues/tango/ballroom/street-latin) — not swing-centric.
+# Keys: axes: { <axis>: { <value>: description } }, families: { <family>: description }.
+#
+axes:
+  pulse:
+    '2': Two felt beats per bar — a duple, marching ONE-two pulse (polka, two-beat, habanera).
+    '3': Three felt beats per bar — the waltz pulse, ONE-two-three.
+    '4': Four felt beats per bar — the default social-dance pulse, counted in fours.
+    mixed: The felt pulse shifts or layers across the track — count by the felt beat, not a fixed bar.
+  subdivision:
+    straight: Each beat divides into even halves — un-swung 8th notes (da-da-da-da).
+    triplet: Each beat divides into three — the swung/shuffle lilt where paired 8ths fall long-short.
+    bass-feel: The motion is carried by a bass line walking or striding on the beats, not by a hi-hat subdivision.
+    mixed: A blend of straight and triplet within the track (e.g. a straight bass under a swung top line).
+  accent:
+    on-beat: Emphasis on the main beats / downbeats — a grounded, even feel.
+    off-beat: Emphasis on the 'and' between beats — the lifting swing of jazz ride playing.
+    backbeat: Emphasis on beats 2 and 4 — the snare-driven feel of blues, R&B, rock'n'roll and rockabilly.
+    clave: Emphasis follows the Afro-Cuban/Brazilian clave — a fixed five-stroke, two-bar key pattern the band locks to.
+    none: No fixed accent pattern — emphasis is even or left to the players.
+  meter:
+    2/4: Two beats per bar, each a quarter note — a tight, two-count grouping with a strong downbeat (polka, habanera, some tango).
+    3/4: Three beats per bar, each a quarter note — the waltz grouping, with a clear strong-weak-weak lilt.
+    4/4: Four beats per bar, each a quarter note — the most common social-dance meter, counted in even fours.
+    6/8: Six eighth-notes per bar grouped into two big beats of three, giving a rolling compound-duple lilt.
+    12/8: Twelve eighth-notes per bar grouped into four big beats of three — four main beats over an underlying triplet pulse.
+  energy:
+    high: 7–10 on the 1–10 arousal scale — hard-driving, up-front intensity that pushes the floor.
+    medium: 5–6 on the 1–10 arousal scale — moderate drive, neither pushing nor holding back.
+    low: 1–4 on the 1–10 arousal scale — relaxed, low intensity that settles or stills the room.
+  valence:
+    bright: 7–10 on the 1–10 brightness scale — warm, upbeat feeling; major-leaning harmony and open timbre that read as happy, sunny, or uplifting.
+    dark: 1–4 on the 1–10 brightness scale — moody, heavy feeling; minor-leaning harmony and shadowed timbre that read as sad, tense, or somber.
+    neutral: 5–6 on the 1–10 brightness scale — emotionally even or ambiguous, neither clearly bright nor dark.
+  size:
+    solo: A single performer — one voice or one instrument carrying the whole track.
+    duo: Two performers together, such as a singer with one accompanist or a pairing of two instruments.
+    trio: Three performers — a compact group like a piano-bass-drums rhythm section or a vocal-plus-two combo.
+    small: A small combo of roughly four to six players, fuller than a trio but well short of a full band.
+    medium: A mid-sized band of about seven to twelve players, with distinct sections but lighter than a full orchestra.
+    large: A large ensemble — a full big band, orchestra, or comparable group with multiple full sections and a heavy sound.
+  tier:
+    '1': Foundational and common — the everyday core values most tracks and most DJs will use.
+    '2': Extended and secondary — values that appear regularly but are less central than the foundational set.
+    '3': Niche and rare — specialist values that turn up only in uncommon tracks or edge cases.
+  dance_relevance:
+    high: Core social-dance floor music — central to at least one scene's repertoire.
+    medium: Danced regularly but secondary — fills a floor without being its backbone.
+    low: Occasionally danced — fringe or special-case floor use.
+    none: Listening music — not a social-dance floor genre in any scene.
+families:
+  jazz: Improvised African-American music built on swing feel and soloing, from New Orleans collective playing through bebop, cool, hard bop and beyond.
+  blues: The foundational African-American form built on the 12-bar cycle, blue notes and call-and-response, from acoustic Delta and Chicago electric to boogie-woogie and jump.
+  swing: Big-band and combo jazz with a four-beat lilting groove and section-based arrangements, plus its later revivals built for partner dancing.
+  gospel: Sacred African-American church music marked by powerful choirs, melismatic shout vocals and call-and-response over a building vamp.
+  ragtime: Composed, fully-notated piano music with a syncopated right-hand melody over a steady march-like oom-pah bass — the pre-jazz parlour style.
+  country: American roots music with European balladry and African-American influence, marked by twangy/nasal vocals, fiddle and steel guitar over storytelling lyrics.
+  rnb: Post-1947 African-American popular music joining blues, jazz and gospel with a strong backbeat and electric instruments — the bridge from jump blues toward soul and rock.
+  r-and-b: Rhythm-and-blues-derived groove music centred on a heavy, syncopated backbeat over melody, including funk and related dance-floor styles.
+  soul: Gospel-rooted secular vocal music with expressive, melismatic singing over a tight rhythm section and horn arrangements.
+  rock: Guitar-driven music in verse-chorus form built on a strong backbeat, from rockabilly and early rock'n'roll through classic, punk and alternative strains.
+  pop: Vocal-led, hook-driven mainstream popular music in verse-chorus form, plus the orchestral easy-listening and standards canon aimed at broad appeal.
+  latin: Latin American and Afro-Caribbean dance music locked to clave-based rhythms — salsa, mambo, cha-cha, merengue and related styles.
+  world: Traditional and popular music from non-Western traditions outside the other families, chiefly the Jamaican lineage of reggae and ska.
+  electro: Electronically produced, synth-driven music with programmed beats, including the swing- and jazz-sampling electro-swing subset.
+  electronic: DAW-produced, synth-driven music built from programmed beats and samples rather than live performance, spanning house, techno and related styles.
+  folk: Acoustic, vocal, narrative-driven music rooted in national traditions and the mid-century revival, typically guitar-led and song-centred.
+  regional: Origin-based context markers (such as Slovenian, ex-Yugoslav, South American or Argentine tango) that flag where music comes from and usually accompany a genre tag.
+  novelty: Comedy, gimmick and one-off songs whose appeal is the joke, sound effect or stunt rather than a musical style.
+  misc: A catch-all for music that breaks with conventional form or doesn't fit any other family, including experimental and avant-garde work.
+  urban: Beat-and-sample-based music built around rhythmic spoken vocals, covering hip-hop and rap.
+  dance: Floor-function music made for sustained dancing, mostly electronic-leaning and built on a four-on-the-floor pulse — house, disco and the broader dance umbrella.
+  classical: Western art music in the orchestral and chamber tradition — through-composed, fully-notated works for orchestra or ensemble, from Baroque through Romantic and beyond.

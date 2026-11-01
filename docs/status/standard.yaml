@@ -1,0 +1,270 @@
+# Status ledger - the SDTS standard. One row per requirement id in requirements/standard.md, plus the two
+# deferred/roadmap items of the standard that have no requirement id (STD-ROADMAP-01/02, `release: post-v1.0`).
+# Statuses: gap | buildable | partial | met | proven | blocked ("accepted" is set by the owner only).
+#   met    = the required content exists; evidence is a file path.
+#   proven = met, and the named automated check passed when run on 2026-10-07 at commit 25b098b
+#            (clean clone, Windows, .NET SDK 10.0.401, Python 3.12).
+# Checks run: `python scripts/validate_data.py` (exit 0); the five generators of the CI step
+# "Generated docs + vectors are in sync with their sources" followed by `git diff --exit-code` (exit 0);
+# `dotnet test dotnet/SocialDanceTaggingStandard.slnx -c Release` (496 passed, 0 failed); `python -m mkdocs build --strict` (exit 0).
+
+- id: STD-F-01
+  kind: requirement
+  title: Every field is defined in the registry with id, data_type, cardinality, value source and bindings
+  status: proven
+  evidence: >-
+    scripts/validate_data.py passed ("33 fields valid") against schemas/fields.schema.json. All 33 rows of
+    data/fields.yaml carry id, data_type, cardinality, value_source, id3_proposed, vorbis and mp4. Each field
+    has a generated page under docs/standard/fields/ (not a section inside spec.md, as the criterion words it).
+  source: requirements/standard.md
+
+- id: STD-F-02
+  kind: requirement
+  title: Each taxonomy dimension defines a controlled value set with aliases and codes that resolve to one term
+  status: proven
+  evidence: >-
+    scripts/validate_data.py passed ("364 vocabulary terms claim no token twice");
+    VocabularyTests.Core_ResolvesCanonicalAndAlias and DimensionCollisionTests (6 tests) passed.
+    Data in data/vocabulary/core/ and data/vocabulary/packs/.
+  source: requirements/standard.md
+
+- id: STD-F-03
+  kind: requirement
+  title: A portable field uses the same name across ID3, Vorbis and MP4 (the binding triangle)
+  status: met
+  evidence: >-
+    docs/standard/spec.md §Conformance "Binding triangle"; data/fields.yaml carries id3_proposed/vorbis/mp4
+    (all 29 TXXX:SDTS_* fields use one name in the three containers, checked by an ad-hoc script).
+    No conformance vector or automated test asserts the triangle.
+  source: requirements/standard.md
+
+- id: STD-F-04
+  kind: requirement
+  title: Where a real standard frame exists, that frame is canonical and the SDTS_* tag is only a mirror
+  status: partial
+  evidence: >-
+    docs/standard/spec.md §Conformance "Binding triangle" states the rule; data/fields.yaml binds genre to TCON,
+    mood to TMOO, bpm to TBPM, rating to POPM and key to TKEY. Open: lyric_language is bound to
+    TXXX:SDTS_LYRIC_LANGUAGE while its own note recommends the standard frame TLAN, and the registry has no
+    TSRC entry.
+  source: requirements/standard.md
+
+- id: STD-F-05
+  kind: requirement
+  title: A multi-value field is one "; "-delimited string
+  status: proven
+  evidence: >-
+    docs/standard/spec.md §Conformance "Multi-value encoding"; conformance/vectors/validation/fields.json
+    (delimiter "; " on multi fields) reproduced by ValidationConformanceTests.Validate_MatchesVectors;
+    GenericTermValueTests.Read_MultiValueFrame_SplitsAndPreservesRawFrame and
+    SdtsRecordTests.Multi_And_Ms_And_Enum_Fields_RoundTrip_InMemory passed.
+  source: requirements/standard.md
+
+- id: STD-F-06
+  kind: requirement
+  title: Every time-valued field is an integer number of milliseconds
+  status: proven
+  evidence: >-
+    docs/standard/spec.md §Conformance "Time unit"; the six duration/position fields are type "int (ms)" in
+    data/fields.yaml; their cases in conformance/vectors/validation/fields.json (e.g. "8s" is not_integer)
+    are reproduced by ValidationConformanceTests.Validate_MatchesVectors.
+  source: requirements/standard.md
+
+- id: STD-F-07
+  kind: requirement
+  title: A normalising writer sets sdts_version; a reader treats a lower version as "needs migration"
+  status: met
+  evidence: >-
+    docs/standard/spec.md §Conformance "Version stamp"; field sdts_version (TXXX:SDTS_VERSION) in
+    data/fields.yaml; dotnet/src/SocialDanceTaggingStandard/Generated/SdtsStandard.g.cs.
+  source: requirements/standard.md
+
+- id: STD-F-08
+  kind: requirement
+  title: The frozen on-disk frames (SB-*, COMM:Songs-DB_*) are never renamed
+  status: met
+  evidence: >-
+    docs/standard/spec.md §Conformance "Frozen frames"; literal descriptions in
+    dotnet/src/SocialDanceTaggingStandard.MediaMonkey/Generated/MmColumns.g.cs. Not "proven": no test pins the frame names.
+    MediaMonkeyFramesTests.MirrorKeys_AreSongsDbFrames asserts only the "Songs-DB_" prefix, so a rename to
+    another Songs-DB_* name passes; one literal is pinned (DancesMapping_IsTheOccasionFrame,
+    "Songs-DB_Occasion"); no test in dotnet/tests asserts an SB-* frame name.
+  source: requirements/standard.md
+
+- id: STD-F-09
+  kind: requirement
+  title: A conforming reader skips SDTS fields it does not recognise instead of failing
+  status: partial
+  evidence: >-
+    docs/standard/spec.md §"Conformance levels" says a reader SHOULD ignore an unrecognised SDTS_* field; the
+    requirement is MUST. No conformance vector with an unknown SDTS_* field exists under conformance/vectors/,
+    and no reader test covers it.
+  source: requirements/standard.md
+
+- id: STD-F-10
+  kind: requirement
+  title: The standard defines how a consumer adds private fields without colliding with the SDTS namespace
+  status: partial
+  evidence: >-
+    MirrorMapTests.Compose_DuplicateFieldId_Throws, Compose_DuplicateCanonicalKey_Throws and
+    Compose_DuplicateMirrorKey_Throws passed; README.md §"Extending with private tags (downstream)" and
+    docs/sync/tool-comparison.md §"Collisions & reserved namespaces" describe the convention. The
+    extensibility clause the criterion places in docs/standard/spec.md was not found there.
+  source: requirements/standard.md
+
+- id: STD-F-11
+  kind: requirement
+  title: The dance vocabulary is partitioned into self-contained packs by family
+  status: proven
+  evidence: >-
+    data/vocabulary/manifest.yaml lists seven packs under data/vocabulary/packs/;
+    VocabularyTests.EnabledDances_MergesPacksDeduped and
+    DanceVocabularyGapsTests.WestCoastSwingAndCarolinaShag_AreOptInPacks_ResolvableByCode passed.
+  source: requirements/standard.md
+
+- id: STD-F-12
+  kind: requirement
+  title: The standard ships machine-readable conformance vectors that the reference implementation reproduces
+  status: proven
+  evidence: >-
+    conformance/vectors/ (hash, sync/reconcile, validation/fields, profile/resolution, profile/path-ingest);
+    ConformanceVectorsTests.Reconcile_MatchesVectors, ConformanceVectorsTests.StableHash_MatchesVectors,
+    ValidationConformanceTests.Validate_MatchesVectors, ProfileResolutionConformanceTests.Profile_MatchesVectors
+    and PathIngestTests.Conformance_path_ingest_vector_reproduces passed.
+  source: requirements/standard.md
+
+- id: STD-F-13
+  kind: requirement
+  title: Display metadata and authored cross-references are overlays, flagged when expert review is pending
+  status: proven
+  evidence: >-
+    `validation:` maps in data/vocabulary/core/genre.yaml and data/vocabulary/packs/*/pack.yaml;
+    scripts/validate_data.py (validation_marker_errors) passed;
+    ReviewStatusTests.Baseline_FlagsPacksAndGenreAttributesAwaitingReview passed.
+  source: requirements/standard.md
+
+- id: STD-F-14
+  kind: requirement
+  title: An optional Personal Profile may declare from_path rules; an unrecognised tail token is reported
+  status: partial
+  evidence: >-
+    schemas/profile.schema.json (mapping.from_path); conformance/vectors/profile/path-ingest.json reproduced by
+    PathIngestTests.Conformance_path_ingest_vector_reproduces;
+    PathParserTests.Parse_flags_unrecognised_trailing_token_run_when_OnUnknownToken_is_Flag passed.
+    Open: the report is made only under on_unknown_token "flag". The schema also allows "keep", and
+    dotnet/src/SocialDanceTaggingStandard.Taxonomy/Ingest/PathParser.cs adds to `unmapped` only when the policy is Flag, so under
+    "keep" an unrecognised tail token is not reported (the PathRule.cs doc comment calls Keep "Same as Flag";
+    the code differs). Both cases of the path-ingest vector expect `"unmapped": []` and the conformance test
+    does not read `unmapped`, so no vector exercises the report.
+  source: requirements/standard.md
+
+- id: STD-N-01
+  kind: requirement
+  title: Spec, field registry and vocabulary are mutually consistent, with no drift
+  status: proven
+  evidence: >-
+    CI step "Generated docs + vectors are in sync with their sources" (.github/workflows/ci.yml) reproduced
+    locally: gen_field_docs.py, gen_vocab_docs.py, gen_conformance_vectors.py, gen_ids.py and
+    gen_overlay_schema.py, then `git diff --exit-code` on the generated paths, exit 0.
+  source: requirements/standard.md
+
+- id: STD-N-02
+  kind: requirement
+  title: SDTS-tagged files stay readable by mainstream taggers; frames SDTS does not own are left untouched
+  status: partial
+  evidence: >-
+    Standard concepts use their real frames (data/fields.yaml; dotnet/src/SocialDanceTaggingStandard.Id3/Id3TaxonomyExtensions.cs).
+    The acceptance check is a manual third-party-tagger interop run; no record of one was found in the repository.
+  source: requirements/standard.md
+
+- id: STD-N-03
+  kind: requirement
+  title: The SDTS_* namespace and the frozen Songs-DB_*/SB-* frames never collide with private tags
+  status: proven
+  evidence: >-
+    dotnet/src/SocialDanceTaggingStandard/Sync/MirrorMap.cs (Validate); MirrorMapTests.Validate_StandardMediaMonkeyMap_Passes,
+    FieldMirrorTests.Validate_DuplicateAcrossEntriesSecondaryKey_Throws,
+    MediaMonkeyFramesTests.Map_HasNoDuplicateKeys and
+    MediaMonkeyFramesTests.SyncStateKey_DoesNotCollideWithAnyMappedField passed.
+  source: requirements/standard.md
+
+- id: STD-N-04
+  kind: requirement
+  title: One source of truth (data/fields.yaml, data/vocabulary/); all docs and artifacts are generated from it
+  status: proven
+  evidence: >-
+    Same regenerate-and-diff gate as STD-N-01, exit 0. 64 of the 65 pages under docs/standard/fields/ and
+    docs/model/vocabulary/ carry a "do not hand-edit" banner; docs/standard/fields/README.md says
+    "Generated from data/fields.yaml" without that phrase.
+  source: requirements/standard.md
+
+- id: STD-N-05
+  kind: requirement
+  title: The spec is format- and language-neutral; bindings are a per-field table
+  status: met
+  evidence: >-
+    docs/standard/spec.md §"Binding model (two layers)"; per-field id3_proposed/vorbis/mp4 in data/fields.yaml.
+  source: requirements/standard.md
+
+- id: STD-N-06
+  kind: requirement
+  title: Canonical values round-trip losslessly and the conformance vectors are deterministic
+  status: proven
+  evidence: >-
+    StableHashTests.Of_IsDeterministic and StableHashTests.Of_MatchesNormativeVectors passed;
+    SdtsRecordTests.Multi_And_Ms_And_Enum_Fields_RoundTrip_InMemory and
+    Id3TagSourceTests.UserTextSource_OverLiveTag_RoundTrips passed; gen_conformance_vectors.py regenerated
+    conformance/vectors/validation/ with no diff. There is no separate round-trip vector file.
+  source: requirements/standard.md
+
+- id: STD-N-07
+  kind: requirement
+  title: The spec separates normative from informative content and the docs site builds clean
+  status: partial
+  evidence: >-
+    Build half: CI job "Docs site (mkdocs --strict)" reproduced locally: `python -m mkdocs build --strict`,
+    exit 0. Open (separation half): docs/standard/spec.md has a §Conformance clause, but RFC 2119 keywords
+    also appear outside it - §"Tempo bands (genre & dance)" ("A validator **SHOULD** ... **MUST NOT**") and
+    §"Perceptual scales" ("MAY render", "SHOULD NOT use stars"). No automated check asserts the
+    normative/informative separation.
+  source: requirements/standard.md
+
+- id: STD-N-08
+  kind: requirement
+  title: The standard is versioned; additive changes are minor; conformance is defined per version
+  status: met
+  evidence: >-
+    docs/standard/versioning.md; CHANGELOG.md; `version: 0.1.0-draft` in data/fields.yaml and
+    `vocabulary_version: 0.1.0-draft` in data/vocabulary/manifest.yaml; scripts/validate_data.py checks that
+    every vector's suite_version equals the spec version.
+  source: requirements/standard.md
+
+- id: STD-N-09
+  kind: requirement
+  title: Spec, schemas, vocabulary and vectors are CC0 with documented provenance
+  status: met
+  evidence: >-
+    LICENSE-SPEC (CC0-1.0, with the provenance statement); NOTICE.md; provenance line in
+    docs/standard/spec.md §"Binding model (two layers)".
+  source: requirements/standard.md
+
+- id: STD-ROADMAP-01
+  kind: requirement
+  title: Dance pack for the deferred `niche` family
+  status: gap
+  release: post-v1.0
+  evidence: >-
+    data/vocabulary/manifest.yaml `deferred_dance_families` lists only niche; `early` is authored, and the
+    Latin ballroom dances are the `ballroom-latin` group inside the `ballroom` pack. No directory for niche
+    exists under data/vocabulary/packs/.
+  source: requirements/standard.md; data/vocabulary/manifest.yaml; README.md
+
+- id: STD-ROADMAP-02
+  kind: requirement
+  title: The `proposed` fields are promoted to `active` once validated and written to disk
+  status: gap
+  release: post-v1.0
+  evidence: >-
+    README.md §"Non-goals & roadmap" ("promoting `proposed` fields to `active`"). 18 of the 33 fields in
+    data/fields.yaml have status "proposed", 15 "active".
+  source: README.md

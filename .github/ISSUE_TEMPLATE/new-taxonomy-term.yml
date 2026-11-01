@@ -1,0 +1,48 @@
+name: New taxonomy term (dance / genre / mood / value)
+description: Propose adding or changing a value in the SDTS vocabulary.
+title: "[taxonomy] add <term> to <dimension>"
+labels: ["taxonomy"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Taxonomy **values** live in [`data/vocabulary/`](../blob/HEAD/data/vocabulary) and are added via
+        pull request. If you can, open a PR editing the relevant file directly; otherwise fill this in and a
+        maintainer will add it. See [CONTRIBUTING — Track B](../blob/HEAD/CONTRIBUTING.md#track-b--taxonomy).
+  - type: dropdown
+    id: dimension
+    attributes:
+      label: Dimension
+      options: [dances, genre, mood, rhythmic_feel, instrumentation, instrument_led, theme, recording_context, other]
+    validations: { required: true }
+  - type: input
+    id: canonical
+    attributes:
+      label: Proposed canonical name
+      placeholder: "Collegiate Shag"
+    validations: { required: true }
+  - type: input
+    id: aliases
+    attributes:
+      label: Aliases / alternate spellings (comma-separated)
+      placeholder: "Collegiate, Shag"   # no '#'-prefixed codes: those are personal shorthand, not baseline
+  - type: input
+    id: family
+    attributes:
+      label: Family / parent (for dances & genres)
+      placeholder: "Swing"
+  - type: input
+    id: tempo
+    attributes:
+      label: Typical tempo range (BPM, for dances)
+      placeholder: "180-210"
+  - type: textarea
+    id: source
+    attributes:
+      label: Source / citation
+      description: A reference that supports this term (a scene, an authority, a recording, a community).
+    validations: { required: true }
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else

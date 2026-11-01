@@ -1,0 +1,15 @@
+{
+  "suite_version": "0.1.0-draft",
+  "algorithm": "fnv1a-32-utf8-hex8",
+  "doc": "../../docs/standard/stable-hash.md",
+  "cases": [
+    { "input": null, "hash": "00000000" },
+    { "input": "", "hash": "00000000" },
+    { "input": "Lindy Hop", "hash": "41379818" },
+    { "input": "dances", "hash": "784f703d" },
+    { "input": "Lindy Hop; Balboa", "hash": "9e33e3a8" },
+    { "input": "Café", "hash": "cfc290a9" },
+    { "input": "120", "hash": "733864ae" },
+    { "input": "original", "hash": "a92b8b72" }
+  ]
+}

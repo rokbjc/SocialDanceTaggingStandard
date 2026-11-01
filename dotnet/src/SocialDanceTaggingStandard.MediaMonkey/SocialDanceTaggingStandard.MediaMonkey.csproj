@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SocialDanceTaggingStandard.MediaMonkey</RootNamespace>
+    <AssemblyName>SocialDanceTaggingStandard.MediaMonkey</AssemblyName>
+    <PackageId>SocialDanceTaggingStandard.MediaMonkey</PackageId>
+    <Description>MediaMonkey 5 bridge for the Social-Dance Tagging Standard (SDTS): import / export / 3-way sync of the canonical SDTS fields against MediaMonkey's legacy COMM:Songs-DB_* frames, with change detection and conflict resolution. Structural mapping only — no value-level taxonomy translation yet.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SocialDanceTaggingStandard\SocialDanceTaggingStandard.csproj" />
+    <ProjectReference Include="..\SocialDanceTaggingStandard.Id3\SocialDanceTaggingStandard.Id3.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TagLibSharp" Version="2.3.0" />
+  </ItemGroup>
+
+</Project>

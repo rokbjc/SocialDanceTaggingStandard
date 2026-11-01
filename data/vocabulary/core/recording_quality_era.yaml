@@ -1,0 +1,95 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+dimension: recording_quality_era
+layer: core
+axes:
+- name: era_start
+  description: Start of the technology era.
+- name: era_end
+  description: End of the technology era.
+values:
+- id: acoustic-era
+  canonical: Acoustic Era
+  aliases:
+  - Acoustic
+  - Pre-Electric
+  - Horn Recording
+  era_start: 1900
+  era_end: 1925
+  technology: Horn recording (no microphone)
+  frequency_range: ~250Hz – 2500Hz
+  character: Limited frequency range, strong surface noise, narrow soundstage. Piano/tenor sax/violin
+    survive; bass and drums are barely audible.
+  display:
+    code: ACO
+    emoji: 📯
+    icon: icon-park-outline:phonograph
+    color: '#8D6E63'
+- id: electrical-mono
+  canonical: Electrical Mono
+  aliases:
+  - Electric Mono
+  - 78 rpm Mono
+  - Electric Era
+  era_start: 1925
+  era_end: 1945
+  technology: Electric microphone + 78 rpm disc
+  frequency_range: ~100Hz – 5000Hz
+  character: Wider frequency range, surface noise still common, strictly mono. The whole big band becomes
+    audible.
+  display:
+    code: EMO
+    emoji: 📻
+    icon: material-symbols:radio
+    color: '#A1887F'
+- id: hi-fi-mono
+  canonical: Hi-Fi Mono
+  aliases:
+  - Hi Fi Mono
+  - HiFi Mono
+  - Mono LP
+  - Tape Mono
+  era_start: 1945
+  era_end: 1958
+  technology: Magnetic tape + LP
+  frequency_range: ~30Hz – 15000Hz
+  character: Very wide frequency range, low noise, still mono. Most classic jazz and swing reissue masters.
+  display:
+    code: HFM
+    emoji: 📼
+    icon: mdi:cassette
+    color: '#90A4AE'
+- id: stereo-era
+  canonical: Stereo Era
+  aliases:
+  - Stereo
+  - Stereo LP
+  - Multi-Track Stereo
+  era_start: 1958
+  era_end: 1980
+  technology: Multi-track tape + stereo LP
+  frequency_range: ~20Hz – 20000Hz
+  character: Full hi-fi, stereo soundstage, low noise.
+  display:
+    code: STE
+    emoji: 🎚️
+    icon: mdi:record-player
+    color: '#5C9CCC'
+- id: digital-era
+  canonical: Digital Era
+  aliases:
+  - Digital
+  - CD Era
+  - Modern Digital
+  era_start: 1980
+  era_end: null
+  technology: Digital recording + CD/file
+  frequency_range: 20Hz – 20kHz (44.1kHz/16bit or higher)
+  character: CD quality or better. Contemporary recordings + remastered classics.
+  display:
+    code: DIG
+    emoji: 💿
+    icon: fa6-solid:compact-disc
+    color: '#2196F3'

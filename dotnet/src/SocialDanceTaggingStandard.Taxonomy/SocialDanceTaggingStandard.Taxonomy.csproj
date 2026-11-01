@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SocialDanceTaggingStandard.Taxonomy</RootNamespace>
+    <AssemblyName>SocialDanceTaggingStandard.Taxonomy</AssemblyName>
+    <PackageId>SocialDanceTaggingStandard.Taxonomy</PackageId>
+    <Description>The Social-Dance Tagging Standard (SDTS) baseline taxonomy: the normative value sets (genres, moods, feels, dances by pack, …) plus the loader and alias/value resolution. Self-contained — no audio-tag-container dependency; the baseline vocabulary is compiled in (generated C#, AOT/trim-safe) and loaded via SocialDanceVocabulary.LoadDefault().</Description>
+  </PropertyGroup>
+
+  <!-- The baseline vocabulary ships COMPILED IN: scripts/gen_vocab_docs.py generates
+       Generated/BaselineVocabulary.g.cs from data/vocabulary/, so LoadDefault() reads no embedded
+       resources and parses no YAML (AOT/trim-safe). YamlDotNet remains only for runtime user OVERLAYS
+       (vocabulary.local.yaml) and for the drift-gate's on-disk YAML oracle. -->
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="18.0.0" />
+  </ItemGroup>
+
+  <!-- The drift-gate (BaselineVocabularyDriftTests) re-parses data/vocabulary/ via the internal
+       LoadFromYamlDirectory and asserts the compiled baseline matches it value-for-value. -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="SocialDanceTaggingStandard.Taxonomy.Tests" />
+  </ItemGroup>
+
+  <!-- For TaxonomyValueTranslator, which implements the core Sync seam (IValueTranslator). -->
+  <ItemGroup>
+    <ProjectReference Include="..\SocialDanceTaggingStandard\SocialDanceTaggingStandard.csproj" />
+  </ItemGroup>
+
+</Project>

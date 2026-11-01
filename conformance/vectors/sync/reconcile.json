@@ -1,0 +1,84 @@
+{
+  "suite_version": "0.1.0-draft",
+  "doc": "../../../docs/sync/sync-strategy.md",
+  "field": "f",
+  "canonical_key": "C",
+  "mirror_key": "M",
+  "comment": "Single-field mirror-reconcile vectors. baseline_value=null means no prior sync; otherwise the runner seeds the baseline with StableHash(baseline_value). op defaults to 'sync'.",
+  "cases": [
+    { "name": "first-sync canonical only -> export", "op": "sync",
+      "canonical_in": "X", "mirror_in": null, "baseline_value": null,
+      "options": { "direction": "Bidirectional", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Exported", "canonical_out": "X", "mirror_out": "X", "resolved": true } },
+
+    { "name": "first-sync mirror only -> import", "op": "sync",
+      "canonical_in": null, "mirror_in": "Y", "baseline_value": null,
+      "options": { "direction": "Bidirectional", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Imported", "canonical_out": "Y", "mirror_out": "Y", "resolved": true } },
+
+    { "name": "first-sync both equal -> unchanged", "op": "sync",
+      "canonical_in": "Same", "mirror_in": "Same", "baseline_value": null,
+      "options": { "direction": "Bidirectional", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Unchanged", "canonical_out": "Same", "mirror_out": "Same", "resolved": true } },
+
+    { "name": "first-sync both differ -> conflict (report-only)", "op": "sync",
+      "canonical_in": "A", "mirror_in": "B", "baseline_value": null,
+      "options": { "direction": "Bidirectional", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Conflict", "canonical_out": "A", "mirror_out": "B", "resolved": false } },
+
+    { "name": "both absent -> unchanged", "op": "sync",
+      "canonical_in": null, "mirror_in": null, "baseline_value": null,
+      "options": { "direction": "Bidirectional", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Unchanged", "canonical_out": null, "mirror_out": null, "resolved": true } },
+
+    { "name": "mirror edit only -> import", "op": "sync",
+      "canonical_in": "X", "mirror_in": "edited", "baseline_value": "X",
+      "options": { "direction": "Bidirectional", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Imported", "canonical_out": "edited", "mirror_out": "edited", "resolved": true } },
+
+    { "name": "canonical edit only -> export", "op": "sync",
+      "canonical_in": "edited", "mirror_in": "X", "baseline_value": "X",
+      "options": { "direction": "Bidirectional", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Exported", "canonical_out": "edited", "mirror_out": "edited", "resolved": true } },
+
+    { "name": "canonical removal propagates to mirror", "op": "sync",
+      "canonical_in": null, "mirror_in": "X", "baseline_value": "X",
+      "options": { "direction": "Bidirectional", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Exported", "canonical_out": null, "mirror_out": null, "resolved": true } },
+
+    { "name": "both edited -> prefer-canonical overwrites mirror", "op": "sync",
+      "canonical_in": "A", "mirror_in": "B", "baseline_value": "base",
+      "options": { "direction": "Bidirectional", "on_conflict": "PreferCanonical", "write_through": true },
+      "expect": { "outcome": "Conflict", "canonical_out": "A", "mirror_out": "A", "resolved": true } },
+
+    { "name": "both edited -> prefer-mirror overwrites canonical", "op": "sync",
+      "canonical_in": "A", "mirror_in": "B", "baseline_value": "base",
+      "options": { "direction": "Bidirectional", "on_conflict": "PreferMirror", "write_through": true },
+      "expect": { "outcome": "Conflict", "canonical_out": "B", "mirror_out": "B", "resolved": true } },
+
+    { "name": "import-only skips canonical export", "op": "sync",
+      "canonical_in": "P", "mirror_in": null, "baseline_value": null,
+      "options": { "direction": "ImportOnly", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Skipped", "canonical_out": "P", "mirror_out": null, "resolved": false } },
+
+    { "name": "export-only ignores mirror edit", "op": "sync",
+      "canonical_in": "X", "mirror_in": "mm5", "baseline_value": "X",
+      "options": { "direction": "ExportOnly", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Skipped", "canonical_out": "X", "mirror_out": "mm5", "resolved": false } },
+
+    { "name": "none direction writes nothing", "op": "sync",
+      "canonical_in": "P", "mirror_in": null, "baseline_value": null,
+      "options": { "direction": "None", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Skipped", "canonical_out": "P", "mirror_out": null, "resolved": false } },
+
+    { "name": "op=import forces mirror into canonical", "op": "import",
+      "canonical_in": "X", "mirror_in": "fromMirror", "baseline_value": "X",
+      "options": { "direction": "Bidirectional", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Imported", "canonical_out": "fromMirror", "mirror_out": "fromMirror", "resolved": true } },
+
+    { "name": "op=export forces canonical into mirror", "op": "export",
+      "canonical_in": "fromCanon", "mirror_in": "X", "baseline_value": "X",
+      "options": { "direction": "Bidirectional", "on_conflict": "ReportOnly", "write_through": true },
+      "expect": { "outcome": "Exported", "canonical_out": "fromCanon", "mirror_out": "fromCanon", "resolved": true } }
+  ]
+}

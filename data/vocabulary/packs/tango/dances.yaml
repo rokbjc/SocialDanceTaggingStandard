@@ -1,0 +1,131 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+# Icons chosen via the Iconify search API; tempos are research-backed (WDSF/WDC official
+# competition tempos for ballroom; tango/street-latin community + corpus conventions) with a
+# per-dance tempo_note for provenance — still pending expert sign-off.
+#
+pack: tango
+dimension: dances
+families:
+- argentine
+values:
+- id: argentine-tango-family
+  canonical: Argentine Tango Family
+  aliases: []
+  tradition: argentine-tango
+  description: 'The Argentine tango social-dance group: Tango (Argentino), Vals, Milonga and Canyengue. A group value, not a dance with its own steps; Tango (Argentino) is the dance of that name, while this value covers all four.'
+  display:
+    code: ART
+    emoji: 🌹
+    icon: mdi:account-group
+    color: '#BE525F'
+- id: tango-argentino
+  canonical: Tango (Argentino)
+  aliases:
+  - Argentine Tango
+  - Tango de Salón
+  - Tango Salón
+  - Tango
+  tradition: argentine-tango
+  family: argentine
+  parent: argentine-tango-family
+  tempo_min: 110
+  tempo_max: 138
+  meter: 4/4
+  typical_genres:
+  - Tango
+  description: 'The Argentine social tango (tango de salón): an improvised close-embrace walking dance
+    that grew up in late-19th-century Buenos Aires and Montevideo, led through the torso and danced
+    counter-clockwise around the floor (the ronda) to Golden Age orquestas. Distinguishing trait:
+    improvised walking and pauses in close embrace, led from the chest (vs. the staccato, codified
+    ballroom International Tango).'
+  disambiguation: Argentine social tango — close embrace, improvised, danced to Golden Age orquestas.
+    NOT the ballroom International Tango (ballroom/tango-international), which is staccato and codified.
+  display:
+    code: TGA
+    emoji: 🪗
+    icon: game-icons:accordion
+    color: '#FA6A94'
+  tempo_note: 4/4 quarter-note BPM. Golden-Age de-facto standard ~120-130 bpm (Helgason corpus of 4,847
+    tangos, 16 orquestas 1926-1956); early period 110-125, D'Arienzo intensity spike (1940-42) up to ~143.
+    Band rounded to 110-138.
+- id: vals
+  canonical: Vals
+  aliases:
+  - Tango Waltz
+  - Vals Cruzado
+  tradition: argentine-tango
+  family: argentine
+  parent: argentine-tango-family
+  tempo_min: 150
+  tempo_max: 240
+  meter: 3/4
+  typical_genres:
+  - Vals
+  description: 'The Argentine tango waltz (vals criollo): danced with the tango embrace and walking
+    vocabulary to 3/4 tango-orchestra waltzes, stepping mainly on the accented first beat of each bar
+    with a continuous, rotating flow. Distinguishing trait: tango walking in 3/4 with a continuous
+    circular flow and few pauses (vs. the paused, 4/4 salon Tango).'
+  disambiguation: Argentine tango waltz in 3/4 — NOT the ballroom Slow Waltz (ballroom/waltz-slow) or
+    Viennese Waltz (ballroom/waltz-viennese).
+  display:
+    code: VLS
+    emoji: 🪗
+    icon: mdi:dance-ballroom
+    color: '#FF9CB4'
+  tempo_note: 3/4 per-beat (quarter-note) BPM = measures/min x 3. Golden-Age valses ~50-80 measures/min
+    — lyrical (Fresedo/De Angelis) ~50-55 MPM = 150-165, fast (D'Arienzo/Biagi) ~75-80 MPM = 225-240.
+    Band 150-240 (ceiling raised from 210 — a beat detector reads fast valses at 225-240). Step on the
+    accented beat 1.
+- id: milonga
+  canonical: Milonga
+  aliases:
+  - Milonga (dance)
+  tradition: argentine-tango
+  family: argentine
+  parent: argentine-tango-family
+  tempo_min: 110
+  tempo_max: 138
+  meter: 2/4
+  typical_genres:
+  - Milonga
+  description: 'The brisk tango-family dance to milonga music, rooted in the habanera-based milonga
+    rhythm of the Río de la Plata: small, rhythmic, continuous steps with few pauses, often doubled into
+    traspié (double-time) steps. Distinguishing trait: pause-free rhythmic stepping with traspié (vs.
+    the paused, lyrical Tango).'
+  disambiguation: The fast 2/4 tango-family dance (habanera rhythm). 'Milonga' is also the name of a tango
+    social event — here it means the dance/music.
+  display:
+    code: MLG
+    emoji: 🪗
+    icon: game-icons:metronome
+    color: '#C27BA0'
+  tempo_note: 2/4 quarter-note BPM, same quarter-note tempo family as tango; perceived speed comes from
+    the habanera double-time 2/4 subdivision, not a higher quarter-note BPM (DJ '75-105 measures/min'
+    = ~150-210 at the subdivision). Brisk end of the Golden-Age range.
+- id: canyengue
+  canonical: Canyengue
+  aliases:
+  - Tango Canyengue
+  tradition: argentine-tango
+  family: argentine
+  parent: argentine-tango-family
+  tempo_min: 108
+  tempo_max: 132
+  meter: 2/4
+  typical_genres:
+  - Tango
+  description: 'An early-20th-century tango style from the arrabal (working-class outskirts) of Buenos
+    Aires, danced in a very close, offset embrace with bent knees and grounded, playful rhythmic steps
+    on a strongly marked 2/4 pulse. Distinguishing trait: bent-knee, grounded, strongly rhythmic early
+    style (vs. the upright, flowing salon Tango).'
+  disambiguation: Early (1900s–1940s) close, rhythmic tango style — a niche revival dance, distinct from
+    salon Tango.
+  display:
+    code: CYG
+    emoji: 🪗
+    icon: mdi:shoe-heel
+    color: '#E666B3'
+  tempo_note: 2/4 quarter-note BPM. Early/guardia-vieja close rhythmic style; Helgason 1926-31 ~110-125,
+    rising to ~132 by 1933. Floor raised to 108 (slower grounded interpretations); band 108-132.

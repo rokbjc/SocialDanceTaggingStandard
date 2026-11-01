@@ -1,0 +1,72 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# SDTS-authored (no catalog source): the choreographed line and group ROUTINES a recording can serve
+# (field `routine`). Deliberate exception to the music/dance fault line: a routine names a choreography,
+# but the field states which RECORDING it is danced to; values point at dances via typical_dances.
+# No tempo: no dance-community source gives routine BPM, and the tagged recording carries its own.
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+dimension: routine
+layer: core
+values:
+- id: shim-sham
+  canonical: Shim Sham
+  aliases:
+  - ShimSham
+  - Shim Sham Shimmy
+  typical_dances:
+  - Solo Jazz
+  - Tap Dance
+  - Lindy Hop
+  description: 'A tap routine created by Leonard Reed and Willie Bryant in the late 1920s (first as
+    ''Goofus'', called the Shim Sham by 1931) and now danced at swing events as a line routine, usually
+    in Frankie Manning''s version: one 32-bar chorus of steps with breaks, repeated with freezes, then
+    boogie and Shorty George phrases before the dancers break into Lindy Hop. Distinguishing trait: a
+    fixed 32-bar tap chorus that ends in partnered Lindy (vs. the circle formation of the Big Apple).'
+  display:
+    code: SHS
+    emoji: 🎩
+- id: big-apple
+  canonical: Big Apple
+  aliases:
+  - BigApple
+  typical_dances:
+  - Lindy Hop
+  - Solo Jazz
+  description: 'A group circle dance from the Big Apple Club, a Black juke joint in Columbia, South
+    Carolina, in the early-to-mid 1930s, where a caller shouted the figures; it became a national craze
+    in 1937. Two forms survive: the called circle, and the fixed routine Frankie Manning choreographed
+    for Whitey''s Lindy Hoppers in late 1937 and filmed in Keep Punching (1939), the one taught today.
+    Distinguishing trait: a circle of 8-count figures, called or set (vs. the line formation of the Shim
+    Sham, Tranky Doo and Jitterbug Stroll).'
+  display:
+    code: BAP
+    emoji: 🍎
+- id: tranky-doo
+  canonical: Tranky Doo
+  aliases:
+  - TrankyDoo
+  typical_dances:
+  - Solo Jazz
+  description: 'A 32-bar jazz line routine from the Savoy era. Frankie Manning claimed it, while the
+    common version is attributed to Pepsi Bethel, who credited Al Minns and Leon James; which came first
+    is unknown. It was danced to ''Tuxedo Junction'' at the Savoy and is now often danced to Ella
+    Fitzgerald''s ''Dipsy Doodle'', dubbed over the silent Spirit Moves footage although that song''s
+    structure does not fit the routine. Distinguishing trait: a 32-bar solo jazz routine danced in lines
+    (vs. the 12-bar-blues phrasing and quarter turns of the Jitterbug Stroll).'
+  display:
+    code: TKD
+    emoji: 🎷
+- id: jitterbug-stroll
+  canonical: Jitterbug Stroll
+  aliases:
+  - JitterbugStroll
+  typical_dances:
+  - Solo Jazz
+  description: 'A line dance created by Ryan Francois in 1992 and choreographed to Woody Herman''s
+    ''Woodchopper''s Ball'': each 48-beat phrase (one 12-bar blues chorus, six 8-counts) ends with a
+    quarter turn. Distinguishing trait: 12-bar-blues phrasing with a quarter turn per phrase (vs. the
+    32-bar Shim Sham and Tranky Doo).'
+  display:
+    code: JBS
+    emoji: 🐛

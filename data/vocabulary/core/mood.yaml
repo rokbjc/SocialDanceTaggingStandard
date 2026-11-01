@@ -1,0 +1,463 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+dimension: mood
+layer: core
+axes:
+- name: energy
+  range: [1, 10]
+  orientation: "1 = lowest arousal, 10 = highest"
+  description: Arousal / activation — tempo, dynamics, rhythmic density, articulation.
+- name: valence
+  range: [1, 10]
+  orientation: "1 = darkest, 10 = brightest"
+  description: Musical brightness — mode, timbre, harmonic complexity, emotional field. Correlates
+    with, but is not identical to, affective pleasantness (a smoky-but-pleasant Sultry reads dark).
+values:
+- id: joyful
+  canonical: Joyful
+  aliases:
+  - Exuberant
+  - Celebratory
+  - Jubilant
+  - Happy
+  - Cheerful
+  energy: 8
+  valence: 10
+  tags: []
+  description: 'Pure, unfiltered, celebratory happiness that lifts you up without complexity or irony
+    — bright major-key high energy. Distinguishing trait: it gladdens rather than amuses (vs Playful,
+    which has humor) and conveys joy rather than power (vs Confident).'
+  display:
+    code: JOY
+    emoji: 😄
+    icon: tabler:mood-happy
+    color: '#FFB300'
+- id: playful
+  canonical: Playful
+  aliases:
+  - Fun
+  - Humorous
+  - Witty
+  - Cheeky
+  - Quirky
+  - Sassy
+  energy: 7
+  valence: 9
+  tags: []
+  description: 'Lighthearted, humorous music with a ''wink'' that makes you smile or laugh, via witty
+    lyrics, performance asides, or surprising musical turns. Distinguishing trait: it has an explicit
+    humor/comedy element (it makes you laugh), unlike Joyful''s straight gladness.'
+  display:
+    code: PLY
+    emoji: 😜
+    icon: tabler:mood-crazy-happy
+    color: '#FFB300'
+- id: hot
+  canonical: Hot
+  aliases:
+  - Fiery
+  - Scorching
+  energy: 8
+  valence: 7
+  tags: []
+  description: 'Sexy, high-energy, forward-leaning performance with an erotic charge — full-blooded, brassy,
+    ''I want you'' momentum at medium-to-fast tempo. Distinguishing trait: seductive forward intent rather
+    than slow smoky sensuality (vs Sultry) or chaotic energy (vs Wild).'
+  display:
+    code: HOT
+    emoji: 🔥
+    icon: mdi:fire
+    color: '#FFB300'
+- id: confident
+  canonical: Confident
+  aliases:
+  - Swagger
+  - Empowering
+  - Bold
+  energy: 7
+  valence: 6
+  tags: []
+  description: 'Cool, assured swagger and controlled power that makes you feel unbeatable — strutting
+    tempo, in-the-pocket rhythm, authoritative delivery (Sinatra stepping onstage). Distinguishing trait:
+    relaxed self-assured strength (''I know I''ll win''), not joy (Joyful) and not the strained, fighting
+    power of Intense.'
+  display:
+    code: CNF
+    emoji: 😎
+    icon: icon-park-solid:muscle
+    color: '#26A69A'
+- id: virtuosic
+  canonical: Virtuosic
+  aliases:
+  - Technical
+  - Dazzling
+  - Show-off
+  energy: 9
+  valence: 6
+  tags: []
+  description: 'Technical brilliance on display — speed, harmonic complexity, and athletic musicianship
+    (bebop runs, Art Tatum, Buddy Rich solos) that demands attention rather than serving the dance floor.
+    Distinguishing trait: melodic/technical acrobatics rather than rhythmic repetition (vs Driving).'
+  display:
+    code: VRT
+    emoji: ✨
+    icon: material-symbols:diamond
+    color: '#26A69A'
+- id: wild
+  canonical: Wild
+  aliases:
+  - Crazy
+  - Unbridled
+  - Mad
+  - Frantic
+  - Shouting
+  energy: 10
+  valence: 5
+  tags: []
+  description: 'Untamed, raw, chaotic energy where unpredictability is the feature itself — manic, off-the-rails,
+    full of shouts and sudden swells. Distinguishing trait: chaos and loss of control, versus the locked-in
+    predictable motor of Driving or the controlled brilliance of Virtuosic.'
+  display:
+    code: WLD
+    emoji: 🤪
+    icon: solar:lightning-bold
+    color: '#26A69A'
+- id: intense
+  canonical: Intense
+  aliases:
+  - Dramatic
+  - Fierce
+  - Powerful
+  - Edgy
+  energy: 9
+  valence: 3
+  tags: []
+  description: 'Dramatic, fierce, high-tension music that grabs you by the throat — dark energy that builds
+    and explodes through big dynamic contrasts (minor-key swing, Ellington drama). Distinguishing trait:
+    it builds and erupts via quiet-to-loud contrast, unlike Driving''s even, contrast-free force.'
+  display:
+    code: INT
+    emoji: ⚡
+    icon: ph:lightning-fill
+    color: '#5E35B1'
+- id: driving
+  canonical: Driving
+  aliases:
+  - Relentless
+  - Raw
+  energy: 8
+  valence: 4
+  tags: []
+  description: 'Unstoppable, relentless forward force from a repetitive motor-like rhythm — hypnotic,
+    earthy, in-the-pocket (boogie-woogie ostinato, one-chord Howlin'' Wolf riffs). Distinguishing trait:
+    even, repetitive momentum without dynamic contrast, unlike Intense which builds and explodes.'
+  display:
+    code: DRV
+    emoji: 🚂
+    icon: lucide:metronome
+    color: '#5E35B1'
+- id: warm
+  canonical: Warm
+  aliases:
+  - Cozy
+  - Intimate
+  - Heartfelt
+  energy: 5
+  valence: 8
+  tags: []
+  description: 'A warm, kind, full-bodied feeling like a hug — bright but unenergetic, often crooner vocals
+    (Nat King Cole, Tony Bennett), suited to intimate and cozy moments. Distinguishing trait: robust emotional
+    warmth, more full-bodied than fragile Tender and more feeling-focused than polished Smooth.'
+  display:
+    code: WRM
+    emoji: 🤗
+    icon: mdi:coffee
+    color: '#FFCA28'
+- id: elegant
+  canonical: Elegant
+  aliases:
+  - Graceful
+  - Polite
+  energy: 5
+  valence: 7
+  tags:
+  - dance-oriented
+  description: 'Graceful, refined, sweet, formal-ballroom-appropriate music — sweet bands and society
+    orchestras for hotel ballrooms and white-tie events; polished and dignified, not hot or wild. Distinguishing
+    trait: social/aesthetic refinement for the dance floor, versus Sophisticated''s harmonic/melodic complexity
+    for the listener.'
+  display:
+    code: ELG
+    emoji: 🎩
+    icon: mdi:dance-ballroom
+    color: '#FFCA28'
+- id: cool
+  canonical: Cool
+  aliases:
+  - Laid-back
+  - Restrained
+  - Detached
+  - Relaxed
+  - Chill
+  energy: 5
+  valence: 5
+  tags:
+  - jazz-specific
+  description: 'Restrained, understated, cerebral jazz feeling — the opposite of ''hot'': intellectual,
+    lyrical, neither happy nor sad (Miles Davis ''Birth of the Cool'', Lester Young, Chet Baker). Distinguishing
+    trait: emotional detachment (''reserved'', not ''sad''), distinct from Melancholic''s bitterness.'
+  display:
+    code: COO
+    emoji: 🧊
+    icon: mdi:sunglasses
+    color: '#4DB6AC'
+- id: sophisticated
+  canonical: Sophisticated
+  aliases:
+  - Refined
+  - Urbane
+  - Lyrical
+  - Izbran
+  energy: 5
+  valence: 6
+  tags:
+  - jazz-specific
+  description: 'Harmonically rich, culturally refined, grown-up feeling — Ellington-level composition,
+    Sinatra''s Capitol period, cabaret elegance for cocktail-hour and black-tie listening. Distinguishing
+    trait: fully expressed yet refined harmonic/melodic complexity, versus Cool''s restraint and detachment.'
+  display:
+    code: SOP
+    emoji: 🍸
+    icon: mdi:glass-cocktail
+    color: '#4DB6AC'
+- id: soulful
+  canonical: Soulful
+  aliases:
+  - Church-influenced
+  - Gospel-tinged
+  - Feeling-heavy
+  - Expressive
+  energy: 6
+  valence: 6
+  tags:
+  - soul-specific
+  description: 'Gospel/church-influenced emotional expression — melisma, vocal cries, call-and-response,
+    building intensity (Ray Charles, Aretha Franklin, Otis Redding). Distinguishing trait: gospel uplift
+    and church-style power, versus Bluesy''s secular sorrow and blues-scale roots.'
+  display:
+    code: SOU
+    emoji: 🙌
+    icon: heroicons:hand-raised
+    color: '#4DB6AC'
+- id: groovy
+  canonical: Groovy
+  aliases:
+  - In the Pocket
+  - Locked-in
+  energy: 6
+  valence: 6
+  tags: []
+  description: 'A body-rhythm, locked-in ''in the pocket'' feel that immediately makes you sway — the
+    rhythm section is glued together with a strong backbeat. Distinguishing trait: body engagement rather
+    than forward speed (vs Driving''s tempo-motor) and active involvement rather than restraint (vs Cool).'
+  display:
+    code: GRV
+    emoji: 🕺
+    icon: mdi:waveform
+    color: '#4DB6AC'
+- id: bluesy
+  canonical: Bluesy
+  aliases:
+  - Blues-tinged
+  - Mournful
+  - Blues-like
+  - Earthy
+  energy: 5
+  valence: 3
+  tags:
+  - blues-specific
+  description: 'A blues-harmonic, mournful, soulful feeling marked by specific blues markers — blue notes,
+    blues scales, 12-bar feel, microtonal bending (Muddy Waters, BB King). Distinguishing trait: it is
+    harmonic-technical (blues scales and bending) rather than purely emotional like Melancholic.'
+  display:
+    code: BLZ
+    emoji: 🎸
+    icon: lucide:guitar
+    color: '#7E57C2'
+- id: smooth
+  canonical: Smooth
+  aliases:
+  - Polished
+  - Mellow
+  energy: 4
+  valence: 7
+  tags: []
+  description: 'Elegant, sophisticated, ''cool'' polish — like a midnight cocktail in a jazz club; effortlessly,
+    confidently relaxed beauty. Distinguishing trait: it impresses rather than moves you (vs Tender),
+    is low-energy passive elegance (vs high-energy active Confident), and is present rather than floating
+    (vs Dreamy).'
+  display:
+    code: SMO
+    emoji: 🪶
+    icon: mdi:feather
+    color: '#FFE082'
+- id: tender
+  canonical: Tender
+  aliases:
+  - Romantic
+  - Gentle
+  - Sentimental
+  energy: 3
+  valence: 8
+  tags: []
+  description: 'Romantic, gentle, loving music that touches the heart — warm, direct, sincere emotion
+    without irony or distance (an honest love song). Distinguishing trait: it moves you and sings directly
+    ''to you'' here and now, versus Smooth (impresses) and Dreamy (floats elsewhere).'
+  display:
+    code: TND
+    emoji: 💗
+    icon: mdi:heart
+    color: '#FFE082'
+- id: dreamy
+  canonical: Dreamy
+  aliases:
+  - Starry
+  - Wistful
+  - Ethereal
+  - Hypnotic
+  energy: 3
+  valence: 6
+  tags: []
+  description: 'Floating, starry-eyed music that carries you elsewhere — ambivalent, open ''floating''
+    harmony evoking moon, stars, and memory; beautiful yet out of reach. Distinguishing trait: nostalgic
+    beauty without pain (''postcard, not funeral''), versus Melancholic''s sorrow, and absent/floating
+    versus Tender''s direct presence.'
+  display:
+    code: DRM
+    emoji: 💫
+    icon: solar:moon-bold
+    color: '#80CBC4'
+- id: sultry
+  canonical: Sultry
+  aliases:
+  - Sensual
+  - Smoky
+  - Seductive
+  - Sexy
+  energy: 3
+  valence: 4
+  tags: []
+  description: 'Sensual, smoky, seductive music — darkness that attracts rather than repels, like a dim
+    club of cigarette smoke and whiskey; erotic tension that is dark but not sad. Distinguishing trait:
+    dark attraction rather than dark pain (vs Melancholic), and physical ''in your ear'' closeness versus
+    Smooth''s cool distance.'
+  display:
+    code: SLT
+    emoji: 💋
+    icon: material-symbols:lips
+    color: '#9575CD'
+- id: melancholic
+  canonical: Melancholic
+  aliases:
+  - Melancholy
+  - Sad
+  - Lonely
+  - Brooding
+  energy: 1
+  valence: 1
+  tags: []
+  description: 'Sad, lonely, nostalgic music — pain expressed through beauty, conveying loss, longing,
+    and isolation; the darkest mood, with unresolved minor-key tension. Distinguishing trait: it saddens
+    rather than attracts (vs Sultry) and carries real pain (vs Dreamy''s painless nostalgia).'
+  display:
+    code: MEL
+    emoji: 😢
+    icon: tabler:mood-sad
+    color: '#9575CD'
+- id: haunting
+  canonical: Haunting
+  aliases:
+  - Eerie
+  - Ghostly
+  - Chilling
+  energy: 2
+  valence: 2
+  tags: []
+  description: 'Eerie, otherworldly music with lingering, unsettling emotional weight — drones, modal/suspended
+    harmony, reverb and isolation that leave residue after the song ends (Robert Johnson, Skip James).
+    Distinguishing trait: psychological/unsettling resonance rather than the plain emotional sadness of
+    Melancholic.'
+  display:
+    code: HNT
+    emoji: 👻
+    icon: mdi:ghost
+    color: '#9575CD'
+- id: angry
+  canonical: Angry
+  aliases:
+  - Aggressive
+  - Furious
+  - Hostile
+  energy: 9
+  valence: 2
+  description: 'Hostile, aggressive, confrontational music — clenched, combative energy aimed outward.
+    Distinguishing trait: outward aggression and hostility, unlike Intense which builds and erupts through
+    quiet-to-loud drama, and unlike Driving''s even, contrast-free motor.'
+  source: 'SDTS mood-coverage review (2026-06): an everyday affect with no value on the catalog 21-mood
+    grid — nothing covers hostile/aggressive feel.'
+  display:
+    code: ANG
+    emoji: 😠
+    icon: mdi:emoticon-angry-outline
+    color: '#5E35B1'
+- id: bittersweet
+  canonical: Bittersweet
+  energy: 3
+  valence: 4
+  description: 'Happiness and sadness at once — fond but aching, sweet but tinged with loss. Distinguishing
+    trait: the blend of sweet and sad in one feel, unlike Melancholic''s pure sorrow and Tender''s pure
+    warmth.'
+  source: 'SDTS mood-coverage review (2026-06): everyday affect missing from the grid — no value captures
+    the happy-sad mix.'
+  display:
+    code: BSW
+    emoji: 🥲
+    icon: mdi:yin-yang
+    color: '#9575CD'
+- id: calm
+  canonical: Calm
+  aliases:
+  - Peaceful
+  - Serene
+  - Restful
+  energy: 2
+  valence: 7
+  description: 'Peaceful, serene, settled music that puts the room at ease — unhurried and restful. Distinguishing
+    trait: plain serenity, unlike Smooth''s polished cocktail elegance and Cool''s detached, cerebral
+    restraint.'
+  source: 'SDTS mood-coverage review (2026-06): everyday affect missing from the grid — no value captures
+    plain restful serenity.'
+  display:
+    code: CLM
+    emoji: 😌
+    icon: mdi:meditation
+    color: '#FFE082'
+- id: hopeful
+  canonical: Hopeful
+  aliases:
+  - Optimistic
+  - Uplifting
+  energy: 6
+  valence: 8
+  description: 'Optimistic, uplifting music that feels like things are looking up — a warm forward lift
+    toward something better. Distinguishing trait: rising optimism and anticipation, unlike Joyful''s
+    in-the-moment, arc-free happiness.'
+  source: 'SDTS mood-coverage review (2026-06): everyday affect missing from the grid — Joyful covers
+    present happiness, not forward-looking optimism.'
+  display:
+    code: HOP
+    emoji: 🌅
+    icon: mdi:weather-sunset-up
+    color: '#FFCA28'

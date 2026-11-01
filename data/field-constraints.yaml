@@ -1,0 +1,88 @@
+# Machine-checkable per-field constraints (the value contract the prose allowed_values describes).
+# Sidecar to fields.yaml so the human registry stays stable. Drives:
+#   - the cross-language validator (Python socialdancetags.validate + .NET FieldValidator)
+#   - generated validation vectors (scripts/gen_conformance_vectors.py -> conformance/vectors/validation/)
+#
+# Keys: type (int|enum|string|composite), cardinality (single|multi), delimiter,
+#       min/max (int), values (closed intrinsic enum),
+#       grades (inline ':grade' set), allow_validation_marker (trailing '?'), pattern (full-match regex).
+# bad_examples (doc-only, stripped from the emitted constraints) seed the negative vectors.
+# Absent/empty value is always valid (fields are optional). An enum with no `values` is open here —
+# its membership is owned by the taxonomy vocabulary layer, not checked by this per-value validator.
+
+# --- intrinsic numeric (1-10 rating family + raw bpm) ---
+bpm:           { type: int, cardinality: single, min: 1, max: 330,
+                 bad_examples: [ { value: "400", error: out_of_range }, { value: "fast", error: not_integer } ] }
+energy:        { type: int, cardinality: single, min: 1, max: 10,
+                 bad_examples: [ { value: "0", error: out_of_range }, { value: "11", error: out_of_range }, { value: "hot", error: not_integer } ] }
+valence:       { type: int, cardinality: single, min: 1, max: 10,
+                 bad_examples: [ { value: "0", error: out_of_range }, { value: "11", error: out_of_range }, { value: "bright", error: not_integer } ] }
+danceability:  { type: int, cardinality: single, min: 1, max: 10,
+                 bad_examples: [ { value: "0", error: out_of_range }, { value: "11", error: out_of_range } ] }
+
+# --- time = non-negative integer milliseconds ---
+intro_duration:    { type: int, cardinality: single, min: 0,
+                     bad_examples: [ { value: "-1", error: out_of_range }, { value: "8s", error: not_integer } ] }
+outro_duration:    { type: int, cardinality: single, min: 0,
+                     bad_examples: [ { value: "3s", error: not_integer } ] }
+playback_start:    { type: int, cardinality: single, min: 0,
+                     bad_examples: [ { value: "-5", error: out_of_range } ] }
+playback_stop:     { type: int, cardinality: single, min: 1,
+                     bad_examples: [ { value: "0", error: out_of_range } ] }
+fade_in_duration:  { type: int, cardinality: single, min: 0,
+                     bad_examples: [ { value: "1.5", error: not_integer } ] }
+fade_out_duration: { type: int, cardinality: single, min: 0,
+                     bad_examples: [ { value: "-1", error: out_of_range } ] }
+
+# --- intrinsic closed enums (small, standard-owned; NOT the open vocabulary) ---
+meter:           { type: enum, cardinality: single,
+                   values: ["2", "3", "4", "2/4", "3/4", "4/4", "6/8", "12/8"],
+                   bad_examples: [ { value: "5", error: not_in_enum }, { value: "4/8", error: not_in_enum } ] }
+tempo_stability: { type: enum, cardinality: single,
+                   values: [stable, drift, rubato, accelerando, tempo-change],
+                   bad_examples: [ { value: "fast", error: not_in_enum } ] }
+ending_type:     { type: enum, cardinality: single,
+                   values: [definitive, fade, cold-stop],
+                   bad_examples: [ { value: "fade-out", error: not_in_enum }, { value: "big-finish", error: not_in_enum } ] }
+recording_origin: { type: enum, cardinality: single,
+                    values: [period-original, faithful-revival, reissue],
+                    bad_examples: [ { value: "original", error: not_in_enum } ] }
+
+# --- patterned strings ---
+sdts_version:  { type: string, cardinality: single, pattern: "\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?",
+                 bad_examples: [ { value: "v1", error: no_match }, { value: "1.0", error: no_match } ] }
+original_title: { type: string, cardinality: single }   # free text: a work title, no pattern to check
+lyric_language: { type: string, cardinality: multi, delimiter: "; ", pattern: "instrumental|[a-z]{2}",
+                  bad_examples: [ { value: "English", error: no_match } ] }
+confirmation_gates: { type: composite, cardinality: multi, delimiter: "; ",
+                      pattern: "[A-Za-z][A-Za-z0-9]*:[0-9]+(:[0-9a-f]{4})?",
+                      bad_examples: [ { value: "BPM", error: no_match }, { value: "BPM:1:ZZZZ", error: no_match } ] }
+# The trailing '(:[^;]*)?' is the reserved per-region source/confidence extension (data/fields.yaml
+# allowed_values): a forward-compatible reader must accept extra ':'-delimited fields, not reject them.
+# Ordering (start < end) is NOT checkable per value here — this validator sees one value's shape only.
+regions:            { type: composite, cardinality: multi, delimiter: "; ",
+                      pattern: "[0-9]+:[0-9]+:(silence|speech|music-boundary)(:[^;]*)?",
+                      bad_examples: [ { value: "0:3200", error: no_match },
+                                      { value: "0:3200:noise", error: no_match },
+                                      { value: "0.5:3200:silence", error: no_match } ] }
+
+# --- inline-grade vocabulary fields (membership out of scope; grade + marker = checked here) ---
+dance:        { type: enum, cardinality: multi, delimiter: "; ",
+                 grades: [core, edge, fusion], allow_validation_marker: true,
+                 bad_examples: [ { value: "Blues:traditional", error: bad_grade } ] }
+routine:      { type: enum, cardinality: multi, delimiter: "; ",
+                 grades: [original, alternative, experimental], allow_validation_marker: true,
+                 bad_examples: [ { value: "Shim Sham:primary", error: bad_grade } ] }
+
+# --- open vocabulary enums (shape only here; membership out of scope for the validator) ---
+genre:                  { type: enum, cardinality: multi, delimiter: "; " }
+mood:                   { type: enum, cardinality: multi, delimiter: "; " }
+theme:                  { type: enum, cardinality: multi, delimiter: "; " }
+instrument_led:         { type: enum, cardinality: multi, delimiter: "; " }
+vocality:               { type: enum, cardinality: single }
+rhythmic_feel:          { type: enum, cardinality: single }
+instrumentation:        { type: enum, cardinality: single }
+recording_context:      { type: enum, cardinality: single }
+recording_quality_era:  { type: enum, cardinality: single }
+song_form:              { type: enum, cardinality: single }
+artist_country:         { type: enum, cardinality: single }

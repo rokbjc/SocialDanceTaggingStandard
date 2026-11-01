@@ -1,0 +1,30 @@
+name: Field / spec / doc fix
+description: Report a problem with a field definition, the spec, or a doc.
+title: "[fix] <short description>"
+labels: ["docs"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Reminder: `docs/standard/fields/**` are **generated** from `data/fields.yaml`. Fixes go in the
+        **source** — see [CONTRIBUTING — source vs. derived](../blob/HEAD/CONTRIBUTING.md#source-vs-derived).
+  - type: input
+    id: field
+    attributes:
+      label: Field id (if applicable)
+      placeholder: "dances"
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong
+    validations: { required: true }
+  - type: textarea
+    id: fix
+    attributes:
+      label: Suggested fix
+  - type: checkboxes
+    id: source
+    attributes:
+      label: Source file
+      options:
+        - label: I understand the fix belongs in a SOURCE file (data/*.yaml, spec.md, …), not a generated doc.

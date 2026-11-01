@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SocialDanceTaggingStandard.Samples</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <!-- Samples are illustrative, not API surface: no XML-doc requirement. -->
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SocialDanceTaggingStandard\SocialDanceTaggingStandard.csproj" />
+    <ProjectReference Include="..\..\src\SocialDanceTaggingStandard.Taxonomy\SocialDanceTaggingStandard.Taxonomy.csproj" />
+    <ProjectReference Include="..\..\src\SocialDanceTaggingStandard.Id3\SocialDanceTaggingStandard.Id3.csproj" />
+    <ProjectReference Include="..\..\src\SocialDanceTaggingStandard.MediaMonkey\SocialDanceTaggingStandard.MediaMonkey.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,23 @@
+# Line endings: LF in the repo AND in working copies on every platform.
+# Matches `.editorconfig` (end_of_line = lf) and keeps generator output byte-stable so the
+# "generated files in sync" CI gate (regenerate → `git diff --exit-code`) is deterministic
+# across Windows / macOS / Linux instead of churning on CRLF.
+* text=auto eol=lf
+
+# Binary assets — never normalize (none tracked today; this protects future sample media,
+# theme images, and packed artifacts from corruption).
+*.mp3   binary
+*.wav   binary
+*.flac  binary
+*.m4a   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.nupkg binary

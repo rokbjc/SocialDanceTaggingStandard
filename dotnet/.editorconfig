@@ -1,0 +1,70 @@
+# Layers on the repo-root .editorconfig for the dotnet/ subtree (no root=true).
+# Analyzer severities follow the project's analyzer policy. The kept Meziantou rules are MA0001/MA0024
+# (StringComparison), MA0011 (culture), MA0032/MA0040 (CancellationToken) and the logging family;
+# every other Meziantou rule is opinionated style, silenced per that section. The only repo-local
+# addition is the [samples/**] CA1031 scope at the bottom.
+
+[*.cs]
+# ---- Logging ----
+dotnet_diagnostic.CA2254.severity = warning
+dotnet_diagnostic.CA1848.severity = suggestion
+
+# ---- Guard clauses / defensive ----
+dotnet_diagnostic.CA1510.severity = warning
+dotnet_diagnostic.CA1511.severity = warning
+dotnet_diagnostic.CA1512.severity = warning
+dotnet_diagnostic.CA2264.severity = warning
+
+# ---- Async / threading (correctness -> error; this codebase is synchronous, so these are inert) ----
+dotnet_diagnostic.CA2012.severity = error
+dotnet_diagnostic.VSTHRD002.severity = error
+dotnet_diagnostic.VSTHRD103.severity = error
+dotnet_diagnostic.VSTHRD100.severity = warning
+dotnet_diagnostic.VSTHRD101.severity = warning
+dotnet_diagnostic.CA1849.severity = suggestion
+dotnet_diagnostic.CA2016.severity = warning
+dotnet_diagnostic.VSTHRD001.severity = none
+dotnet_diagnostic.VSTHRD010.severity = none
+
+# ---- Exceptions ----
+dotnet_diagnostic.CA2201.severity = warning
+dotnet_diagnostic.CA1031.severity = warning   # KEEP warning; a boundary catch-all that logs/surfaces is suppressed at the site, not narrowed
+
+# ---- Modern syntax ----
+dotnet_diagnostic.IDE0161.severity = warning
+dotnet_diagnostic.IDE0305.severity = warning
+dotnet_diagnostic.IDE0301.severity = warning
+dotnet_diagnostic.IDE0010.severity = none
+dotnet_diagnostic.IDE0072.severity = none
+
+# ---- not-null pattern ----
+dotnet_diagnostic.IDE0150.severity = warning
+
+# ---- Meziantou: silence opinionated style, keep only mapped rules ----
+dotnet_diagnostic.MA0048.severity = none       # file name must match type
+dotnet_diagnostic.MA0051.severity = none       # method too long (ceremony)
+dotnet_diagnostic.MA0004.severity = none       # ConfigureAwait(false) — wrong for UI continuations
+dotnet_diagnostic.MA0006.severity = suggestion # string.Equals over == — mostly style
+dotnet_diagnostic.MA0049.severity = none       # type name == namespace
+dotnet_diagnostic.VSTHRD200.severity = suggestion # "Async" suffix — style
+
+# non-mapped opinionated Meziantou rules (not in the mapped set MA0001/MA0024/MA0011/MA0032/MA0040) —
+# silenced per the §Analyzers philosophy; keeping them at default warning is exactly the "9000 warnings
+# of noise" the standard warns against.
+dotnet_diagnostic.MA0002.severity = none       # IEqualityComparer for collections — string dicts already default to ordinal
+dotnet_diagnostic.MA0074.severity = none       # StringComparison on Contains/StartsWith — MA0001/MA0024 are the mapped rules
+dotnet_diagnostic.MA0016.severity = none       # prefer collection abstraction over List<> — style
+dotnet_diagnostic.MA0008.severity = none       # StructLayoutAttribute — noise on record structs
+dotnet_diagnostic.MA0015.severity = none       # ArgumentException param name — low value
+dotnet_diagnostic.MA0023.severity = none       # RegexOptions.ExplicitCapture — style
+dotnet_diagnostic.MA0009.severity = none       # regex ReDoS — patterns here are static/controlled, not user input
+
+# ---- Default-ERROR Meziantou rules that would break a fresh build — demote to warning ----
+dotnet_diagnostic.MA0037.severity = warning    # empty statement
+dotnet_diagnostic.MA0039.severity = warning    # own cert validation
+dotnet_diagnostic.VSTHRD011.severity = warning # Lazy<Task>.Value deadlock
+
+# Demo scenario runners wrap file ops in a boundary catch that SURFACES (prints) the error so one bad
+# file variant doesn't abort the demo — a broad-but-not-silent boundary catch, legit per CA1031 above.
+[samples/**/*.cs]
+dotnet_diagnostic.CA1031.severity = none

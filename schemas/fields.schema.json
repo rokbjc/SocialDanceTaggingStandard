@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rokbjc/SocialDanceTaggingStandard/HEAD/schemas/fields.schema.json",
+  "title": "SDTS field registry (data/fields.yaml)",
+  "type": "object",
+  "required": ["fields"],
+  "additionalProperties": true,
+  "properties": {
+    "fields": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/field" }
+    }
+  },
+  "$defs": {
+    "field": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["id", "display_name", "group", "status", "data_type", "cardinality", "description"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "display_name": { "type": "string", "minLength": 1 },
+        "group": {
+          "enum": [
+            "taxonomy-core-a", "taxonomy-core-b", "measured-confirmation",
+            "proposed-tempo-structure", "proposed-dance-semantic", "proposed-content-provenance"
+          ]
+        },
+        "layer": { "enum": ["taxonomy", "measured", "derived", "confirmation", "meta"] },
+        "status": { "enum": ["active", "proposed", "frozen-legacy", "deprecated"] },
+        "replaced_by": { "type": "string", "description": "For status=deprecated: the field id that supersedes this one (see docs/standard/versioning.md)." },
+        "data_type": { "enum": ["enum", "int", "string", "composite"] },
+        "cardinality": { "enum": ["single", "multi"] },
+        "authority": { "enum": ["both", "reference-impl", "vocabulary"] },
+        "value_source": { "type": "string" },
+        "allowed_values": { "type": "string" },
+        "id3_current": { "type": "string" },
+        "id3_proposed": { "type": "string" },
+        "vorbis": { "type": "string" },
+        "mp4": { "type": "string" },
+        "delimiter": { "type": "string" },
+        "mm5_mirror": { "type": "boolean", "description": "True when this field participates in the MediaMonkey reused-slot sync mirror (canonical TXXX:SDTS_* <-> legacy COMM:Songs-DB_*); drives the generated MediaMonkeyFrames.Map via scripts/gen_ids.py. Requires an SDTS_* vorbis key and a COMM:Songs-DB_* id3_current slot." },
+        "description": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string" },
+        "type": { "type": "string" },
+        "dj_use": { "type": "string" },
+        "other_tools": { "type": "string" },
+        "examples": {
+          "type": "array",
+          "items": { "type": ["string", "number"] }
+        }
+      }
+    }
+  }
+}

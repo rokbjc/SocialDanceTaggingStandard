@@ -1,0 +1,172 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+dimension: vocality
+layer: core
+values:
+- id: instrumental
+  canonical: Instrumental
+  aliases:
+  - No Vocal
+  description: No vocals. Pure instrumental — no one sings through the track.
+  examples:
+  - Sing Sing Sing (Goodman)
+  - Take the A Train (Ellington instr)
+  - One O'Clock Jump (Basie)
+  - Body and Soul (Hawkins)
+  display:
+    code: INS
+    emoji: 🎷
+    icon: mdi:saxophone
+    color: '#D81B60'
+- id: vocal-male
+  canonical: Male
+  parent: vocal-generic
+  aliases:
+  - Vocal Male
+  - Vocal Male Lead
+  - Vocal Male (lead)
+  - Male Vocal
+  - Male Lead
+  - Vocal M
+  description: Male vocal-led — a male singer is the main voice through most of the track.
+  examples:
+  - Sinatra
+  - Elvis
+  - Louis Armstrong
+  - Big Joe Turner
+  display:
+    code: VM
+    emoji: 🧔
+    icon: mdi:microphone
+    color: '#D81B60'
+- id: vocal-female
+  canonical: Female
+  parent: vocal-generic
+  aliases:
+  - Vocal Female
+  - Vocal Female Lead
+  - Vocal Female (lead)
+  - Female Vocal
+  - Female Lead
+  - Vocal F
+  description: Female vocal-led — a female singer is the lead.
+  examples:
+  - Ella Fitzgerald
+  - Billie Holiday
+  - Peggy Lee
+  - Bessie Smith
+  display:
+    code: VF
+    emoji: 👩‍🎤
+    icon: mdi:microphone-variant
+    color: '#D81B60'
+- id: vocal-group
+  canonical: Group
+  parent: vocal-generic
+  aliases:
+  - Vocal Group
+  - Vocal Ensemble
+  - Vocal Ensemble (Male)
+  - Vocal Ensemble (Female)
+  - Vocal Trio
+  - Vocal Trio (Female)
+  - Vocal Trio (Male)
+  - Vocal Quartet
+  description: Several singers at once (doo-wop, harmony trio/quartet, gospel choir).
+  examples:
+  - The Andrews Sisters
+  - The Ink Spots
+  - The Mills Brothers
+  - The Boswell Sisters
+  - The Five Satins
+  display:
+    code: VG
+    emoji: 👥
+    icon: mdi:account-group
+    color: '#D81B60'
+- id: duet
+  canonical: Duet
+  parent: vocal-generic
+  aliases:
+  - Vocal Duet
+  description: Two singers — M+F, M+M, or F+F — both equal vocal leads.
+  examples:
+  - Ella + Louis Armstrong duets
+  - Baby It's Cold Outside
+  - Louis Prima + Keely Smith
+  display:
+    code: VD
+    emoji: 👫
+    icon: mdi:account-multiple
+    color: '#D81B60'
+- id: vocal-feature
+  canonical: Feature
+  parent: vocal-generic
+  aliases:
+  - Vocal Feature
+  - Vocal Male (featured)
+  - Vocal Female (featured)
+  - Vocal (featured)
+  - Vocal Featured
+  - Featured Vocal
+  - Vocal Cameo
+  description: A largely instrumental track with a vocal part (verse/chorus) but mostly instrumental.
+  examples:
+  - Minnie the Moocher (vocal in responses, long instrumental sections)
+  - St. Louis Blues (varies)
+  display:
+    code: VX
+    emoji: 🎙️
+    icon: mdi:microphone-outline
+    color: '#D81B60'
+- id: scat-led
+  canonical: Scat
+  parent: vocal-generic
+  aliases:
+  - Scat Led
+  - Scat Vocal
+  - Vocal Scat
+  - Vocal Male (featured as Scat)
+  - Vocal Female (featured as Scat)
+  description: The singer uses scat instead of lyrics through the main part of the track.
+  examples:
+  - How High the Moon (Ella scat version)
+  - Flat Foot Floogie (Slim Gaillard)
+  display:
+    code: VS
+    emoji: 🎶
+    icon: mdi:music-note
+    color: '#D81B60'
+- id: spoken-word
+  canonical: Spoken
+  parent: vocal-generic
+  aliases:
+  - Spoken Word
+  - Talking
+  - Vocal Spoken
+  description: The performer speaks the lyrics rather than singing them.
+  examples:
+  - Is That All There Is? (Peggy Lee)
+  - Minnie the Moocher intro (Cab Calloway)
+  - 60s R&B intros
+  display:
+    code: VW
+    emoji: 🗣️
+    icon: mdi:account-voice
+    color: '#D81B60'
+- id: vocal-generic
+  canonical: Vocal
+  aliases: []
+  description: Generic vocal — use when the specific form (Male/Female/Group/Feature/Scat/Spoken) is unknown
+    or unspecified, or when vocality is mixed/uncertain.
+  examples:
+  - Multi-vocal pieces with mixed M/F
+  - Uncertain triage cases
+  - Specific vocality not yet catalogued
+  display:
+    code: V
+    emoji: 🎤
+    icon: mdi:microphone-settings
+    color: '#D81B60'

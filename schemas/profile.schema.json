@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rokbjc/SocialDanceTaggingStandard/HEAD/schemas/profile.schema.json",
+  "title": "SDTS Personal Profile (per-DJ, optional, non-normative)",
+  "description": "A per-DJ customization over the immutable baseline vocabulary: a vocabulary overlay, presentation (color/label) overrides, and ingest mapping rules. Never bumps sdts_version; never alters a hashed canonical. See docs/standard/profile.md. NOTE: some invariants can't be expressed in JSON Schema and are enforced at import (docs/standard/profile.md §8): a custom canonical must not collide case-insensitively with a baseline term/alias in the same dimension; an added alias must resolve to exactly one canonical; a cross_dimension rule's to_dimension must differ from its from_dimension.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile_version"],
+  "properties": {
+    "profile_version": { "type": "integer", "const": 1 },
+    "sdts_baseline": { "type": "string", "description": "advisory: spec version authored against; never normative" },
+    "owner": { "type": "string" },
+    "vocabulary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "add_terms": {
+          "type": "object",
+          "description": "dimension -> custom terms to add",
+          "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/customTerm" } }
+        },
+        "remove_terms": {
+          "type": "object",
+          "additionalProperties": { "type": "array", "items": { "type": "string" } }
+        },
+        "add_aliases": {
+          "type": "object",
+          "description": "dimension -> term -> aliases to add (same-dimension remaps live here)",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "remove_aliases": {
+          "type": "object",
+          "additionalProperties": { "type": "array", "items": { "type": "string" } }
+        },
+        "rename": {
+          "type": "object",
+          "description": "dimension -> display-label overrides (canonical unchanged, auto-aliased)",
+          "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/rename" } }
+        },
+        "re_grade": {
+          "type": "object",
+          "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/reGrade" } }
+        }
+      }
+    },
+    "display": {
+      "type": "object",
+      "description": "dimension -> value -> { color, label } (presentation only; never hashed)",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": { "$ref": "#/$defs/displayOverride" }
+      }
+    },
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "alias": { "type": "array", "items": { "$ref": "#/$defs/aliasRule" } },
+        "cross_dimension": { "type": "array", "items": { "$ref": "#/$defs/crossRule" } },
+        "from_path": { "type": "array", "items": { "$ref": "#/$defs/pathRule" } }
+      }
+    }
+  },
+  "$defs": {
+    "customTerm": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "a new DJ-owned term; additionalProperties is intentional — a term may carry dimension attributes (family, tempo_min, …) that are preserved but not schema-validated",
+      "required": ["id", "canonical"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(x|user)-[a-z0-9][a-z0-9-]*$",
+          "description": "custom ids MUST be user-namespaced; the prefix is never folded into the hash"
+        },
+        "canonical": { "type": "string", "minLength": 1, "description": "the ONLY string StableHash sees" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "origin": { "enum": ["user"] },
+        "display": { "$ref": "#/$defs/customDisplay" }
+      }
+    },
+    "customDisplay": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "full display metadata for a NEW custom term (code/emoji/icon/color/label); the top-level display: section, by contrast, only overrides color/label on EXISTING terms",
+      "properties": {
+        "code": { "type": "string" },
+        "emoji": { "type": "string" },
+        "icon": { "type": "string" },
+        "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "label": { "type": "string" }
+      }
+    },
+    "rename": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["term", "label"],
+      "properties": { "term": { "type": "string" }, "label": { "type": "string" } }
+    },
+    "reGrade": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["term", "attribute", "value"],
+      "properties": { "term": { "type": "string" }, "attribute": { "type": "string" }, "value": {} }
+    },
+    "displayOverride": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "label": { "type": "string" }
+      }
+    },
+    "aliasRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "a same-dimension legacy-token -> canonical mapping; folds into add_aliases, so matching is always case-insensitive (no per-rule match mode)",
+      "required": ["from_dimension", "from_value", "to_value"],
+      "properties": {
+        "from_dimension": { "type": "string" },
+        "from_value": { "type": "string" },
+        "to_value": { "type": "string" },
+        "migrate": { "type": "boolean", "default": false }
+      }
+    },
+    "crossRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_dimension", "from_value", "to_dimension", "to_value"],
+      "description": "to_dimension MUST differ from from_dimension (a same-dimension remap is an alias, not a cross-rule) — enforced by the validator/conformance, not expressible in JSON Schema.",
+      "properties": {
+        "from_dimension": { "type": "string" },
+        "from_value": { "type": "string" },
+        "to_dimension": { "type": "string" },
+        "to_value": { "type": "string" },
+        "on_source": { "enum": ["keep", "drop"], "default": "keep" },
+        "match": { "enum": ["exact", "ci"], "default": "ci" },
+        "migrate": { "type": "boolean", "default": false }
+      }
+    },
+    "pathRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["match", "mask"],
+      "description": "a filename/path ingest rule (read-time projection); see docs/standard/profile.md §6",
+      "properties": {
+        "match": { "type": "string", "description": "path glob relative to the library root (* / **)" },
+        "mask": { "type": "string", "description": "skeleton mask, e.g. \"%artist% - %title% <tail>\"" },
+        "separator_tolerance": { "enum": ["collapse-spaces", "exact"] },
+        "set": { "type": "object", "additionalProperties": { "type": "string" } },
+        "on_unknown_token": { "enum": ["flag", "keep"], "default": "flag" },
+        "tail": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "rating": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": { "const": "plus-run" },
+                "to": { "type": "string", "default": "rating" },
+                "scale": { "enum": ["clamp10", "linear"], "default": "clamp10" },
+                "max": { "type": "integer" }
+              }
+            },
+            "year": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": { "const": "regex" },
+                "to": { "type": "string", "default": "recording_year" },
+                "pattern": { "type": "string" }
+              }
+            },
+            "codes": {
+              "type": "object",
+              "description": "token -> { dimension: canonical-value } (also the recogniser)",
+              "additionalProperties": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "minProperties": 1,
+                "maxProperties": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

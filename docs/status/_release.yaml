@@ -1,0 +1,12 @@
+# The release the ledgers in this directory are measured against.
+# Proposed label: v1.0. It is the only target version a source document names - requirements/library.md §5
+# "Acceptance / Definition of Done (v1.0 / public release)" and requirements/README.md "Publication readiness
+# (v1.0)". The stamps 0.1.0 (packages, dotnet/Directory.Build.props) and 0.1.0-draft (spec, data/fields.yaml)
+# are the present versions of the two streams in docs/standard/versioning.md, not a release target, and no
+# release is tagged.
+# Later work: no source names a later version, but three items are called deferred or roadmap -
+# requirements/standard.md STD-F-11 and data/vocabulary/manifest.yaml `deferred_dance_families` (dance packs),
+# README.md §"Non-goals & roadmap" (Vorbis/MP4 bindings, promoting `proposed` fields). Their rows
+# (STD-ROADMAP-01, STD-ROADMAP-02, LIB-ROADMAP-01) carry `release: post-v1.0`, a placeholder label for
+# "after the current release", not a planned version number.
+current: v1.0

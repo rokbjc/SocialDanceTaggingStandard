@@ -1,0 +1,38 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+pack: carolina-shag
+dimension: dances
+families:
+- carolina-shag
+values:
+- id: carolina-shag
+  canonical: Carolina Shag
+  aliases: []
+  tradition: carolina-shag
+  family: carolina-shag
+  parent: swing
+  tempo_min: 100
+  tempo_max: 132
+  meter: 4/4
+  typical_genres:
+  - Beach Music
+  - Rhythm & Blues
+  - Doo-wop
+  - Soul
+  description: 'A slotted partner dance from the 1940s Carolina coast, descended from the Carolina
+    Jitterbug and the Little Apple and built on a six-count, eight-step basic (triple, triple, rock),
+    danced to Carolina beach music; the official state dance of South Carolina (1984) and the official
+    popular dance of North Carolina (2005). Distinguishing trait: a slotted triple-triple-rock basic to
+    beach music (vs. the swing-era Collegiate Shag and St. Louis Shag, which it resembles only in
+    name).'
+  disambiguation: Carolina beach-music shag. NOT Collegiate Shag (swing/collegiate-shag) or St. Louis
+    Shag (swing/st-louis-shag).
+  display:
+    code: CAS
+    emoji: 🏖️
+    icon: mdi:shoe-print
+    color: '#FFB300'
+  tempo_note: Beach-music shag runs 100-130+ BPM in 4/4 (Wikipedia, Carolina shag) and 108-132 BPM
+    (SiriusXM beach-music guidance). Band 100-132.

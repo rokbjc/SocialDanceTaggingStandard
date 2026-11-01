@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this standard or its reference library, please cite it as below."
+title: "Social-Dance Tagging Standard"
+abstract: >-
+  A format-neutral taxonomy and per-track tag fields for social/partner-dance DJ libraries,
+  with an ID3v2.4 binding, conformance vectors and a .NET reference implementation.
+version: 0.1.0-draft
+authors:
+  - name: "rokbjc"
+license:
+  - Apache-2.0
+  - CC0-1.0
+repository-code: "https://github.com/rokbjc/SocialDanceTaggingStandard"
+keywords:
+  - music metadata
+  - ID3
+  - dance
+  - DJ
+  - standard

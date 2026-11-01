@@ -1,0 +1,206 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+# Icons chosen via the Iconify search API; tempos are research-backed (WDSF/WDC official
+# competition tempos for ballroom; tango/street-latin community + corpus conventions) with a
+# per-dance tempo_note for provenance — still pending expert sign-off.
+#
+pack: street-latin
+dimension: dances
+families:
+- street-latin
+values:
+- id: street-latin
+  canonical: Street Latin
+  aliases: []
+  tradition: street-latin
+  description: 'The social Latin group: Salsa, Bachata, Merengue, Kizomba, Zouk, Son Cubano and Mambo. A group value, not a dance with its own steps; distinct from the codified International Latin group in the ballroom pack.'
+  display:
+    code: SLT
+    emoji: 🌶️
+    icon: mdi:account-group
+    color: '#40F2BC'
+- id: salsa
+  canonical: Salsa
+  aliases:
+  - Salsa (LA)
+  - Salsa (Cuban)
+  - Salsa On1
+  - Salsa On2
+  tradition: street-latin
+  family: street-latin
+  parent: street-latin
+  tempo_min: 150
+  tempo_max: 250
+  meter: 4/4
+  typical_genres:
+  - Salsa
+  - Latin
+  description: 'The global social partner dance to salsa music, grown in 1960s-70s New York from Cuban
+    son and mambo: three weight changes in every four beats, with turn patterns and solo shines, danced
+    in regional styles (LA On1, New York On2, Cuban casino in a circular pattern). Distinguishing trait:
+    the three-steps-in-four-beats basic with dense turn combinations (vs. the side-to-side, tap-on-4
+    Bachata).'
+  disambiguation: 'Social/street salsa (LA/Cuban/NY styles). NOT a ballroom competition dance. Salsa takes
+    the #SLS code here; it formerly denoted St. Louis Shag (now swing/st-louis-shag, bare code SLS).'
+  display:
+    code: SAL
+    emoji: 🕺
+    icon: game-icons:maracas
+    color: '#139948'
+  tempo_note: Social-salsa community measures music in BPM (not mpm). Comfortable social range ~160-220
+    BPM; fast Cuban/NY tracks reach 250. Range kept wide to cover LA On1, NY On2 and Cuban casino styles.
+- id: bachata
+  canonical: Bachata
+  aliases:
+  - Bachata Dominicana
+  - Bachata Sensual
+  tradition: street-latin
+  family: street-latin
+  parent: street-latin
+  tempo_min: 108
+  tempo_max: 152
+  meter: 4/4
+  typical_genres:
+  - Bachata
+  - Latin
+  description: 'A partner dance from the Dominican Republic danced to bachata music, built on a
+    side-to-side or box basic of three steps and a tap or hip accent on the fourth beat, ranging from
+    the rhythmic traditional Dominican style to the smooth, body-wave-rich sensual style. Distinguishing
+    trait: the tap or hip accent on beats 4 and 8 (vs. the continuous stepping of Salsa and Merengue).'
+  display:
+    code: BAC
+    emoji: 🕺
+    icon: ph:guitar
+    color: '#39D2C3'
+  tempo_note: Bachata is 4/4 at ~108-152 BPM per social-dance DJ convention; modern/sensual bachata clusters
+    ~120-135, traditional Dominicana runs faster toward 150. Signature requinto guitar drives the genre.
+- id: merengue
+  canonical: Merengue
+  aliases:
+  - Merengue (social)
+  tradition: street-latin
+  family: street-latin
+  parent: street-latin
+  tempo_min: 120
+  tempo_max: 160
+  meter: 2/4
+  typical_genres:
+  - Merengue
+  - Latin
+  description: 'The national dance of the Dominican Republic: a simple partner dance in 2/4 with a
+    marching step on every beat, hip motion from alternating knee bends and slowly turning figures,
+    usually in closed hold. Distinguishing trait: a steady step on every beat with no pause or tap (vs.
+    the tap-on-4 Bachata).'
+  display:
+    code: MER
+    emoji: 🕺
+    icon: lucide:drum
+    color: '#22ECFA'
+  tempo_note: Merengue is the fastest mainstream Latin social dance, 2/4 at roughly 120-160 BPM in social
+    settings (traditional perico ripiao can exceed 160). Tambora drum sets the marching two-step pulse.
+- id: kizomba
+  canonical: Kizomba
+  aliases:
+  - Kizomba (Angolan)
+  tradition: street-latin
+  family: street-latin
+  parent: street-latin
+  tempo_min: 80
+  tempo_max: 110
+  meter: 4/4
+  typical_genres:
+  - Kizomba
+  description: 'A close-embrace partner dance from Angola, developed in the 1980s-90s to kizomba music
+    (a slow, zouk-influenced evolution of semba), built on smooth, grounded walking and weight transfers
+    with subtle hip movement, led through the chest and upper-body connection. Distinguishing trait:
+    slow, grounded walking in a sustained close embrace (vs. the flowing head and body waves of Zouk).'
+  disambiguation: Angolan close-embrace social dance (often grouped with Latin socials). Not a Latin-American
+    genre per se.
+  display:
+    code: KIZ
+    emoji: 🫂
+    icon: openmoji:people-hugging
+    color: '#009585'
+  tempo_note: Angolan close-embrace dance derived from semba/zouk; community tempo ~80-110 BPM (4/4),
+    among the slowest of the Latin socials, emphasizing connection over speed.
+- id: zouk
+  canonical: Zouk
+  aliases:
+  - Brazilian Zouk
+  - Lambada-Zouk
+  tradition: street-latin
+  family: street-latin
+  parent: street-latin
+  tempo_min: 100
+  tempo_max: 130
+  meter: 4/4
+  typical_genres:
+  - Brazilian Zouk
+  description: 'Brazilian zouk: a partner dance that evolved in 1990s Brazil from the lambada, danced to
+    zouk and remixed pop, with flowing body waves, follower head movements and circular upper-body
+    rotations over a slow, spread-out basic. Distinguishing trait: flowing body waves and follower head
+    movements (vs. the grounded walking of Kizomba).'
+  display:
+    code: ZK
+    emoji: 🕺
+    icon: mdi:human-female-dance
+    color: '#9EDAAA'
+  tempo_note: Brazilian Zouk (Lambada-Zouk) danced to zouk/lambada and remixed pop at ~100-130 BPM (4/4);
+    slow flowing body-wave movement spread across the beat, slower than salsa/bachata.
+- id: son-cubano
+  canonical: Son Cubano
+  aliases:
+  - Cuban Son
+  tradition: street-latin
+  family: street-latin
+  parent: street-latin
+  tempo_min: 140
+  tempo_max: 180
+  meter: 4/4
+  typical_genres:
+  - Latin
+  description: 'The traditional social dance to Cuban son, the Afro-Cuban genre that is the root of
+    salsa: an understated partner dance with grounded contratiempo footwork (steps timed off the strong
+    beat) and subtle hip and shoulder movement. Distinguishing trait: syncopated contratiempo stepping
+    with little turning (vs. the turn-heavy modern Salsa).'
+  disambiguation: The Cuban son — root of salsa; danced socially. Not the ballroom Rumba.
+  display:
+    code: SON
+    emoji: 🪘
+    icon: qlementine-icons:bongos-24
+    color: '#50D589'
+  tempo_note: Cuban son, the root of salsa, is danced socially slower than modern salsa at ~140-180 BPM
+    (4/4 clave), with grounded footwork on the contratiempo feel.
+- id: mambo
+  canonical: Mambo
+  aliases:
+  - Mambo (On2)
+  - Mambo On2
+  - Palladium Mambo
+  - Big-Band Mambo
+  tradition: street-latin
+  family: street-latin
+  parent: street-latin
+  tempo_min: 160
+  tempo_max: 210
+  meter: 4/4
+  typical_genres:
+  - Mambo
+  - Latin
+  description: 'The dance to Palladium-era big-band mambo in 1940s-50s New York: a sharp, energetic
+    partner dance with fast footwork and solo shines on the second beat, danced to the horn-driven
+    arrangements of Pérez Prado, Machito and Tito Puente. Distinguishing trait: flashy On2 footwork and
+    shines of the Palladium big-band era (vs. the later Salsa that absorbed it).'
+  disambiguation: Palladium-era big-band mambo (Prado/Machito/Puente) — the 1940s-50s ancestor that salsa
+    later absorbed; same 4/4 clave/tumbao lineage as Salsa and Son, not separable by tempo. Danced On2
+    (breaks on 2 and 6). NOT the ballroom American Rhythm Mambo (a competition construct, ~47 mpm).
+  display:
+    code: MMB
+    emoji: 🎺
+    icon: mdi:trumpet
+    color: '#669F72'
+  tempo_note: Stored in the street-latin social-BPM convention (like Salsa/Son). Raw quarter-note pulse
+    of real recordings is ~90-115 (songbpm Tito Puente 'Mambo Diablo' = 97, flagged double-time 194);
+    the felt/ballroom rate is 188-204 (47-51 mpm x 4). Same music as Salsa On2 — distinguish by era/genre,
+    not tempo.

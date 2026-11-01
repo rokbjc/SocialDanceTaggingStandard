@@ -1,0 +1,24 @@
+# Code owners — who is requested for review by default.
+# https://docs.github.com/repositories/managing-your-repos-settings-and-features/customizing-your-repository/about-code-owners
+#
+# The project currently has a single maintainer; every path falls back to them.
+# As the project grows, add area-specific owners above the catch-all (last match wins).
+
+# Catch-all
+*                       @rokbjc
+
+# The normative standard (spec text, field registry, vocabulary, schemas, conformance vectors).
+# Changes here can break every implementation — see docs/standard/versioning.md.
+/docs/standard/         @rokbjc
+/data/                  @rokbjc
+/schemas/               @rokbjc
+/conformance/           @rokbjc
+
+# Reference implementation + build tooling.
+/dotnet/                @rokbjc
+/scripts/               @rokbjc
+
+# Project meta / governance.
+/.github/               @rokbjc
+/CONTRIBUTING.md        @rokbjc
+/GOVERNANCE.md          @rokbjc

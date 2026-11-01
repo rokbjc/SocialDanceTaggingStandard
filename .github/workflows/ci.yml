@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  data:
+    name: Data + docs in sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No private references in tracked files
+        # A regenerated file must not silently reintroduce the private catalog path or the consumer name.
+        # (Legacy on-disk frame names Songs-DB_* / SB-* are interop facts and are intentionally kept.)
+        run: |
+          if git grep -nI -F -e 'M:\media' -e 'Songoulash' -- . ':!.github/workflows/ci.yml' ; then
+            echo "::error::a private reference is present in a tracked file"
+            exit 1
+          fi
+      - name: Consumer probe names no TagLib type
+        run: |
+          if git grep -nI -E 'TagLib' -- 'dotnet/samples/SocialDanceTaggingStandard.ConsumerProbe/*.cs' ; then
+            echo "::error::the consumer probe names a TagLib type — the SdtsFile gateway is leaking"
+            exit 1
+          fi
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pyyaml jsonschema
+      - name: Validate data files against the JSON schemas
+        run: python scripts/validate_data.py
+      - name: Generated docs + vectors are in sync with their sources
+        # Generated docs/vectors are derived from data/fields.yaml + data/vocabulary/ (the hand-maintained
+        # normative value sets) — a stale commit must fail the build.
+        run: |
+          python scripts/gen_field_docs.py
+          python scripts/gen_vocab_docs.py
+          python scripts/gen_conformance_vectors.py
+          python scripts/gen_ids.py
+          python scripts/gen_overlay_schema.py
+          git diff --exit-code docs/standard/fields docs/model/vocabulary conformance/vectors/validation schemas dotnet/src/SocialDanceTaggingStandard/Generated dotnet/src/SocialDanceTaggingStandard.Id3/Generated dotnet/src/SocialDanceTaggingStandard.MediaMonkey/Generated dotnet/src/SocialDanceTaggingStandard.Taxonomy/Generated
+
+  dotnet:
+    name: .NET build + test
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: dotnet/global.json
+      - run: dotnet build dotnet/SocialDanceTaggingStandard.slnx -c Release
+      - name: Verify formatting (.editorconfig)
+        # Formatting is OS-independent (LF enforced via .gitattributes) — check once on Linux.
+        if: matrix.os == 'ubuntu-latest'
+        run: dotnet format dotnet/SocialDanceTaggingStandard.slnx --verify-no-changes --no-restore
+      - run: dotnet test dotnet/SocialDanceTaggingStandard.slnx -c Release --no-build
+
+  docs:
+    name: Docs site (mkdocs --strict)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements-docs.txt
+      - name: Build the docs site (fails on broken links / orphaned pages)
+        run: python -m mkdocs build --strict

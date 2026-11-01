@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rokbjc/SocialDanceTaggingStandard/HEAD/schemas/sdvo.schema.json
+schemaVersion: 2
+
+# EXAMPLE per-deployment vocabulary overlay (not loaded automatically).
+# Copy it next to your library as `<name>.sdvo.yaml` and load it:
+#   var vocab = SocialDanceVocabulary.LoadDefault(new FileInfo("path/to/my.sdvo.yaml"));
+# or build the same edits programmatically via vocab.Customize()....Build().
+#
+# Keys are dimension names: a core dimension (genre, mood, vocality, …) or "dances", which fans out to
+# every pack. The baseline is never modified — a NEW vocabulary is returned.
+#
+# The modeline above gives editor validation and autocomplete. Keep it on line 1.
+
+sdts_vocabulary: 0.1.0-draft        # advisory: which baseline this was authored against
+description: Example overlay — copy, then delete the sections you do not need.
+
+# Add aliases to existing terms (term key = canonical, id, or an existing alias).
+add_aliases:
+  genre:
+    Swing: [My Swing, Swing Era]
+  dances:
+    Lindy Hop: [Jitterbug]          # your house shorthand
+    # Personal '#'-prefixed codes are NOT in the baseline — add back only the ones you actually use:
+    #   Balboa: ["#BLB"]
+    # Never migrate an on-disk value by stripping the '#': the namespaces are not parallel
+    # ('#SLS' was Salsa, while bare 'SLS' is St. Louis Shag). Resolve through the vocabulary.
+
+# Remove aliases you never want to resolve.
+remove_aliases:
+  dances: [Jitterbug Stroll]
+
+# Add your own terms to a CORE dimension. ("dances" is not accepted here — a new dance needs its own
+# pack, because packs are applied with allowAddTerms:false.)
+add_terms:
+  genre:
+    - { id: balkan-brass, canonical: Balkan Brass, aliases: [Brass BG, Guča] }
+
+# Remove terms you never use (by id or canonical).
+remove_terms:
+  genre: [reggaeton]
+
+# NB: field→frame MAPPING customization (which ID3/MM frame a field reads/writes) lives in the
+# Sync layer — compose it via MirrorMap.Compose / the binding's `additionalFields` parameter.

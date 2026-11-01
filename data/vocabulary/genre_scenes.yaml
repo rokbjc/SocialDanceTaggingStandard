@@ -1,0 +1,267 @@
+# HAND-MAINTAINED overlay (SDTS-side) — genre -> dance scene(s).
+# Mirrors feel_scenes.yaml: places each genre under the scene(s) its dances use; genres absent here
+# are cross-genre/listening. 'primary' = the scene whose section carries the full entry (back-ref
+# elsewhere). Built from the genre-scene-rollout workflow (per-genre research + adversarial review).
+genres:
+  adult-standards:
+    scenes:
+    - swing
+    - ballroom
+    primary: swing
+  bachata:
+    scenes:
+    - street-latin
+    primary: street-latin
+  barrelhouse-piano:
+    scenes:
+    - blues
+    primary: blues
+  big-band:
+    scenes:
+    - swing
+    - ballroom
+    primary: swing
+  blues:
+    scenes:
+    - blues
+    primary: blues
+  bolero:
+    scenes:
+    - street-latin
+    - ballroom
+    primary: street-latin
+  boogie-woogie:
+    scenes:
+    - blues
+    - swing
+    primary: blues
+  bossa-nova:
+    scenes:
+    - ballroom
+    primary: ballroom
+  british-dance-band:
+    scenes:
+    - swing
+    primary: swing
+  cha-cha-cha:
+    scenes:
+    - street-latin
+    - ballroom
+    primary: street-latin
+  chicago-blues:
+    scenes:
+    - blues
+    primary: blues
+  classic-vaudeville-blues:
+    scenes:
+    - blues
+    - swing
+    primary: blues
+  country-blues:
+    scenes:
+    - blues
+    primary: blues
+  delta-blues:
+    scenes:
+    - blues
+    primary: blues
+  dixieland:
+    scenes:
+    - swing
+    primary: swing
+  doo-wop:
+    scenes:
+    - blues
+    primary: blues
+  early-rock-n-roll:
+    scenes:
+    - swing
+    primary: swing
+  electro-swing:
+    scenes:
+    - swing
+    primary: swing
+  funk:
+    scenes:
+    - blues
+    primary: blues
+  gypsy-jazz:
+    scenes:
+    - swing
+    primary: swing
+  hot-jazz:
+    scenes:
+    - swing
+    primary: swing
+  jazz:
+    scenes:
+    - swing
+    primary: swing
+  jazz-blues:
+    scenes:
+    - swing
+    - blues
+    primary: swing
+  jug-band:
+    scenes:
+    - blues
+    primary: blues
+  jump-blues:
+    scenes:
+    - swing
+    - blues
+    primary: swing
+  kansas-city-jazz:
+    scenes:
+    - swing
+    primary: swing
+  kizomba:
+    scenes:
+    - street-latin
+    primary: street-latin
+  latin:
+    scenes:
+    - street-latin
+    - ballroom
+    primary: street-latin
+  latin-jazz:
+    scenes:
+    - street-latin
+    - ballroom
+    primary: street-latin
+  mambo:
+    scenes:
+    - street-latin
+    - ballroom
+    primary: street-latin
+  merengue:
+    scenes:
+    - street-latin
+    primary: street-latin
+  milonga:
+    scenes:
+    - tango
+    primary: tango
+  modern-swing-revival:
+    scenes:
+    - swing
+    primary: swing
+  neo-swing:
+    scenes:
+    - swing
+    primary: swing
+  new-orleans-jazz:
+    scenes:
+    - swing
+    primary: swing
+  nola-jazz-revival:
+    scenes:
+    - swing
+    primary: swing
+  paso-doble:
+    scenes:
+    - ballroom
+    primary: ballroom
+  piedmont-blues:
+    scenes:
+    - blues
+    primary: blues
+  ragtime:
+    scenes:
+    - swing
+    primary: swing
+  retro-soul:
+    scenes:
+    - blues
+    primary: blues
+  rhythm-and-blues:
+    scenes:
+    - blues
+    primary: blues
+  rockabilly:
+    scenes:
+    - swing
+    primary: swing
+  rumba-cubana:
+    scenes:
+    - street-latin
+    primary: street-latin
+  salsa:
+    scenes:
+    - street-latin
+    - ballroom
+    primary: street-latin
+  samba:
+    scenes:
+    - street-latin
+    - ballroom
+    primary: street-latin
+  son-cubano:
+    scenes:
+    - street-latin
+    primary: street-latin
+  soul:
+    scenes:
+    - blues
+    primary: blues
+  soul-blues:
+    scenes:
+    - blues
+    primary: blues
+  soul-jazz:
+    scenes:
+    - blues
+    primary: blues
+  southern-soul:
+    scenes:
+    - blues
+    primary: blues
+  stride-piano:
+    scenes:
+    - swing
+    - blues
+    primary: swing
+  sweet-band:
+    scenes:
+    - swing
+    - ballroom
+    primary: swing
+  swing:
+    scenes:
+    - swing
+    - ballroom
+    primary: swing
+  tango:
+    scenes:
+    - tango
+    primary: tango
+  tanzorchester:
+    scenes:
+    - swing
+    primary: swing
+  torch-song:
+    scenes:
+    - blues
+    primary: blues
+  trad-jazz:
+    scenes:
+    - swing
+    primary: swing
+  vals:
+    scenes:
+    - tango
+    primary: tango
+  vocal-jazz:
+    scenes:
+    - swing
+    - blues
+    - ballroom
+    primary: swing
+  western-swing:
+    scenes:
+    - swing
+    primary: swing
+  zouk:
+    scenes:
+    - street-latin
+    primary: street-latin

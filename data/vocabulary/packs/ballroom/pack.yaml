@@ -1,0 +1,20 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+pack: ballroom
+display_name: Ballroom (International)
+description: International DanceSport ballroom dances — Standard (Waltz, Tango, Viennese, Foxtrot, Quickstep) and Latin (Cha-Cha, Samba, Rumba, Paso Doble, Jive), per WDSF/WDC.
+extends: core
+source: SDTS-authored (WDSF/WDC International Standard & Latin conventions)
+validation: expert-review-pending
+families:
+- ballroom-standard
+- ballroom-latin
+traditions:
+- ballroom-international-standard
+- ballroom-international-latin
+family_labels:
+  ballroom-standard: "Standard"
+  ballroom-latin: "Latin"
+dances: dances.yaml

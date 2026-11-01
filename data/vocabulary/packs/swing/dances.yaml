@@ -1,0 +1,251 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+#
+pack: swing
+dimension: dances
+families:
+- swing-partner
+- boogie-rocknroll
+- solo-rhythmic
+- electro
+values:
+- id: swing
+  canonical: Swing
+  aliases: []
+  tradition: swing-vernacular
+  description: 'The umbrella for the swing-descended partner and solo dances: the swing-era dances (Lindy Hop, Balboa, the Shags, East Coast Swing, Jive, Boogie Woogie, Solo Jazz, Charleston, Electro Swing) and the swing-descended West Coast Swing and Carolina Shag. A group value, not a dance with its own steps: tag it when a track suits swing dancing in general without singling out one dance.'
+  display:
+    code: SWG
+    emoji: 🎷
+    icon: mdi:account-group
+    color: '#F6E1C9'
+- id: lindy-hop
+  canonical: Lindy Hop
+  aliases:
+  - Lindy
+  tradition: swing-vernacular
+  family: swing-partner
+  parent: swing
+  tempo_min: 120
+  tempo_max: 240
+  typical_genres:
+  - Swing
+  - Big Band
+  - Jump Blues
+  - Kansas City Jazz
+  - Gypsy Jazz
+  - Vocal Jazz
+  description: The core swing partner dance, born in Harlem's Savoy Ballroom in the late 1920s-30s, built
+    on the 8-count swingout with a knee-driven bounce and heavy improvisation. Distinguished by having
+    the widest music and tempo range of any swing dance (~120-240 BPM) and serving as the default dance
+    at any swing event.
+  display:
+    code: LH
+    emoji: 🤸
+    icon: game-icons:high-kick
+    color: '#E6433B'
+- id: balboa
+  canonical: Balboa
+  aliases:
+  - BLB
+  - Slow Bal
+  - SBL
+  tradition: swing-vernacular
+  family: swing-partner
+  parent: swing
+  tempo_min: 180
+  tempo_max: 300
+  typical_genres:
+  - Big Band
+  - Swing
+  - Gypsy Jazz
+  description: A close-embrace swing dance from 1930s Southern California for fast tempos, where the feet
+    stay minimal and shuffling while the rhythm is expressed through the body. Its distinguishing trait
+    is subtle, near-invisible footwork that works in crowds and at speeds where Lindy Hop becomes exhausting
+    (vs Collegiate Shag, which solves fast tempos with energetic vertical hopping instead).
+  display:
+    code: BAL
+    emoji: 👞
+    icon: mdi:shoe-heel
+    color: '#E68A2E'
+- id: collegiate-shag
+  canonical: Collegiate Shag
+  tradition: swing-vernacular
+  family: swing-partner
+  parent: swing
+  tempo_min: 180
+  tempo_max: 250
+  typical_genres:
+  - Swing
+  - Big Band
+  description: An energetic, athletic swing dance for fast tempos, popular with 1930s university students,
+    built on a hop-step-step pattern. Distinguished by a pronounced vertical bounce and visible hopping
+    found in no other swing dance (vs Balboa's minimalist subtlety, and vs the stationary St. Louis Shag).
+  display:
+    code: CSH
+    emoji: 🦵
+    icon: material-symbols:footprint
+    color: '#E8C547'
+- id: st-louis-shag
+  canonical: St. Louis Shag
+  aliases:
+  - St Louis Shag
+  - STLS
+  tradition: swing-vernacular
+  family: swing-partner
+  parent: swing
+  tempo_min: 200
+  tempo_max: 300
+  typical_genres:
+  - Swing
+  description: A stationary, very fast 8-count partner dance from St. Louis, danced side-by-side with
+    strong stomping footwork. Its distinguishing trait is staying in place (no travel across the floor)
+    at extreme tempos of 200-300 BPM (vs Collegiate Shag, which hops and travels).
+  display:
+    code: SLS
+    emoji: 🌉
+    icon: material-symbols:footprint
+    color: '#8FBF3F'
+- id: east-coast-swing
+  canonical: East Coast Swing
+  tradition: swing-vernacular
+  family: swing-partner
+  parent: swing
+  tempo_min: 130
+  tempo_max: 180
+  typical_genres:
+  - Swing
+  - Big Band
+  - Jump Blues
+  deprecated: true
+  replaced_by: boogie-woogie-dance
+  description: A simplified, codified version of Lindy Hop standardized by Arthur Murray dance schools
+    in the 1940s for mass teaching, using a 6-count rock-step/triple-step/triple-step pattern. Distinguished
+    by being more upright, structured and predictable with far less improvisation and bounce than its
+    Lindy Hop parent, and a narrower tempo range (~130-180 BPM).
+  display:
+    code: ECS
+    emoji: 🔄
+    icon: mdi:dance-ballroom
+    color: '#3FB984'
+- id: jive
+  canonical: Jive
+  tradition: swing-vernacular
+  family: swing-partner
+  parent: swing
+  tempo_min: 150
+  tempo_max: 210
+  typical_genres:
+  - Jump Blues
+  - Early Rock 'n' Roll
+  - Rockabilly
+  description: The competitive ballroom version of swing, one of the five International Latin dances,
+    derived from Lindy Hop/East Coast Swing but codified for competition. Distinguished by pronounced
+    kicks and flicks and a showy, athletic 'pumping' knee action aimed at impressing judges and spectators.
+  display:
+    code: JV
+    emoji: ⚡
+    icon: mdi:flash
+    color: '#3FA7D6'
+- id: boogie-woogie-dance
+  canonical: Boogie Woogie
+  aliases:
+  - Boogie
+  - Boogie Woogie Dance
+  tradition: swing-vernacular
+  family: boogie-rocknroll
+  parent: swing
+  tempo_min: 130
+  tempo_max: 200
+  typical_genres:
+  - Boogie Woogie
+  - Jump Blues
+  - Early Rock 'n' Roll
+  - Rockabilly
+  description: An energetic partner dance set to boogie woogie, rock'n'roll and rockabilly, with a strong
+    European competitive scene (WRRC). Distinguished from Lindy Hop by its linear (rather than circular)
+    figures and a driving, bass-following bounce, plus kicks/flicks and a more codified competitive technique.
+  display:
+    code: BW
+    emoji: 🎹
+    icon: mdi:piano
+    color: '#4666C4'
+- id: solo-jazz
+  canonical: Solo Jazz
+  tradition: swing-vernacular
+  family: solo-rhythmic
+  parent: swing
+  tempo_min: 120
+  tempo_max: 220
+  typical_genres:
+  - Swing
+  - Big Band
+  description: Improvised solo jazz dance (also called authentic or vernacular jazz) with no partner,
+    performed in jam circles, performances and group routines on swing/jazz music. Distinguished by classic
+    vernacular steps (Suzy Q, Shorty George) and codified group routines like the Shim Sham, plus body
+    isolations and polyrhythmic personal expression rather than any fixed basic.
+  display:
+    code: SJ
+    emoji: 🕺
+    icon: mdi:human-female-dance
+    color: '#7E57C2'
+- id: charleston
+  canonical: Charleston
+  tradition: swing-vernacular
+  family: solo-rhythmic
+  parent: swing
+  tempo_min: 140
+  tempo_max: 240
+  typical_genres:
+  - Hot Jazz
+  - Stride Piano
+  - Dixieland
+  description: The iconic 1920s dance recognizable by 'kicked-back' steps with knees together, feet swiveling
+    out, and swinging kicks front and back; exists in solo and partner forms and is built into Lindy Hop
+    as core technique. Its distinguishing trait is the swivel-and-kick footwork, split into '20s Charleston'
+    (straight rhythm) and 'Swing Charleston' (swung feel, embedded in Lindy Hop).
+  display:
+    code: CH
+    emoji: 🦶
+    icon: mdi:shoe-print
+    color: '#C44FA0'
+- id: tap-dance
+  canonical: Tap Dance
+  tradition: swing-vernacular
+  family: solo-rhythmic
+  tempo_min: 80
+  tempo_max: 220
+  typical_genres:
+  - Swing
+  - Big Band
+  - Ragtime
+  description: A rhythmic dance where metal plates on the toe and heel turn the foot into a percussion
+    instrument, fusing African polyrhythm with Irish step-dance footwork. Distinguished by the dancer
+    being simultaneously dancer and percussionist, improvising like a jazz musician and 'trading fours'
+    with the band as the 'fourth instrument'.
+  display:
+    code: TAP
+    emoji: 🥿
+    icon: mdi:shoe-formal
+    color: '#D65A8E'
+- id: electro-swing-dance
+  canonical: Electro Swing
+  aliases:
+  - Electro Swing Dance
+  tradition: swing-vernacular
+  family: electro
+  parent: swing
+  tempo_min: 110
+  tempo_max: 140
+  typical_genres:
+  - Electro Swing
+  description: An uncodified freestyle dance done to electro swing music, mixing Lindy Hop, solo jazz,
+    hip-hop and shuffle dance, largely a YouTube and party-event phenomenon. Distinguished by having no
+    formal basis and being mostly solo and performative; it is rarely danced at true swing socials (vs
+    the codified vernacular swing dances).
+  display:
+    code: ES
+    emoji: 🎧
+    icon: material-symbols:headphones
+    color: '#6E8B9E'

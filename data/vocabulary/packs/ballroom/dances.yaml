@@ -1,0 +1,255 @@
+# SDTS baseline vocabulary — hand-maintained normative value set (edit directly).
+# Bindings live in data/fields.yaml. Regenerate derived artifacts after editing:
+#   python scripts/gen_vocab_docs.py
+# Icons chosen via the Iconify search API; tempos are research-backed (WDSF/WDC official
+# competition tempos for ballroom; tango/street-latin community + corpus conventions) with a
+# per-dance tempo_note for provenance — still pending expert sign-off.
+#
+pack: ballroom
+dimension: dances
+families:
+- ballroom-standard
+- ballroom-latin
+values:
+- id: ballroom-standard
+  canonical: Ballroom Standard
+  aliases: []
+  tradition: ballroom-international-standard
+  description: 'The International Standard group of DanceSport: Slow Waltz, Tango (International), Viennese Waltz, Slow Foxtrot and Quickstep. A group value, not a dance with its own steps.'
+  display:
+    code: BST
+    emoji: 🩰
+    icon: mdi:account-group
+    color: '#FF86D1'
+- id: ballroom-latin
+  canonical: Ballroom Latin
+  aliases: []
+  tradition: ballroom-international-latin
+  description: 'The International Latin group of DanceSport: Cha-Cha-Cha, Samba, Rumba, Paso Doble and Jive. A group value, not a dance with its own steps.'
+  display:
+    code: BLT
+    emoji: 💃
+    icon: mdi:account-group
+    color: '#A17833'
+- id: waltz-slow
+  canonical: Slow Waltz
+  aliases:
+  - Waltz (International)
+  - English Waltz
+  - International Waltz
+  tradition: ballroom-international-standard
+  family: ballroom-standard
+  parent: ballroom-standard
+  tempo_min: 84
+  tempo_max: 90
+  meter: 3/4
+  description: 'The slowest International Standard dance: a smooth, progressive 3/4 ballroom waltz with
+    continuous rise and fall, body sway and closed-hold turning figures travelling around the floor.
+    Distinguishing trait: the lilting rise and fall on a slow 3/4 count (vs. the fast, rotary Viennese
+    Waltz).'
+  disambiguation: International Standard slow waltz (3/4, ~84–90 bpm). NOT the Viennese Waltz (waltz-viennese)
+    or the Argentine Vals (tango/vals).
+  display:
+    code: SW
+    emoji: 💃
+    icon: mdi:dance-ballroom
+    color: '#FDBADF'
+  tempo_note: WDSF/WDC Slow Waltz 28-30 mpm x 3 beats (3/4) = 84-90 bpm
+- id: tango-international
+  canonical: Tango (International)
+  aliases:
+  - Ballroom Tango
+  - International Tango
+  tradition: ballroom-international-standard
+  family: ballroom-standard
+  parent: ballroom-standard
+  tempo_min: 120
+  tempo_max: 132
+  meter: 4/4
+  description: 'The International Standard ballroom tango: a codified, progressive closed-hold dance
+    with sharp staccato head and foot actions and no rise and fall, standardised in England in the 1920s
+    from the Argentine tango that reached Paris and London before the First World War. Distinguishing
+    trait: staccato, march-like action with no rise and fall (vs. the improvised close-embrace Argentine
+    tango).'
+  disambiguation: International Standard ballroom tango — staccato, codified. NOT Argentine social tango
+    (tango/tango-argentino).
+  display:
+    code: TGI
+    emoji: 💃
+    icon: mdi:dance-ballroom
+    color: '#C979D0'
+  tempo_note: WDSF/WDC Tango 30-33 mpm x 4 beats (4/4) = 120-132 bpm (32 mpm = 128 bpm standard)
+- id: waltz-viennese
+  canonical: Viennese Waltz
+  aliases:
+  - Viennese
+  - Quick Waltz
+  tradition: ballroom-international-standard
+  family: ballroom-standard
+  parent: ballroom-standard
+  tempo_min: 174
+  tempo_max: 180
+  meter: 3/4
+  description: 'The original fast waltz of Vienna, danced as almost continuous natural and reverse turns
+    that travel around the floor in closed hold, with far less rise and fall than the Slow Waltz.
+    Distinguishing trait: fast, near-continuous rotation (vs. the slow, lilting Slow Waltz).'
+  disambiguation: Fast rotary 3/4 waltz (~174–180 bpm). NOT the Slow Waltz (waltz-slow).
+  display:
+    code: VW
+    emoji: 💃
+    icon: tabler:tornado
+    color: '#9B6690'
+  tempo_note: WDSF/WDC Viennese Waltz 58-60 mpm x 3 beats (3/4) = 174-180 bpm
+- id: foxtrot-slow
+  canonical: Slow Foxtrot
+  aliases:
+  - Foxtrot (International)
+  - Slow Fox
+  tradition: ballroom-international-standard
+  family: ballroom-standard
+  parent: ballroom-standard
+  tempo_min: 112
+  tempo_max: 120
+  meter: 4/4
+  description: 'The International Standard slow foxtrot: a smooth progressive closed-hold dance in 4/4
+    built on long gliding strides, soft rise and fall and unbroken flowing movement, refined in 1920s
+    England from the American social fox trot of the 1910s. Distinguishing trait: the unbroken, gliding
+    slow-quick-quick flow (vs. the brisk, hopping Quickstep).'
+  disambiguation: International Standard slow foxtrot — related to but distinct from the early social
+    Fox Trot (early pack).
+  display:
+    code: SF
+    emoji: 💃
+    icon: mdi:dance-ballroom
+    color: '#D298C3'
+  tempo_note: WDSF/WDC Slow Foxtrot 28-30 mpm x 4 beats (4/4) = 112-120 bpm
+- id: quickstep
+  canonical: Quickstep
+  aliases:
+  - Quick Step
+  tradition: ballroom-international-standard
+  family: ballroom-standard
+  parent: ballroom-standard
+  tempo_min: 200
+  tempo_max: 208
+  meter: 4/4
+  description: 'A fast, light International Standard dance in 4/4 that developed in 1920s England from
+    the quick-time foxtrot and the Charleston, combining gliding progressive figures with quick runs,
+    hops, skips and chassés. Distinguishing trait: fast travelling footwork with hops and runs (vs. the
+    smooth, gliding Slow Foxtrot).'
+  display:
+    code: QS
+    emoji: 💃
+    icon: ph:high-heel
+    color: '#E091FE'
+  tempo_note: WDSF/WDC Quickstep 50-52 mpm x 4 beats (4/4) = 200-208 bpm
+- id: cha-cha
+  canonical: Cha-Cha-Cha
+  aliases:
+  - Cha Cha
+  - Cha-Cha
+  - ChaChaCha
+  tradition: ballroom-international-latin
+  family: ballroom-latin
+  parent: ballroom-latin
+  tempo_min: 120
+  tempo_max: 128
+  meter: 4/4
+  description: 'The International Latin competition form of the Cuban cha-cha-chá: a lively 4/4 dance on
+    the spot or gently travelling, built on the syncopated cha-cha chassé on the counts 4-and-1 and on
+    hip action from straightening knees (Cuban motion). Distinguishing trait: the syncopated cha-cha-cha
+    chassé (vs. the slower, sensual Rumba).'
+  disambiguation: International Latin cha-cha-cha (codified competition dance) — distinct from social/Cuban
+    cha-cha.
+  display:
+    code: CC
+    emoji: 🕺
+    icon: game-icons:high-heel
+    color: '#F7AB8C'
+  tempo_note: WDSF/WDC Cha-Cha-Cha 30-32 mpm x 4 beats (4/4) = 120-128 bpm
+- id: samba-ballroom
+  canonical: Samba (Ballroom)
+  aliases:
+  - International Samba
+  - Ballroom Samba
+  tradition: ballroom-international-latin
+  family: ballroom-latin
+  parent: ballroom-latin
+  tempo_min: 96
+  tempo_max: 104
+  meter: 2/4
+  description: 'The International Latin ballroom samba, derived from Brazilian samba: a lively dance
+    that travels around the floor with the characteristic samba bounce (rhythmic flexing of the knees)
+    and figures such as voltas and bota fogos. Distinguishing trait: the continuous bounce action while
+    travelling (vs. the stationary Rumba and Cha-Cha-Cha).'
+  disambiguation: International Latin ballroom samba — NOT Brazilian street samba (samba no pé).
+  display:
+    code: SB
+    emoji: 🕺
+    icon: game-icons:high-heel
+    color: '#C5786B'
+  tempo_note: WDSF/WDC Samba 48-52 mpm x 2 beats (2/4) = 96-104 bpm
+- id: rumba-ballroom
+  canonical: Rumba (Ballroom)
+  aliases:
+  - International Rumba
+  - Ballroom Rumba
+  tradition: ballroom-international-latin
+  family: ballroom-latin
+  parent: ballroom-latin
+  tempo_min: 100
+  tempo_max: 108
+  meter: 4/4
+  description: 'The International Latin rumba: the slowest, most sensual Latin competition dance, in 4/4
+    with hip action from straightening knees (Cuban motion) and the step taken on beat 2 (counted
+    2-3-4-1), expressing a romantic interplay between the partners. Distinguishing trait: slow, sensual
+    hip action with the step starting on 2 (vs. the syncopated Cha-Cha-Cha).'
+  disambiguation: International Latin rumba (slow, ~100–108 bpm) — distinct from Cuban son/guaguancó rumba.
+  display:
+    code: RB
+    emoji: 🕺
+    icon: game-icons:high-heel
+    color: '#FB6C58'
+  tempo_note: WDSF/WDC Rumba 25-27 mpm x 4 beats (4/4) = 100-108 bpm
+- id: paso-doble
+  canonical: Paso Doble
+  aliases:
+  - Pasodoble
+  tradition: ballroom-international-latin
+  family: ballroom-latin
+  parent: ballroom-latin
+  tempo_min: 120
+  tempo_max: 124
+  meter: 2/4
+  description: 'A dramatic International Latin dance modelled on the Spanish bullfight, in which the
+    leader portrays the matador and the follower his cape, danced to march-like paso doble music with a
+    proud upright posture, heel-led progressive steps and stamping (appel) actions. Distinguishing
+    trait: the bullfight theatre and march-like heel leads (vs. the hip-driven Rumba and Cha-Cha-Cha).'
+  display:
+    code: PD
+    emoji: 🕺
+    icon: game-icons:bull-horns
+    color: '#D06600'
+  tempo_note: WDSF/WDC Paso Doble 60-62 mpm x 2 beats (2/4) = 120-124 bpm
+- id: jive-ballroom
+  canonical: Jive (Ballroom)
+  aliases:
+  - International Jive
+  tradition: ballroom-international-latin
+  family: ballroom-latin
+  parent: ballroom-latin
+  tempo_min: 168
+  tempo_max: 184
+  meter: 4/4
+  description: 'The International Latin competition jive, codified in 1950s Britain from American
+    jitterbug and swing: a very fast, bouncy 4/4 dance on the spot built on triple-step chassés, kicks
+    and flicks under a strict competition technique. Distinguishing trait: sharp kicks and flicks under
+    codified competition technique (vs. the social, improvised swing Jive).'
+  disambiguation: International Latin jive — the codified competition cousin of swing-era East Coast Swing
+    (swing/east-coast-swing) and Jive (swing/jive).
+  display:
+    code: JVB
+    emoji: 🕺
+    icon: game-icons:high-heel
+    color: '#DF9082'
+  tempo_note: WDSF/WDC Jive 42-46 mpm x 4 beats (4/4) = 168-184 bpm

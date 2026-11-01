@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rokbjc/SocialDanceTaggingStandard/HEAD/schemas/field-constraints.schema.json",
+  "title": "SDTS field constraints (data/field-constraints.yaml)",
+  "description": "Map of field id -> machine-checkable value constraints.",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["type", "cardinality"],
+    "properties": {
+      "type": { "enum": ["int", "enum", "string", "composite"] },
+      "cardinality": { "enum": ["single", "multi"] },
+      "delimiter": { "type": "string" },
+      "min": { "type": "integer" },
+      "max": { "type": "integer" },
+      "values": { "type": "array", "items": { "type": "string" } },
+      "grades": { "type": "array", "items": { "type": "string" } },
+      "allow_validation_marker": { "type": "boolean" },
+      "pattern": { "type": "string" },
+      "bad_examples": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "error"],
+          "properties": {
+            "value": { "type": "string" },
+            "error": { "enum": ["not_integer", "out_of_range", "not_in_enum", "bad_grade", "no_match"] }
+          }
+        }
+      }
+    }
+  }
+}
