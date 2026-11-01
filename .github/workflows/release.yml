@@ -29,7 +29,7 @@ jobs:
           # a SemVer pre-release identifier (e.g. 0.1.0-beta.1) → GitHub pre-release, hold nuget.org
           if [[ "$V" == *-* ]]; then echo "prerelease=true" >> "$GITHUB_OUTPUT"; else echo "prerelease=false" >> "$GITHUB_OUTPUT"; fi
 
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v6
         with:
           global-json-file: dotnet/global.json
 
