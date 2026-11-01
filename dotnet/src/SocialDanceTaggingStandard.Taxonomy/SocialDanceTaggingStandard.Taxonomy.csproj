@@ -13,7 +13,7 @@
        resources and parses no YAML (AOT/trim-safe). YamlDotNet remains only for runtime user OVERLAYS
        (vocabulary.local.yaml) and for the drift-gate's on-disk YAML oracle. -->
   <ItemGroup>
-    <PackageReference Include="YamlDotNet" Version="18.0.0" />
+    <PackageReference Include="YamlDotNet" Version="18.1.0" />
   </ItemGroup>
 
   <!-- The drift-gate (BaselineVocabularyDriftTests) re-parses data/vocabulary/ via the internal
